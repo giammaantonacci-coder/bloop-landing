@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background-color: #0b0920;
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* Custom scrollbar (WebKit) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0920;
+}
+::-webkit-scrollbar-thumb {
+  background: #f76b3a;
+  border-radius: 0;
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@layer utilities {
+  .marquee-track {
+    animation: marquee-x 45s linear infinite;
+    will-change: transform;
+  }
+  .marquee-track-slow {
+    animation: marquee-x 70s linear infinite;
+    will-change: transform;
+  }
+
+  /* Blueprint grid overlay */
+  .grid-blueprint {
+    background-image:
+      linear-gradient(to right, rgba(167, 165, 190, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(167, 165, 190, 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .grid-blueprint-tight {
+    background-image:
+      linear-gradient(to right, rgba(167, 165, 190, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(167, 165, 190, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .noise {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Corner tick marks — cinematic crop feel */
+  .tick-corners {
+    position: relative;
+  }
+  .tick-corners::before,
+  .tick-corners::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1px solid currentColor;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .tick-corners::before {
+    top: -1px;
+    left: -1px;
+    border-right: 0;
+    border-bottom: 0;
+  }
+  .tick-corners::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: 0;
+    border-top: 0;
+  }
+
+  /* Highlighter block (used behind key words) */
+  .highlight-coral {
+    background-color: #f76b3a;
+    color: #0b0920;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0.02em 0.14em;
+  }
+
+  .highlight-lilac {
+    background-color: #a269ff;
+    color: #0b0920;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0.02em 0.14em;
+  }
+}
