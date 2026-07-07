@@ -80,7 +80,7 @@ export function BackgroundBubbles() {
                 }
           }
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          className="h-[26rem] w-[26rem] rounded-full bg-coral/70 blur-3xl"
+          className="h-[26rem] w-[26rem] rounded-full bg-coral/35 blur-3xl sm:bg-coral/70"
         />
       </motion.div>
 
@@ -105,7 +105,7 @@ export function BackgroundBubbles() {
             ease: "easeInOut",
             delay: 2,
           }}
-          className="h-[24rem] w-[24rem] rounded-full bg-lilac/65 blur-3xl"
+          className="h-[24rem] w-[24rem] rounded-full bg-lilac/30 blur-3xl sm:bg-lilac/65"
         />
       </motion.div>
     </div>
