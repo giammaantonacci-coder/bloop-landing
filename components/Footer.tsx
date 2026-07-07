@@ -1,5 +1,4 @@
 import { Logo } from "./Logo";
-import { Marquee } from "./ui/Marquee";
 
 const socials = [
   {
@@ -66,29 +65,9 @@ const socials = [
   },
 ];
 
-const marqueeItems = ["GO OUT", "LIVE THE CITY", "BLOOP / 2026", "REAL-TIME CITY PULSE"];
-
 export function Footer() {
   return (
     <footer className="relative border-t border-white/10 bg-deep">
-      {/* Marquee band */}
-      <div className="border-b border-white/10 py-6">
-        <Marquee
-          items={marqueeItems.map((t) => (
-            <span
-              key={t}
-              className="font-display text-4xl font-bold uppercase tracking-tight text-white sm:text-6xl"
-            >
-              {t}
-            </span>
-          ))}
-          separator={
-            <span aria-hidden className="mx-8 inline-block h-3 w-3 rotate-45 bg-coral" />
-          }
-          speed="slow"
-        />
-      </div>
-
       {/* Main grid */}
       <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
