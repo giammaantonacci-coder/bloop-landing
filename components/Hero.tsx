@@ -22,7 +22,7 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 noise opacity-40" aria-hidden />
 
       {/* Main content */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 pt-32 sm:px-8 sm:pt-40">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 pt-40 sm:px-8 sm:pt-52">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -36,15 +36,15 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.05 }}
-          className="mt-10 font-display text-[clamp(2.75rem,8vw,7rem)] font-bold leading-[0.95] tracking-[-0.03em]"
+          className="mt-12 font-display text-[clamp(2.75rem,8vw,7rem)] font-bold leading-[0.95] tracking-[-0.03em]"
         >
           <span className="block sm:whitespace-nowrap">La tua città pulsa</span>
-          <span className="mt-3 block">
+          <span className="mt-5 block">
             <span className="highlight-coral">Vivila.</span>
           </span>
         </motion.h1>
 
-        <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-6">
+        <div className="mt-20 grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-6">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -97,18 +97,18 @@ export function Hero() {
       </div>
 
       {/* Bottom ticker */}
-      <div className="relative z-10 mt-24 border-y border-white/10 bg-deep py-3">
+      <div className="relative z-10 mt-32 border-y border-white/10 bg-deep py-2.5">
         <Marquee
           items={marqueeItems.map((t) => (
             <span
               key={t}
-              className="font-display text-2xl font-bold uppercase tracking-tight text-white sm:text-3xl"
+              className="font-display text-sm font-bold uppercase tracking-wide text-white sm:text-base"
             >
               {t}
             </span>
           ))}
           separator={
-            <span aria-hidden className="mx-6 inline-block h-2 w-2 rotate-45 bg-coral" />
+            <span aria-hidden className="mx-4 inline-block h-1.5 w-1.5 rotate-45 bg-coral" />
           }
         />
       </div>
