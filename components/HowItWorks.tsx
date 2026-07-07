@@ -35,7 +35,7 @@ export function HowItWorks() {
   return (
     <section
       id="come-funziona"
-      className="relative border-t border-white/10 bg-deep py-28 sm:py-36"
+      className="relative border-t border-white/10 py-28 sm:py-36"
     >
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-14 md:grid-cols-12">

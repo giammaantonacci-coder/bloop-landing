@@ -40,7 +40,7 @@ export function Bloopers() {
   return (
     <section
       id="bloopers"
-      className="relative border-t border-white/10 bg-deep py-28 sm:py-36"
+      className="relative border-t border-white/10 py-28 sm:py-36"
     >
       <div className="pointer-events-none absolute inset-0 noise opacity-30" aria-hidden />
 

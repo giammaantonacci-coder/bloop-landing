@@ -61,7 +61,7 @@ export function BackgroundBubbles() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-30 overflow-hidden mix-blend-screen"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden mix-blend-screen"
       aria-hidden
     >
       {/* Coral — outer handles mouse + scroll, inner handles autonomous drift */}

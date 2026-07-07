@@ -50,7 +50,7 @@ export function Problem() {
   return (
     <section
       id="problema"
-      className="relative border-t border-white/10 bg-deep py-28 sm:py-36"
+      className="relative border-t border-white/10 py-28 sm:py-36"
     >
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         {/* Section header */}

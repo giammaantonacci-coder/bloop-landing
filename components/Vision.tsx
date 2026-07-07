@@ -23,7 +23,7 @@ export function Vision() {
   return (
     <section
       id="visione"
-      className="relative isolate overflow-hidden border-t border-white/10 bg-night py-28 sm:py-36"
+      className="relative isolate overflow-hidden border-t border-white/10 py-28 sm:py-36"
     >
       <div className="pointer-events-none absolute inset-0 noise opacity-30" aria-hidden />
 

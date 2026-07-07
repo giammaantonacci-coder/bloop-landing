@@ -16,7 +16,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative isolate flex min-h-screen flex-col overflow-hidden bg-deep"
+      className="relative isolate flex min-h-screen flex-col overflow-hidden"
     >
       {/* Background: fine noise */}
       <div className="pointer-events-none absolute inset-0 noise opacity-40" aria-hidden />
@@ -36,10 +36,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.05 }}
-          className="mt-10 font-display text-[clamp(3.25rem,11vw,10rem)] font-bold leading-[0.88] tracking-[-0.03em]"
+          className="mt-10 font-display text-[clamp(2.75rem,8vw,7rem)] font-bold leading-[0.95] tracking-[-0.03em]"
         >
-          <span className="block">La città</span>
-          <span className="block">pulsa.</span>
+          <span className="block sm:whitespace-nowrap">La tua città pulsa</span>
           <span className="mt-3 block">
             <span className="highlight-coral">Vivila.</span>
           </span>
