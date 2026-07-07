@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -62,6 +63,7 @@ export default function RootLayout({
     >
       <body className="bg-deep text-white font-sans antialiased selection:bg-coral selection:text-deep">
         {children}
+        <Analytics />
       </body>
     </html>
   );
