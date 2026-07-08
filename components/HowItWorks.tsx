@@ -5,6 +5,7 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
+  useInView,
   MotionValue,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -43,12 +44,14 @@ function Step({
   threshold,
   progress,
   dotRef,
+  sectionInView,
 }: {
   step: StepData;
   index: number;
   threshold: number;
   progress: MotionValue<number>;
   dotRef: (el: HTMLSpanElement | null) => void;
+  sectionInView: boolean;
 }) {
   const reduce = useReducedMotion();
   const accent = step.accent === "coral" ? "#F76B3A" : "#A269FF";
@@ -101,7 +104,11 @@ function Step({
             <motion.span
               className="absolute inset-0 rounded-full"
               style={{ backgroundColor: accent }}
-              animate={reduce ? undefined : { scale: [1, 1.75], opacity: [0.45, 0] }}
+              animate={
+                reduce || !sectionInView
+                  ? undefined
+                  : { scale: [1, 1.75], opacity: [0.45, 0] }
+              }
               transition={{
                 duration: 1.9,
                 repeat: Infinity,
@@ -210,6 +217,10 @@ export function HowItWorks() {
     offset: ["start 0.8", "end 0.55"],
   });
 
+  // Only run the infinite dot-halo loops while the path is actually
+  // on screen, so they don't burn CPU/GPU the rest of the scroll.
+  const sectionInView = useInView(containerRef, { margin: "-10% 0px" });
+
   // Glowing "comet" that rides the tip of the completion bar.
   const cometTop = useTransform(
     scrollYProgress,
@@ -291,6 +302,7 @@ export function HowItWorks() {
                 dotRef={(el) => {
                   dotEls.current[i] = el;
                 }}
+                sectionInView={sectionInView}
               />
             ))}
           </ol>

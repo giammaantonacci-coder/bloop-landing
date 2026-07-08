@@ -73,6 +73,18 @@ type Motion = {
   rotY: MotionValue<number>;
 };
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  return isMobile;
+}
+
 function useBubbleMotion(
   cfg: BubbleConfig,
   t: MotionValue<number>,
@@ -134,13 +146,25 @@ function BubbleVisual({
   alive,
   cycle,
   reduce,
+  isMobile,
 }: {
   cfg: BubbleConfig;
   m: Motion;
   alive: boolean;
   cycle: number;
   reduce: boolean | null;
+  isMobile: boolean;
 }) {
+  // Lighter sphere shadow on mobile: smaller blur radii are cheaper to
+  // paint/composite on low-power GPUs than the desktop version.
+  const sphereStyle = isMobile
+    ? {
+        ...cfg.sphere,
+        boxShadow:
+          "inset -8px -10px 26px rgba(0,0,0,0.4), inset 8px 10px 22px rgba(255,255,255,0.26), 0 22px 46px -18px rgba(0,0,0,0.5)",
+      }
+    : cfg.sphere;
+
   return (
     <motion.div style={{ x: m.x, y: m.y }} className={`absolute ${cfg.pos} ${cfg.size}`}>
       <AnimatePresence>
@@ -155,29 +179,35 @@ function BubbleVisual({
           >
             <motion.div
               className="relative h-full w-full"
-              animate={reduce ? undefined : { x: cfg.float.x, y: cfg.float.y }}
+              animate={
+                reduce
+                  ? undefined
+                  : isMobile
+                  ? { x: cfg.float.x.map((v) => v * 0.5), y: cfg.float.y.map((v) => v * 0.5) }
+                  : { x: cfg.float.x, y: cfg.float.y }
+              }
               transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
             >
-              {/* Ambient blurred blob (screen-blended → never darkens text) */}
+              {/* Ambient blurred blob — lighter blur, no blend mode on mobile */}
               <motion.div
                 aria-hidden
                 style={{ opacity: m.blobOpacity, background: cfg.blob }}
-                className="absolute -inset-[18%] rounded-full blur-2xl mix-blend-screen"
+                className={`absolute -inset-[18%] rounded-full blur-xl sm:blur-2xl sm:mix-blend-screen`}
               />
-              {/* Glossy 3D sphere */}
+              {/* Glossy 3D sphere — tilt only where a cursor exists */}
               <motion.div
                 aria-hidden
                 style={{
                   opacity: m.sharpOpacity,
                   scale: m.sharpScale,
-                  rotateX: reduce ? 0 : m.rotX,
-                  rotateY: reduce ? 0 : m.rotY,
-                  transformPerspective: 900,
-                  ...cfg.sphere,
+                  rotateX: reduce || isMobile ? 0 : m.rotX,
+                  rotateY: reduce || isMobile ? 0 : m.rotY,
+                  transformPerspective: isMobile ? undefined : 900,
+                  ...sphereStyle,
                 }}
                 className="relative h-full w-full rounded-full"
               >
-                <span className="absolute left-[20%] top-[16%] h-[26%] w-[26%] rounded-full bg-white/70 blur-xl" />
+                <span className="absolute left-[20%] top-[16%] h-[26%] w-[26%] rounded-full bg-white/70 blur-lg sm:blur-xl" />
               </motion.div>
             </motion.div>
           </motion.div>
@@ -215,6 +245,7 @@ function BubbleHit({
 
 export function BackgroundBubbles() {
   const reduce = useReducedMotion();
+  const isMobile = useIsMobile();
   const vp = useRef({ w: 1440, h: 900 });
 
   const mouseX = useMotionValue(0);
@@ -282,8 +313,8 @@ export function BackgroundBubbles() {
     <>
       {/* Visuals — behind content */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
-        <BubbleVisual cfg={CORAL} m={coral} alive={bubbles.coral.alive} cycle={bubbles.coral.cycle} reduce={reduce} />
-        <BubbleVisual cfg={LILAC} m={lilac} alive={bubbles.lilac.alive} cycle={bubbles.lilac.cycle} reduce={reduce} />
+        <BubbleVisual cfg={CORAL} m={coral} alive={bubbles.coral.alive} cycle={bubbles.coral.cycle} reduce={reduce} isMobile={isMobile} />
+        <BubbleVisual cfg={LILAC} m={lilac} alive={bubbles.lilac.alive} cycle={bubbles.lilac.cycle} reduce={reduce} isMobile={isMobile} />
       </div>
 
       {/* Hit targets — above content, but only active near the top */}
