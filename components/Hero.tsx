@@ -19,7 +19,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="font-sans font-medium text-[11px] uppercase tracking-[0.28em] text-smoke"
+          className="font-sans font-semibold text-[13px] uppercase tracking-[0.28em] text-smoke"
         >
           Real-time city pulse platform
         </motion.p>
@@ -76,7 +76,7 @@ export function Hero() {
             </a>
             <a
               href="#problema"
-              className="group inline-flex items-center gap-2 font-sans font-medium text-xs uppercase tracking-[0.2em] text-smoke transition hover:text-white"
+              className="group inline-flex items-center gap-2 font-sans font-semibold text-[13px] uppercase tracking-[0.2em] text-smoke transition hover:text-white"
             >
               Guarda perché
               <span aria-hidden className="transition-transform group-hover:translate-x-0.5">↓</span>
@@ -87,7 +87,7 @@ export function Hero() {
 
       {/* Scroll indicator */}
       {!reduce && (
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center px-6 pb-10 pt-16 font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-smoke sm:px-8">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center px-6 pb-10 pt-16 font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-smoke sm:px-8">
           <span>Scroll ↓</span>
         </div>
       )}

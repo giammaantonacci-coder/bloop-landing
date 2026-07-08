@@ -24,7 +24,7 @@ export function Nav() {
           <Logo size="sm" animated />
         </a>
 
-        <nav className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 font-sans font-medium text-[11px] uppercase tracking-[0.2em] text-smoke md:flex">
+        <nav className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 font-sans font-semibold text-[13px] uppercase tracking-[0.2em] text-smoke md:flex">
           <a href="#problema" className="pointer-events-auto transition hover:text-white">
             Problema
           </a>

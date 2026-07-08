@@ -48,7 +48,7 @@ export function Bloopers() {
         {/* Section header */}
         <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
           <div className="md:col-span-3">
-            <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-coral">
+            <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-coral">
               Community
             </p>
           </div>
@@ -92,7 +92,7 @@ export function Bloopers() {
               variants={card}
               className="group relative flex flex-col justify-between rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
             >
-              <div className="flex items-center justify-between font-sans font-medium text-[10px] uppercase tracking-[0.3em] text-smoke">
+              <div className="flex items-center justify-between font-sans font-semibold text-[12px] uppercase tracking-[0.3em] text-smoke">
                 <span className="text-coral">{s.n}</span>
                 <span>{s.tag}</span>
               </div>
@@ -106,7 +106,7 @@ export function Bloopers() {
                 </p>
               </div>
 
-              <div className="mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-coral/15 px-4 py-2 font-sans font-medium text-[10px] uppercase tracking-[0.25em] text-coral">
+              <div className="mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-coral/15 px-4 py-2 font-sans font-semibold text-[12px] uppercase tracking-[0.25em] text-coral">
                 {s.reward}
               </div>
             </motion.article>
@@ -116,7 +116,7 @@ export function Bloopers() {
         {/* CTA row */}
         <div className="grid grid-cols-1 gap-8 pt-16 md:grid-cols-12 md:items-center">
           <div className="md:col-span-8">
-            <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-smoke">
+            <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-smoke">
               Come partecipare
             </p>
             <p className="mt-4 max-w-xl font-display text-2xl leading-tight sm:text-3xl">

@@ -45,7 +45,7 @@ export function Solution() {
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
           <div className="md:col-span-3">
-            <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-lilac">
+            <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-lilac">
               Soluzione
             </p>
           </div>
@@ -81,7 +81,7 @@ export function Solution() {
               variants={card}
               className="group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
             >
-              <div className="flex items-center justify-between font-sans font-medium text-[10px] uppercase tracking-[0.3em] text-smoke">
+              <div className="flex items-center justify-between font-sans font-semibold text-[12px] uppercase tracking-[0.3em] text-smoke">
                 <span className={f.accent === "coral" ? "text-coral" : "text-lilac"}>
                   {f.n}
                 </span>

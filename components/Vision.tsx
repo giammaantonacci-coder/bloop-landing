@@ -30,12 +30,12 @@ export function Vision() {
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
           <div className="md:col-span-3">
-            <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-lilac">
+            <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-lilac">
               Visione
             </p>
           </div>
           <div className="md:col-span-9">
-            <p className="font-sans font-medium text-xs uppercase tracking-[0.25em] text-smoke">
+            <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-smoke">
               Manifesto
             </p>
           </div>
@@ -66,7 +66,7 @@ export function Vision() {
 
             <motion.div
               variants={line}
-              className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-10 font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-smoke"
+              className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-10 font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-smoke"
             >
               <span className="text-white">— Il team Bloop</span>
               <span>2026</span>

@@ -157,7 +157,7 @@ function Step({
       >
         <div className="flex items-center gap-3">
           <span
-            className="font-sans font-medium text-[10px] uppercase tracking-[0.3em]"
+            className="font-sans font-semibold text-[12px] uppercase tracking-[0.3em]"
             style={{ color: accent }}
           >
             Fermata {step.n}
@@ -243,7 +243,7 @@ export function HowItWorks() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-coral"
+              className="font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-coral"
             >
               Flusso
             </motion.p>

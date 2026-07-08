@@ -56,7 +56,7 @@ export function Problem() {
         {/* Section header */}
         <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
           <div className="md:col-span-3">
-            <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-coral">
+            <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-coral">
               Problema
             </p>
           </div>
@@ -89,7 +89,7 @@ export function Problem() {
               variants={item}
               className="group relative flex flex-col justify-between rounded-[2rem] bg-white/[0.04] p-8 py-12 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
             >
-              <div className="flex items-center justify-between font-sans font-medium text-[10px] uppercase tracking-[0.3em] text-smoke">
+              <div className="flex items-center justify-between font-sans font-semibold text-[12px] uppercase tracking-[0.3em] text-smoke">
                 <span>{s.index}</span>
                 <span>{s.source}</span>
               </div>
@@ -111,7 +111,7 @@ export function Problem() {
 
         {/* Closer */}
         <div className="mt-16 grid grid-cols-1 items-end gap-8 md:grid-cols-12">
-          <p className="font-sans font-medium text-[11px] uppercase tracking-[0.3em] text-smoke md:col-span-3">
+          <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.3em] text-smoke md:col-span-3">
             Sintesi
           </p>
           <motion.p

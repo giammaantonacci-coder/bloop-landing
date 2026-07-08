@@ -85,7 +85,7 @@ export function Footer() {
 
           {/* Meta columns */}
           <div className="md:col-span-2">
-            <p className="font-sans font-medium text-[10px] uppercase tracking-[0.3em] text-smoke">
+            <p className="font-sans font-semibold text-[12px] uppercase tracking-[0.3em] text-smoke">
               Naviga
             </p>
             <ul className="mt-5 space-y-3 text-sm">
@@ -118,7 +118,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <p className="font-sans font-medium text-[10px] uppercase tracking-[0.3em] text-smoke">
+            <p className="font-sans font-semibold text-[12px] uppercase tracking-[0.3em] text-smoke">
               Contatti
             </p>
             <ul className="mt-5 space-y-3 text-sm">
@@ -134,7 +134,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <p className="font-sans font-medium text-[10px] uppercase tracking-[0.3em] text-smoke">
+            <p className="font-sans font-semibold text-[12px] uppercase tracking-[0.3em] text-smoke">
               Social
             </p>
             <ul className="mt-5 space-y-3">
@@ -163,7 +163,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col items-start justify-between gap-4 pt-8 font-sans font-medium text-[10px] uppercase tracking-[0.25em] text-smoke sm:flex-row sm:items-center">
+        <div className="mt-20 flex flex-col items-start justify-between gap-4 pt-8 font-sans font-semibold text-[12px] uppercase tracking-[0.25em] text-smoke sm:flex-row sm:items-center">
           <p>© 2026 Bloop — Made in Italia</p>
           <div className="flex items-center gap-6">
             <a href="#" className="transition hover:text-white">
