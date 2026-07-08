@@ -49,7 +49,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-            className="max-w-xl text-balance text-lg text-smoke sm:text-xl md:col-span-6"
+            className="max-w-xl text-balance text-lg text-white sm:text-xl md:col-span-6"
           >
             Bloop ti mostra tutto quello che succede intorno a te, in tempo
             reale. Eventi, zone vive, esperienze — tutto in un&apos;unica app.

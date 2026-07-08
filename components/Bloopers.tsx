@@ -70,7 +70,7 @@ export function Bloopers() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-15% 0px" }}
               transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-              className="mt-6 max-w-xl text-lg text-smoke"
+              className="mt-6 max-w-xl text-lg text-white"
             >
               Bloop cresce grazie a chi vive la città. Segnala gli eventi che
               non trovi in app: ogni contributo ti fa guadagnare punti.
@@ -109,7 +109,7 @@ export function Bloopers() {
                 <h3 className="font-display text-2xl font-semibold leading-[1.1] tracking-[-0.01em] sm:text-3xl">
                   {s.title}
                 </h3>
-                <p className="mt-5 max-w-md text-base leading-relaxed text-smoke">
+                <p className="mt-5 max-w-md text-base leading-relaxed text-white">
                   {s.body}
                 </p>
               </div>

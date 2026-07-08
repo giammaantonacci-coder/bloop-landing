@@ -77,7 +77,7 @@ export function Footer() {
             <p className="mt-8 max-w-md font-display text-2xl font-semibold leading-tight sm:text-3xl">
               Go out, <span className="highlight-coral">live the city.</span>
             </p>
-            <p className="mt-8 max-w-md text-base text-smoke">
+            <p className="mt-8 max-w-md text-base text-white">
               Bloop è il sistema operativo per vivere la città. Real-time,
               personale, umano.
             </p>

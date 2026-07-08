@@ -110,7 +110,7 @@ export function HowItWorks() {
                   <h3 className="font-display text-3xl font-semibold leading-tight tracking-[-0.01em] sm:text-4xl md:text-5xl">
                     {s.title}
                   </h3>
-                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-smoke sm:text-lg">
+                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-white sm:text-lg">
                     {s.body}
                   </p>
                 </div>

@@ -61,7 +61,7 @@ export function Solution() {
               <br />
               della tua città
             </motion.h2>
-            <p className="mt-6 max-w-xl text-lg text-smoke">
+            <p className="mt-6 max-w-xl text-lg text-white">
               Un&apos;unica app per trasformare la voglia di uscire in
               un&apos;esperienza reale — dalla scoperta alla porta d&apos;ingresso.
             </p>
@@ -102,7 +102,7 @@ export function Solution() {
                 <h3 className="font-display text-3xl font-semibold leading-[1.05] tracking-[-0.01em] sm:text-4xl">
                   {f.title}
                 </h3>
-                <p className="mt-6 max-w-md text-base leading-relaxed text-smoke sm:text-lg">
+                <p className="mt-6 max-w-md text-base leading-relaxed text-white sm:text-lg">
                   {f.body}
                 </p>
               </div>

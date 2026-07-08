@@ -102,7 +102,7 @@ export function Problem() {
                 )}
               </p>
 
-              <p className="mt-8 max-w-xs text-base leading-relaxed text-white/85 sm:text-lg">
+              <p className="mt-8 max-w-xs text-base leading-relaxed text-white sm:text-lg">
                 {s.label}
               </p>
 
