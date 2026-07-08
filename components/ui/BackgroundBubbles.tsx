@@ -31,7 +31,7 @@ type BubbleConfig = {
 const CORAL: BubbleConfig = {
   pos: "left-[2%] top-[6%]",
   size: "h-[20rem] w-[20rem] sm:h-[27rem] sm:w-[27rem]",
-  fx: 0.15,
+  fx: 0.48,
   fy: 0.2,
   mouse: 42,
   delay: 0.1,
@@ -50,7 +50,7 @@ const CORAL: BubbleConfig = {
 const LILAC: BubbleConfig = {
   pos: "left-[66%] top-[50%]",
   size: "h-[18rem] w-[18rem] sm:h-[25rem] sm:w-[25rem]",
-  fx: -0.3,
+  fx: 0.08,
   fy: -0.16,
   mouse: -36,
   delay: 0.26,
