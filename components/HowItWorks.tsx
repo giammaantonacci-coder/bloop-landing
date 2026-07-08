@@ -1,47 +1,165 @@
 "use client";
 
-import { motion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  MotionValue,
+} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-const steps = [
+type StepData = {
+  n: string;
+  title: string;
+  body: string;
+  accent: "coral" | "lilac";
+};
+
+const steps: StepData[] = [
   {
     n: "01",
-    code: "STOP · 01",
     title: "Dimmi cosa ti piace",
     body: "Un onboarding rapido: musica, cibo, mood. Bloop capisce il tuo modo di vivere la città.",
-    accent: "coral" as const,
+    accent: "coral",
   },
   {
     n: "02",
-    code: "STOP · 02",
     title: "Guarda la città pulsare",
     body: "La mappa live si aggiorna in tempo reale. Vedi dove sta succedendo qualcosa, adesso.",
-    accent: "lilac" as const,
+    accent: "lilac",
   },
   {
     n: "03",
-    code: "STOP · 03",
     title: "Esci e vivila",
     body: "Ticket, tragitto, amici. Tutto in un flusso unico. Zero pensieri.",
-    accent: "coral" as const,
+    accent: "coral",
   },
 ];
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
-};
+function Step({
+  step,
+  threshold,
+  progress,
+  dotRef,
+}: {
+  step: StepData;
+  threshold: number;
+  progress: MotionValue<number>;
+  dotRef: (el: HTMLSpanElement | null) => void;
+}) {
+  const accent = step.accent === "coral" ? "#F76B3A" : "#A269FF";
 
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
-};
+  // Fill the dot over a short window just before the bar reaches it.
+  const fill = useTransform(progress, (p) => {
+    const start = Math.max(0, threshold - 0.14);
+    const end = threshold <= 0.001 ? 0.03 : threshold;
+    if (p <= start) return 0;
+    if (p >= end) return 1;
+    return (p - start) / (end - start);
+  });
+  const dotScale = useTransform(fill, [0, 1], [0.82, 1]);
+  const emptyOpacity = useTransform(fill, [0, 1], [1, 0]);
+  const glow = useTransform(
+    fill,
+    [0, 1],
+    ["0 0 0px rgba(0,0,0,0)", `0 0 30px ${accent}70`]
+  );
+
+  return (
+    <li className="relative grid grid-cols-[3.5rem_1fr] items-center gap-5 sm:grid-cols-[4rem_1fr] sm:gap-8">
+      {/* Dot on the rail */}
+      <div className="relative z-10 flex justify-center">
+        <motion.span
+          ref={dotRef}
+          style={{ scale: dotScale, boxShadow: glow }}
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-deep sm:h-16 sm:w-16"
+        >
+          <span
+            className="absolute inset-0 rounded-full border-2"
+            style={{ borderColor: accent, opacity: 0.35 }}
+            aria-hidden
+          />
+          <motion.span
+            className="absolute inset-0 rounded-full"
+            style={{ backgroundColor: accent, opacity: fill }}
+            aria-hidden
+          />
+          <motion.span
+            style={{ opacity: emptyOpacity }}
+            className="absolute font-display text-lg font-bold"
+          >
+            <span style={{ color: accent }}>{step.n}</span>
+          </motion.span>
+          <motion.span
+            style={{ opacity: fill }}
+            className="absolute font-display text-lg font-bold text-deep"
+          >
+            {step.n}
+          </motion.span>
+        </motion.span>
+      </div>
+
+      {/* Card */}
+      <div className="rounded-[2rem] bg-white/[0.04] p-7 transition-colors duration-300 hover:bg-white/[0.07] sm:p-9">
+        <h3 className="font-display text-2xl font-semibold leading-tight tracking-[-0.01em] sm:text-3xl">
+          {step.title}
+        </h3>
+        <p className="mt-4 max-w-xl text-base leading-relaxed text-white sm:text-lg">
+          {step.body}
+        </p>
+      </div>
+    </li>
+  );
+}
 
 export function HowItWorks() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dotEls = useRef<(HTMLSpanElement | null)[]>([]);
+
+  // Rail geometry + per-dot thresholds, measured from the real layout so
+  // the bar and dots stay aligned across breakpoints and content lengths.
+  const [rail, setRail] = useState({ top: 0, height: 0 });
+  const [thresholds, setThresholds] = useState<number[]>(
+    steps.map((_, i) => (steps.length > 1 ? i / (steps.length - 1) : 0))
+  );
+
+  useEffect(() => {
+    const measure = () => {
+      const c = containerRef.current;
+      if (!c) return;
+      const cTop = c.getBoundingClientRect().top;
+      const centers = dotEls.current.map((d) => {
+        if (!d) return 0;
+        const r = d.getBoundingClientRect();
+        return r.top - cTop + r.height / 2;
+      });
+      const first = centers[0];
+      const last = centers[centers.length - 1];
+      const height = Math.max(1, last - first);
+      setRail({ top: first, height });
+      setThresholds(centers.map((v) => (v - first) / height));
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (containerRef.current) ro.observe(containerRef.current);
+    window.addEventListener("resize", measure);
+    // Re-measure once fonts settle to avoid layout-shift misalignment.
+    const t = setTimeout(measure, 300);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+      clearTimeout(t);
+    };
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.8", "end 0.55"],
+  });
+
   return (
-    <section
-      id="come-funziona"
-      className="relative py-28 sm:py-36"
-    >
+    <section id="come-funziona" className="relative py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
           <div className="md:col-span-3">
@@ -64,38 +182,40 @@ export function HowItWorks() {
           </div>
         </div>
 
-        {/* Step bubbles */}
-        <motion.ol
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-10% 0px" }}
-          className="grid grid-cols-1 gap-5 md:grid-cols-3"
-        >
-          {steps.map((s) => (
-            <motion.li
-              key={s.code}
-              variants={item}
-              className="group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
-            >
-              <span
-                className={`flex h-14 w-14 items-center justify-center rounded-full font-display text-xl font-bold text-deep ${
-                  s.accent === "coral" ? "bg-coral" : "bg-lilac"
-                }`}
-                aria-hidden
-              >
-                {s.n}
-              </span>
+        {/* Vertical path */}
+        <div ref={containerRef} className="relative mt-6">
+          {/* Rail track — centered under the dot column */}
+          <div
+            className="absolute left-[1.75rem] w-[3px] -translate-x-1/2 rounded-full bg-white/10 sm:left-8"
+            style={{ top: rail.top, height: rail.height }}
+            aria-hidden
+          />
+          {/* Completion bar */}
+          <motion.div
+            style={{
+              top: rail.top,
+              height: rail.height,
+              scaleY: scrollYProgress,
+              transformOrigin: "top",
+            }}
+            className="absolute left-[1.75rem] w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-coral to-lilac sm:left-8"
+            aria-hidden
+          />
 
-              <h3 className="mt-8 font-display text-2xl font-semibold leading-tight tracking-[-0.01em] sm:text-3xl">
-                {s.title}
-              </h3>
-              <p className="mt-5 text-base leading-relaxed text-white sm:text-lg">
-                {s.body}
-              </p>
-            </motion.li>
-          ))}
-        </motion.ol>
+          <ol className="relative space-y-5 sm:space-y-8">
+            {steps.map((s, i) => (
+              <Step
+                key={s.n}
+                step={s}
+                progress={scrollYProgress}
+                threshold={thresholds[i] ?? 0}
+                dotRef={(el) => {
+                  dotEls.current[i] = el;
+                }}
+              />
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );
