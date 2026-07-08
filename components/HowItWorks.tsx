@@ -4,6 +4,7 @@ import {
   motion,
   useScroll,
   useTransform,
+  useReducedMotion,
   MotionValue,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -38,15 +39,18 @@ const steps: StepData[] = [
 
 function Step({
   step,
+  index,
   threshold,
   progress,
   dotRef,
 }: {
   step: StepData;
+  index: number;
   threshold: number;
   progress: MotionValue<number>;
   dotRef: (el: HTMLSpanElement | null) => void;
 }) {
+  const reduce = useReducedMotion();
   const accent = step.accent === "coral" ? "#F76B3A" : "#A269FF";
 
   // Fill the dot over a short window just before the bar reaches it.
@@ -57,13 +61,27 @@ function Step({
     if (p >= end) return 1;
     return (p - start) / (end - start);
   });
-  const dotScale = useTransform(fill, [0, 1], [0.82, 1]);
+
+  const dotScale = useTransform(fill, [0, 0.7, 1], [0.8, 1.08, 1]);
   const emptyOpacity = useTransform(fill, [0, 1], [1, 0]);
   const glow = useTransform(
     fill,
     [0, 1],
-    ["0 0 0px rgba(0,0,0,0)", `0 0 30px ${accent}70`]
+    ["0 0 0px rgba(0,0,0,0)", `0 0 34px ${accent}80`]
   );
+
+  // The card lights up as its dot is reached.
+  const cardBg = useTransform(
+    fill,
+    [0, 1],
+    ["rgba(255,255,255,0.035)", "rgba(255,255,255,0.08)"]
+  );
+  const cardShadow = useTransform(
+    fill,
+    [0, 1],
+    ["0 0 0 rgba(0,0,0,0)", `0 24px 70px -28px ${accent}66`]
+  );
+  const cardScale = useTransform(fill, [0, 1], [0.99, 1]);
 
   return (
     <li className="relative grid grid-cols-[3.5rem_1fr] items-center gap-5 sm:grid-cols-[4rem_1fr] sm:gap-8">
@@ -74,16 +92,38 @@ function Step({
           style={{ scale: dotScale, boxShadow: glow }}
           className="relative flex h-14 w-14 items-center justify-center rounded-full bg-deep sm:h-16 sm:w-16"
         >
+          {/* Pulsing halo — only visible once active */}
+          <motion.span
+            className="absolute inset-0 rounded-full"
+            style={{ opacity: fill }}
+            aria-hidden
+          >
+            <motion.span
+              className="absolute inset-0 rounded-full"
+              style={{ backgroundColor: accent }}
+              animate={reduce ? undefined : { scale: [1, 1.75], opacity: [0.45, 0] }}
+              transition={{
+                duration: 1.9,
+                repeat: Infinity,
+                ease: "easeOut",
+                delay: index * 0.2,
+              }}
+            />
+          </motion.span>
+
+          {/* Empty ring */}
           <span
             className="absolute inset-0 rounded-full border-2"
             style={{ borderColor: accent, opacity: 0.35 }}
             aria-hidden
           />
+          {/* Fill */}
           <motion.span
             className="absolute inset-0 rounded-full"
             style={{ backgroundColor: accent, opacity: fill }}
             aria-hidden
           />
+          {/* Number crossfade */}
           <motion.span
             style={{ opacity: emptyOpacity }}
             className="absolute font-display text-lg font-bold"
@@ -99,15 +139,30 @@ function Step({
         </motion.span>
       </div>
 
-      {/* Card */}
-      <div className="rounded-[2rem] bg-white/[0.04] p-7 transition-colors duration-300 hover:bg-white/[0.07] sm:p-9">
-        <h3 className="font-display text-2xl font-semibold leading-tight tracking-[-0.01em] sm:text-3xl">
+      {/* Card — enters on scroll, brightens when its dot is reached */}
+      <motion.div
+        initial={{ opacity: 0, x: 40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-12% 0px" }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.08 }}
+        style={{ backgroundColor: cardBg, boxShadow: cardShadow, scale: cardScale }}
+        className="group rounded-[2rem] p-7 sm:p-9"
+      >
+        <div className="flex items-center gap-3">
+          <span
+            className="font-sans font-medium text-[10px] uppercase tracking-[0.3em]"
+            style={{ color: accent }}
+          >
+            Fermata {step.n}
+          </span>
+        </div>
+        <h3 className="mt-4 font-display text-2xl font-semibold leading-tight tracking-[-0.01em] sm:text-3xl">
           {step.title}
         </h3>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-white sm:text-lg">
           {step.body}
         </p>
-      </div>
+      </motion.div>
     </li>
   );
 }
@@ -116,8 +171,6 @@ export function HowItWorks() {
   const containerRef = useRef<HTMLDivElement>(null);
   const dotEls = useRef<(HTMLSpanElement | null)[]>([]);
 
-  // Rail geometry + per-dot thresholds, measured from the real layout so
-  // the bar and dots stay aligned across breakpoints and content lengths.
   const [rail, setRail] = useState({ top: 0, height: 0 });
   const [thresholds, setThresholds] = useState<number[]>(
     steps.map((_, i) => (steps.length > 1 ? i / (steps.length - 1) : 0))
@@ -144,7 +197,6 @@ export function HowItWorks() {
     const ro = new ResizeObserver(measure);
     if (containerRef.current) ro.observe(containerRef.current);
     window.addEventListener("resize", measure);
-    // Re-measure once fonts settle to avoid layout-shift misalignment.
     const t = setTimeout(measure, 300);
     return () => {
       ro.disconnect();
@@ -158,14 +210,32 @@ export function HowItWorks() {
     offset: ["start 0.8", "end 0.55"],
   });
 
+  // Glowing "comet" that rides the tip of the completion bar.
+  const cometTop = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [rail.top, rail.top + rail.height]
+  );
+  const cometOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.03, 0.97, 1],
+    [0, 1, 1, 0]
+  );
+
   return (
     <section id="come-funziona" className="relative py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
           <div className="md:col-span-3">
-            <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-coral">
+            <motion.p
+              initial={{ opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-coral"
+            >
               Flusso
-            </p>
+            </motion.p>
           </div>
           <div className="md:col-span-9">
             <motion.h2
@@ -184,7 +254,7 @@ export function HowItWorks() {
 
         {/* Vertical path */}
         <div ref={containerRef} className="relative mt-6">
-          {/* Rail track — centered under the dot column */}
+          {/* Rail track */}
           <div
             className="absolute left-[1.75rem] w-[3px] -translate-x-1/2 rounded-full bg-white/10 sm:left-8"
             style={{ top: rail.top, height: rail.height }}
@@ -198,15 +268,24 @@ export function HowItWorks() {
               scaleY: scrollYProgress,
               transformOrigin: "top",
             }}
-            className="absolute left-[1.75rem] w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-coral to-lilac sm:left-8"
+            className="absolute left-[1.75rem] w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-coral via-coral to-lilac sm:left-8"
             aria-hidden
           />
+          {/* Comet at the tip */}
+          <motion.div
+            style={{ top: cometTop, opacity: cometOpacity }}
+            className="absolute left-[1.75rem] z-10 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white sm:left-8"
+            aria-hidden
+          >
+            <span className="absolute inset-0 rounded-full bg-white blur-[6px]" />
+          </motion.div>
 
           <ol className="relative space-y-5 sm:space-y-8">
             {steps.map((s, i) => (
               <Step
                 key={s.n}
                 step={s}
+                index={i}
                 progress={scrollYProgress}
                 threshold={thresholds[i] ?? 0}
                 dotRef={(el) => {
