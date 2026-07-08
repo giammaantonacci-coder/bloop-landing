@@ -67,7 +67,7 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/10 bg-deep">
+    <footer className="relative bg-deep">
       {/* Main grid */}
       <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
@@ -151,7 +151,7 @@ export function Footer() {
                       })}
                       className="group inline-flex items-center gap-3 text-sm text-white transition hover:text-coral"
                     >
-                      <span className="inline-flex h-8 w-8 items-center justify-center border border-white/15 transition group-hover:border-coral">
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.06] transition group-hover:bg-coral group-hover:text-deep">
                         {s.icon}
                       </span>
                       {s.name}
@@ -163,7 +163,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 font-sans font-medium text-[10px] uppercase tracking-[0.25em] text-smoke sm:flex-row sm:items-center">
+        <div className="mt-20 flex flex-col items-start justify-between gap-4 pt-8 font-sans font-medium text-[10px] uppercase tracking-[0.25em] text-smoke sm:flex-row sm:items-center">
           <p>© 2026 Bloop — Made in Italia</p>
           <div className="flex items-center gap-6">
             <a href="#" className="transition hover:text-white">

@@ -1,14 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Marquee } from "./ui/Marquee";
-
-const marqueeItems = [
-  "GO OUT",
-  "LIVE THE CITY",
-  "REAL-TIME CITY PULSE",
-  "BLOOP / 2026",
-];
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -86,36 +78,16 @@ export function Hero() {
               href="#problema"
               className="group inline-flex items-center gap-2 font-sans font-medium text-xs uppercase tracking-[0.2em] text-smoke transition hover:text-white"
             >
-              <span
-                aria-hidden
-                className="inline-block h-px w-6 bg-smoke transition group-hover:w-10 group-hover:bg-white"
-              />
               Guarda perché
+              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">↓</span>
             </a>
           </motion.div>
         </div>
       </div>
 
-      {/* Bottom ticker */}
-      <div className="relative z-10 mt-32 border-y border-white/10 bg-deep py-2.5">
-        <Marquee
-          items={marqueeItems.map((t) => (
-            <span
-              key={t}
-              className="font-display text-sm font-bold uppercase tracking-wide text-white sm:text-base"
-            >
-              {t}
-            </span>
-          ))}
-          separator={
-            <span aria-hidden className="mx-4 inline-block h-1.5 w-1.5 rotate-45 bg-coral" />
-          }
-        />
-      </div>
-
       {/* Scroll indicator */}
       {!reduce && (
-        <div className="relative z-10 flex items-center justify-between border-b border-white/10 px-6 py-5 font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-smoke sm:px-8">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center px-6 pb-10 pt-16 font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-smoke sm:px-8">
           <span>Scroll ↓</span>
         </div>
       )}

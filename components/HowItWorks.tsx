@@ -1,22 +1,24 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 const steps = [
   {
+    n: "01",
     code: "STOP · 01",
     title: "Dimmi cosa ti piace",
     body: "Un onboarding rapido: musica, cibo, mood. Bloop capisce il tuo modo di vivere la città.",
     accent: "coral" as const,
   },
   {
+    n: "02",
     code: "STOP · 02",
     title: "Guarda la città pulsare",
     body: "La mappa live si aggiorna in tempo reale. Vedi dove sta succedendo qualcosa, adesso.",
     accent: "lilac" as const,
   },
   {
+    n: "03",
     code: "STOP · 03",
     title: "Esci e vivila",
     body: "Ticket, tragitto, amici. Tutto in un flusso unico. Zero pensieri.",
@@ -24,21 +26,24 @@ const steps = [
   },
 ];
 
-export function HowItWorks() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const lineScale = useTransform(scrollYProgress, [0.05, 0.7], [0, 1]);
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+};
 
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+};
+
+export function HowItWorks() {
   return (
     <section
       id="come-funziona"
-      className="relative border-t border-white/10 py-28 sm:py-36"
+      className="relative py-28 sm:py-36"
     >
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
-        <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-14 md:grid-cols-12">
+        <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
           <div className="md:col-span-3">
             <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-coral">
               Flusso
@@ -59,65 +64,38 @@ export function HowItWorks() {
           </div>
         </div>
 
-        {/* Timeline */}
-        <div ref={ref} className="relative mt-20">
-          {/* Rail */}
-          <div
-            className="absolute left-4 top-2 bottom-2 w-px bg-white/15 sm:left-6"
-            aria-hidden
-          />
-          <motion.div
-            aria-hidden
-            style={{ scaleY: lineScale, transformOrigin: "top" }}
-            className="absolute left-4 top-2 bottom-2 w-px bg-coral sm:left-6"
-          />
-
-          <ol className="space-y-16 sm:space-y-20">
-            {steps.map((s, i) => (
-              <motion.li
-                key={s.code}
-                initial={{ opacity: 0, x: -12 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
-                transition={{ duration: 0.6, ease: "easeOut", delay: i * 0.05 }}
-                className="relative grid grid-cols-1 gap-6 pl-14 sm:grid-cols-12 sm:gap-8 sm:pl-20"
+        {/* Step bubbles */}
+        <motion.ol
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-10% 0px" }}
+          className="grid grid-cols-1 gap-5 md:grid-cols-3"
+        >
+          {steps.map((s) => (
+            <motion.li
+              key={s.code}
+              variants={item}
+              className="group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
+            >
+              <span
+                className={`flex h-14 w-14 items-center justify-center rounded-full font-display text-xl font-bold text-deep ${
+                  s.accent === "coral" ? "bg-coral" : "bg-lilac"
+                }`}
+                aria-hidden
               >
-                {/* Station marker — square, sharp */}
-                <span
-                  className="absolute left-4 top-3 -translate-x-1/2 sm:left-6"
-                  aria-hidden
-                >
-                  <span
-                    className={`block h-4 w-4 border-2 ${
-                      s.accent === "coral"
-                        ? "border-coral bg-deep"
-                        : "border-lilac bg-deep"
-                    }`}
-                  />
-                </span>
+                {s.n}
+              </span>
 
-                <div className="sm:col-span-3">
-                  <p
-                    className={`font-sans font-medium text-[11px] uppercase tracking-[0.3em] ${
-                      s.accent === "coral" ? "text-coral" : "text-lilac"
-                    }`}
-                  >
-                    {s.code}
-                  </p>
-                </div>
-
-                <div className="sm:col-span-9">
-                  <h3 className="font-display text-3xl font-semibold leading-tight tracking-[-0.01em] sm:text-4xl md:text-5xl">
-                    {s.title}
-                  </h3>
-                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-white sm:text-lg">
-                    {s.body}
-                  </p>
-                </div>
-              </motion.li>
-            ))}
-          </ol>
-        </div>
+              <h3 className="mt-8 font-display text-2xl font-semibold leading-tight tracking-[-0.01em] sm:text-3xl">
+                {s.title}
+              </h3>
+              <p className="mt-5 text-base leading-relaxed text-white sm:text-lg">
+                {s.body}
+              </p>
+            </motion.li>
+          ))}
+        </motion.ol>
       </div>
     </section>
   );

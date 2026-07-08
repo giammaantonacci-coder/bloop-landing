@@ -40,13 +40,13 @@ export function Bloopers() {
   return (
     <section
       id="bloopers"
-      className="relative border-t border-white/10 py-28 sm:py-36"
+      className="relative py-28 sm:py-36"
     >
       <div className="pointer-events-none absolute inset-0 noise opacity-30" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         {/* Section header */}
-        <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-14 md:grid-cols-12">
+        <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
           <div className="md:col-span-3">
             <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-coral">
               Community
@@ -84,22 +84,14 @@ export function Bloopers() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-10% 0px" }}
-          className="grid grid-cols-1 border-b border-white/10 md:grid-cols-3"
+          className="grid grid-cols-1 gap-5 md:grid-cols-3"
         >
-          {steps.map((s, i) => (
+          {steps.map((s) => (
             <motion.article
               key={s.n}
               variants={card}
-              className={`group relative flex flex-col justify-between p-8 md:p-10 ${
-                i > 0 ? "border-t border-white/10 md:border-l md:border-t-0" : ""
-              }`}
+              className="group relative flex flex-col justify-between rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
             >
-              {/* Left accent stripe */}
-              <div
-                aria-hidden
-                className="absolute left-0 top-8 h-14 w-1 bg-coral transition-all duration-500 group-hover:h-24 md:top-10"
-              />
-
               <div className="flex items-center justify-between font-sans font-medium text-[10px] uppercase tracking-[0.3em] text-smoke">
                 <span className="text-coral">{s.n}</span>
                 <span>{s.tag}</span>
@@ -114,7 +106,7 @@ export function Bloopers() {
                 </p>
               </div>
 
-              <div className="mt-10 inline-flex w-fit items-center gap-2 border border-coral/40 px-3 py-1.5 font-sans font-medium text-[10px] uppercase tracking-[0.25em] text-coral">
+              <div className="mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-coral/15 px-4 py-2 font-sans font-medium text-[10px] uppercase tracking-[0.25em] text-coral">
                 {s.reward}
               </div>
             </motion.article>
@@ -122,7 +114,7 @@ export function Bloopers() {
         </motion.div>
 
         {/* CTA row */}
-        <div className="grid grid-cols-1 gap-8 pt-14 md:grid-cols-12 md:items-center">
+        <div className="grid grid-cols-1 gap-8 pt-16 md:grid-cols-12 md:items-center">
           <div className="md:col-span-8">
             <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-smoke">
               Come partecipare

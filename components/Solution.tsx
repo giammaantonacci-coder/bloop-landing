@@ -40,10 +40,10 @@ export function Solution() {
   return (
     <section
       id="soluzione"
-      className="relative border-t border-white/10 py-28 sm:py-36"
+      className="relative py-28 sm:py-36"
     >
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
-        <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-14 md:grid-cols-12">
+        <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
           <div className="md:col-span-3">
             <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-lilac">
               Soluzione
@@ -73,24 +73,14 @@ export function Solution() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-10% 0px" }}
-          className="grid grid-cols-1 border-b border-white/10 md:grid-cols-3"
+          className="grid grid-cols-1 gap-5 md:grid-cols-3"
         >
-          {features.map((f, i) => (
+          {features.map((f) => (
             <motion.article
               key={f.n}
               variants={card}
-              className={`group relative flex flex-col justify-between p-8 md:p-10 ${
-                i > 0 ? "border-t border-white/10 md:border-l md:border-t-0" : ""
-              }`}
+              className="group relative flex flex-col justify-between rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
             >
-              {/* Left accent stripe */}
-              <div
-                aria-hidden
-                className={`absolute left-0 top-8 h-14 w-1 transition-all duration-500 group-hover:h-24 md:top-10 ${
-                  f.accent === "coral" ? "bg-coral" : "bg-lilac"
-                }`}
-              />
-
               <div className="flex items-center justify-between font-sans font-medium text-[10px] uppercase tracking-[0.3em] text-smoke">
                 <span className={f.accent === "coral" ? "text-coral" : "text-lilac"}>
                   {f.n}
@@ -107,9 +97,8 @@ export function Solution() {
                 </p>
               </div>
 
-              <div className="mt-10 flex items-center gap-3 font-sans font-medium text-[10px] uppercase tracking-[0.25em] text-smoke transition group-hover:text-white">
-                <span aria-hidden className="inline-block h-px w-6 bg-current" />
-                Scopri di più
+              <div className="mt-10 font-sans font-medium text-[10px] uppercase tracking-[0.25em] text-smoke transition group-hover:text-white">
+                Scopri di più →
               </div>
             </motion.article>
           ))}

@@ -50,11 +50,11 @@ export function Problem() {
   return (
     <section
       id="problema"
-      className="relative border-t border-white/10 py-28 sm:py-36"
+      className="relative py-28 sm:py-36"
     >
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         {/* Section header */}
-        <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-14 md:grid-cols-12">
+        <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
           <div className="md:col-span-3">
             <p className="font-sans font-medium text-[11px] uppercase tracking-[0.25em] text-coral">
               Problema
@@ -75,19 +75,19 @@ export function Problem() {
           </div>
         </div>
 
-        {/* Stats grid */}
+        {/* Stats bubbles */}
         <motion.ul
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-10% 0px" }}
-          className="grid grid-cols-1 divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0"
+          className="grid grid-cols-1 gap-5 md:grid-cols-3"
         >
           {stats.map((s) => (
             <motion.li
               key={s.index}
               variants={item}
-              className="group relative flex flex-col justify-between p-8 py-14 transition-colors hover:bg-white/[0.02] md:p-10"
+              className="group relative flex flex-col justify-between rounded-[2rem] bg-white/[0.04] p-8 py-12 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
             >
               <div className="flex items-center justify-between font-sans font-medium text-[10px] uppercase tracking-[0.3em] text-smoke">
                 <span>{s.index}</span>
@@ -105,17 +105,12 @@ export function Problem() {
               <p className="mt-8 max-w-xs text-base leading-relaxed text-white sm:text-lg">
                 {s.label}
               </p>
-
-              <div
-                className="mt-8 h-0.5 w-10 origin-left scale-x-100 bg-coral transition-transform duration-500 group-hover:scale-x-[4]"
-                aria-hidden
-              />
             </motion.li>
           ))}
         </motion.ul>
 
         {/* Closer */}
-        <div className="mt-20 grid grid-cols-1 items-end gap-8 border-t border-white/10 pt-14 md:grid-cols-12">
+        <div className="mt-16 grid grid-cols-1 items-end gap-8 md:grid-cols-12">
           <p className="font-sans font-medium text-[11px] uppercase tracking-[0.3em] text-smoke md:col-span-3">
             Sintesi
           </p>
