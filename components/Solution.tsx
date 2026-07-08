@@ -7,7 +7,7 @@ const features = [
     n: "F/01",
     tag: "Discovery",
     title: "Scopri cosa pulsa",
-    body: "La mappa ti mostra dove la città è viva in questo momento, zona per zona.",
+    body: "Aggreghiamo eventi e posti da più fonti, in un unico posto. Niente più ricerche infinite.",
     accent: "coral" as const,
   },
   {
@@ -79,7 +79,7 @@ export function Solution() {
             <motion.article
               key={f.n}
               variants={card}
-              className="group relative flex flex-col justify-between rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
+              className="group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
             >
               <div className="flex items-center justify-between font-sans font-medium text-[10px] uppercase tracking-[0.3em] text-smoke">
                 <span className={f.accent === "coral" ? "text-coral" : "text-lilac"}>
@@ -95,10 +95,6 @@ export function Solution() {
                 <p className="mt-6 max-w-md text-base leading-relaxed text-white sm:text-lg">
                   {f.body}
                 </p>
-              </div>
-
-              <div className="mt-10 font-sans font-medium text-[10px] uppercase tracking-[0.25em] text-smoke transition group-hover:text-white">
-                Scopri di più →
               </div>
             </motion.article>
           ))}
