@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const features = [
   {
@@ -65,6 +66,23 @@ export function Solution() {
               Un&apos;unica app per trasformare la voglia di uscire in
               un&apos;esperienza reale — dalla scoperta alla porta d&apos;ingresso.
             </p>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-15% 0px" }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+              className="mt-8"
+            >
+              <Link
+                href="/soluzione"
+                className="group inline-flex items-center gap-2 font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-lilac transition hover:text-white"
+              >
+                Approfondisci la soluzione
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+              </Link>
+            </motion.div>
           </div>
         </div>
 

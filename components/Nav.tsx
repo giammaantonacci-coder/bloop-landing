@@ -31,9 +31,9 @@ export function Nav() {
           <Link href="/problema" className="transition hover:text-white">
             Problema
           </Link>
-          <a href="/#soluzione" className="transition hover:text-white">
+          <Link href="/soluzione" className="transition hover:text-white">
             Soluzione
-          </a>
+          </Link>
           <a href="/#come-funziona" className="transition hover:text-white">
             Flusso
           </a>
