@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { BackgroundBubbles } from "@/components/ui/BackgroundBubbles";
+import { PinballBubbles } from "@/components/ui/PinballBubbles";
 import { ProblemDetail } from "@/components/ProblemDetail";
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export default function ProblemaPage() {
   return (
     <>
       <Nav />
-      <BackgroundBubbles />
+      <PinballBubbles />
       <main className="relative z-10 overflow-hidden">
         <ProblemDetail />
         <Footer />
