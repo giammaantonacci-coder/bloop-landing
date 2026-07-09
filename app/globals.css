@@ -51,6 +51,20 @@ html {
   }
 }
 
+/* Animatable angle for the rotating hover border. Registered as a typed
+   custom property so it can be transitioned/animated. */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
 @layer utilities {
   .marquee-track {
     animation: marquee-x 45s linear infinite;
@@ -127,5 +141,44 @@ html {
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
     padding: 0.02em 0.14em;
+  }
+
+  /* Rotating luminous border, revealed on hover. A conic gradient with a
+     bright coral→lilac arc is masked down to a thin ring and spun around
+     the card via the --border-angle custom property. */
+  .glow-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--border-angle),
+      transparent 0%,
+      transparent 62%,
+      #f76b3a 78%,
+      #ffd9c7 86%,
+      #a269ff 94%,
+      transparent 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .glow-border:hover::before {
+    opacity: 1;
+    animation: border-spin 2.8s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glow-border:hover::before {
+      animation: none;
+    }
   }
 }

@@ -90,7 +90,7 @@ export function Bloopers() {
             <motion.article
               key={s.n}
               variants={card}
-              className="group relative flex flex-col justify-between rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
+              className="glow-border group relative flex flex-col justify-between rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
             >
               <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.3em] text-coral">
                 {s.tag}
