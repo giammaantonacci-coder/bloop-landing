@@ -5,34 +5,34 @@ import { Marquee } from "./ui/Marquee";
 import { BlooperLevels } from "./ui/BlooperLevels";
 
 const perks = [
-  "Accesso VIP",
-  "Eventi esclusivi",
-  "Ticket scontati",
-  "Badge esclusivi",
-  "Anteprime",
-  "Priorità in lista",
+  "Ti ricondivido",
+  "Anteprima al lancio",
+  "Le chicche prima",
+  "Contest con i partner",
+  "Il tuo nome in giro",
+  "Conti nella community",
 ];
 
 const steps = [
   {
     n: "01",
     tag: "Segnala",
-    title: "Vedi un evento che manca?",
-    body: "Un link, un flyer, uno screen. Bastano pochi secondi per farcelo sapere in DM o via email.",
+    title: "Sai di una cosa bella?",
+    body: "Un link, un flyer, uno screen. Taggami #Bloop dalle tue serate o scrivimi in DM. Bastano pochi secondi.",
     accent: "coral" as const,
   },
   {
     n: "02",
-    tag: "Verifichiamo",
-    title: "Il team controlla e pubblica",
-    body: "Ogni segnalazione passa dal team Bloop. Se è valida, entra in app entro poche ore.",
+    tag: "Pubblico",
+    title: "La controllo e la metto in giro",
+    body: "Controllo che sia tutto giusto e la faccio scoprire a tutti. Niente gatekeeping.",
     accent: "lilac" as const,
   },
   {
     n: "03",
-    tag: "Guadagna",
-    title: "Accumuli punti",
-    body: "Ogni evento approvato ti fa salire di livello. Più segnali, più sblocchi.",
+    tag: "Ti riconosco",
+    title: "Ti ricondivido, col tuo nome",
+    body: "Chi me l'ha fatta scoprire lo dico. Più segnali, prima entri.",
     accent: "coral" as const,
   },
 ];
@@ -40,30 +40,30 @@ const steps = [
 const rewards = [
   {
     n: "01",
-    tag: "VIP",
-    title: "Accesso prioritario",
-    body: "Salta la fila ed entra prima agli eventi partner. Il tuo posto è già pronto.",
+    tag: "Riconoscimento",
+    title: "Ti ricondivido col tuo nome",
+    body: "Chi me l'ha fatta scoprire lo dico. Il tuo nome gira insieme all'evento — «me l'hai fatta scoprire tu».",
     accent: "coral" as const,
   },
   {
     n: "02",
-    tag: "Esclusive",
-    title: "Serate riservate",
-    body: "Inviti a eventi solo per Bloopers, che non trovi da nessun'altra parte.",
+    tag: "Anteprima",
+    title: "Provi la città prima di tutti",
+    body: "I primi in lista entrano prima. Quando Bloop apre, lo sai tu per primo/a.",
     accent: "lilac" as const,
   },
   {
     n: "03",
-    tag: "Sconti",
-    title: "Ticket scontati",
-    body: "Prezzi ridotti e drop dedicati sui biglietti degli eventi in app.",
+    tag: "Contest",
+    title: "Ti porto agli eventi",
+    body: "Ogni tanto regalo ingressi e drink offerti dai partner. Segnali, partecipi, magari vinci.",
     accent: "coral" as const,
   },
   {
     n: "04",
-    tag: "Status",
-    title: "Badge e livelli",
-    body: "Sali di livello, sblocca badge e fatti riconoscere nella community.",
+    tag: "Community",
+    title: "Conti davvero",
+    body: "Più segnali, più la mappa è viva. La città la costruiamo insieme.",
     accent: "lilac" as const,
   },
 ];
@@ -117,7 +117,8 @@ export function BloopersDetail() {
                 className="mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl"
               >
                 La città la fanno le persone che la vivono. Segnala gli eventi
-                che mancano, falli scoprire a tutti — e guadagna mentre lo fai.
+                che mancano — quelli che vivono nei social e nelle chat — e li
+                faccio scoprire a tutti. Ti ricondivido, col tuo nome.
               </motion.p>
             </div>
           </div>
@@ -297,8 +298,8 @@ export function BloopersDetail() {
               <span className="highlight-coral">la città?</span>
             </h2>
             <p className="mt-6 max-w-xl text-lg text-white">
-              Mandaci la prima segnalazione in DM su Instagram o via email.
-              Rispondiamo a tutti.
+              Mandami la tua prima segnalazione in DM su Instagram o via email.
+              Rispondo a tutti.
             </p>
             <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a

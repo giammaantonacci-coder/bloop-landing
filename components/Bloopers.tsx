@@ -5,25 +5,25 @@ import Link from "next/link";
 
 const steps = [
   {
-    n: "R/01",
+    n: "01",
     tag: "Segnala",
-    title: "Vedi un evento che manca?",
-    body: "Un link, un flyer, uno screen. Bastano pochi secondi per farcelo sapere in DM o via email.",
-    reward: "+ Contributo",
+    title: "Sai di una cosa bella?",
+    body: "Un link, un flyer, uno screen. Taggami #Bloop dalle tue serate o scrivimi in DM. Bastano pochi secondi.",
+    reward: "+ Segnalazione",
   },
   {
-    n: "R/02",
-    tag: "Verifichiamo",
-    title: "Il team controlla e pubblica.",
-    body: "Ogni segnalazione passa dal team Bloop. Se è valida, entra in app entro poche ore.",
+    n: "02",
+    tag: "Pubblico",
+    title: "La controllo e la metto in giro",
+    body: "Controllo che sia tutto giusto e la faccio scoprire a tutti. Niente gatekeeping: entra chiunque abbia qualcosa di buono.",
     reward: "+ Fiducia",
   },
   {
-    n: "R/03",
-    tag: "Guadagna",
-    title: "Accumuli punti.",
-    body: "Ogni evento approvato ti fa salire di livello. Più segnali, più sblocchi premi, esperienze e accessi VIP.",
-    reward: "+ Punti",
+    n: "03",
+    tag: "Ti riconosco",
+    title: "Ti ricondivido, col tuo nome",
+    body: "Chi me l'ha fatta scoprire lo dico. Più segnali, prima entri: i primi provano la città in anteprima.",
+    reward: "+ Anteprima",
   },
 ];
 
@@ -61,7 +61,7 @@ export function Bloopers() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
             >
-              Aiutaci a far pulsare
+              Aiutami a mappare
               <br />
               la città. Diventa un{" "}
               <span className="highlight-coral">Blooper</span>.
@@ -73,8 +73,9 @@ export function Bloopers() {
               transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
               className="mt-6 max-w-xl text-lg text-white"
             >
-              Bloop cresce grazie a chi vive la città. Segnala gli eventi che
-              non trovi in app: ogni contributo ti fa guadagnare punti.
+              La città la fanno le persone che la vivono. Segnala gli eventi che
+              mancano — quelli che vivono nei social e nelle chat — e li faccio
+              scoprire a tutti.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -87,7 +88,7 @@ export function Bloopers() {
                 href="/bloopers"
                 className="group inline-flex items-center gap-2 font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-coral transition hover:text-white"
               >
-                Scopri livelli e premi
+                Scopri come funziona
                 <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
                   →
                 </span>
@@ -137,8 +138,8 @@ export function Bloopers() {
               Come partecipare
             </p>
             <p className="mt-4 max-w-xl font-display text-2xl leading-tight sm:text-3xl">
-              Mandaci una segnalazione in DM su Instagram o via email.
-              Rispondiamo a tutti.
+              Mandami la tua prima segnalazione in DM su Instagram o via email.
+              Rispondo a tutti.
             </p>
           </div>
 

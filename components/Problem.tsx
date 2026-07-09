@@ -18,22 +18,22 @@ const stats: Stat[] = [
   {
     value: 86,
     suffix: "%",
-    label: "della giornata la passiamo chiusi in casa",
-    source: "Indoor time index",
+    label: "delle cose belle in città non le trovi cercando dove guardi di solito",
+    source: "Fuori dal tuo radar",
     index: "01",
   },
   {
     value: 69,
     suffix: "%",
-    label: "delle persone scopre eventi solo tramite passaparola",
-    source: "Word-of-mouth survey",
+    label: "scopre gli eventi solo per passaparola o per caso sui social",
+    source: "Passaparola & social",
     index: "02",
   },
   {
     value: 0,
     custom: "1/3",
-    label: "eventi locali non raggiunge il proprio pubblico",
-    source: "Local reach study",
+    label: "degli eventi non arriva a chi vorrebbe esserci",
+    source: "Persi per strada",
     index: "03",
   },
 ];
@@ -140,8 +140,8 @@ export function Problem() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="text-balance font-display text-3xl leading-tight sm:text-4xl md:col-span-9 md:text-5xl"
             >
-              Gli eventi ci sono. La voglia c&apos;è.{" "}
-              <span className="highlight-coral">Manca il ponte.</span>
+              Le cose belle ci sono.{" "}
+              <span className="highlight-coral">Basta sapere dove cercarle.</span>
             </motion.p>
           </div>
 

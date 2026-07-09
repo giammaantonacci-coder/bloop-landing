@@ -21,20 +21,20 @@ type StepData = {
 const steps: StepData[] = [
   {
     n: "01",
-    title: "Dimmi cosa ti piace",
-    body: "Un onboarding rapido: musica, cibo, mood. Bloop capisce il tuo modo di vivere la città.",
+    title: "Dimmi che serata cerchi",
+    body: "Gente e casino, qualcosa di tranquillo, o «stupiscimi». Basta dirmelo come lo diresti a un amico.",
     accent: "coral",
   },
   {
     n: "02",
-    title: "Guarda la città pulsare",
-    body: "La mappa live si aggiorna in tempo reale. Vedi dove sta succedendo qualcosa, adesso.",
+    title: "Ti porto nel posto giusto",
+    body: "Ti dico dove andare, vicino a te e al momento giusto. Anche la chicca che non sapevi di volere.",
     accent: "lilac",
   },
   {
     n: "03",
-    title: "Esci e vivila",
-    body: "Ticket, tragitto, amici. Tutto in un flusso unico. Zero pensieri.",
+    title: "Scegli e vai",
+    body: "Io accendo il radar, tu vivi la città. Nessun algoritmo che decide per te.",
     accent: "coral",
   },
 ];

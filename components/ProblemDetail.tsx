@@ -114,7 +114,8 @@ export function ProblemDetail() {
                 className="mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl"
               >
                 Ogni giorno, intorno a te, succede molto più di quello che vedi.
-                Il problema non è la mancanza di eventi — è che non arrivano a te.
+                Il problema non è che manchino gli eventi — è che vivono sparsi
+                ovunque e le chicche si perdono.
               </motion.p>
             </div>
           </div>
@@ -219,8 +220,8 @@ export function ProblemDetail() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="text-balance font-display text-3xl leading-tight sm:text-4xl md:col-span-9 md:text-5xl"
             >
-              Gli eventi ci sono. La voglia c&apos;è.{" "}
-              <span className="highlight-coral">Manca il ponte.</span>
+              Le cose belle ci sono.{" "}
+              <span className="highlight-coral">Basta sapere dove cercarle.</span>
             </motion.p>
           </div>
 

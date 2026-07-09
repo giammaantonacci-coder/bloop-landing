@@ -15,14 +15,14 @@ const features = [
     n: "02",
     tag: "Personal",
     title: "Su misura per te",
-    body: "L'AI impara i tuoi gusti — musica, cibo, mood — e ti mostra solo quello che ti interessa davvero.",
+    body: "Mi dici che serata cerchi — gente, qualcosa di tranquillo, o «stupiscimi» — e ti mostro solo quello che fa per te.",
     accent: "lilac" as const,
   },
   {
     n: "03",
     tag: "Flow",
     title: "Dall'idea all'ingresso",
-    body: "Ticket, indicazioni, trasporto: tutto dentro l'app. Dall'impulso di uscire alla serata, zero friction.",
+    body: "Dall'impulso di uscire al posto giusto, senza saltare da un'app all'altra. Ti guido fino a lì.",
     accent: "coral" as const,
   },
 ];
@@ -32,7 +32,7 @@ const details = [
     n: "01",
     tag: "Aggregazione",
     title: "Una sola mappa",
-    body: "Tutti gli eventi e i posti della città, raccolti e sempre aggiornati in tempo reale.",
+    body: "Tutti gli eventi e i posti della città, raccolti in un solo posto e sempre aggiornati.",
     accent: "coral" as const,
   },
   {
@@ -107,9 +107,9 @@ export function SolutionDetail() {
                 transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
                 className="mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl"
               >
-                Bloop aggrega tutto quello che succede in città, impara cosa ti
-                piace e ti accompagna dall&apos;idea di uscire fino alla porta
-                d&apos;ingresso. Un&apos;unica app.
+                Raccolgo tutto quello che succede in città — anche le chicche
+                che vivono nei social e nelle chat — e ti guido a trovare cosa
+                fare. A scegliere resti tu, non l&apos;algoritmo.
               </motion.p>
             </div>
           </div>

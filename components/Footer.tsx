@@ -75,11 +75,11 @@ export function Footer() {
           <div className="md:col-span-6">
             <Logo size="lg" animated />
             <p className="mt-8 max-w-md font-display text-2xl font-semibold leading-tight sm:text-3xl">
-              Go out, <span className="highlight-coral">live the city.</span>
+              La scopri tu, <span className="highlight-coral">non l&apos;algoritmo.</span>
             </p>
             <p className="mt-8 max-w-md text-base text-white">
-              Bloop è il sistema operativo per vivere la città. Real-time,
-              personale, umano.
+              Il radar degli eventi della tua città. L&apos;amico local che ti
+              dice dove andare, stasera, vicino a te.
             </p>
           </div>
 

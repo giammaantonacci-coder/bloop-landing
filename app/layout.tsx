@@ -24,22 +24,22 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bloop — La città pulsa. Vivila.",
+  title: "Bloop — La tua città è più viva di quanto pensi",
   description:
-    "Bloop è il sistema operativo per vivere la città. Eventi, zone vive, esperienze — tutto quello che succede intorno a te, in tempo reale.",
+    "Il radar degli eventi della tua città. Tutti gli eventi in un solo posto — anche le chicche che vivono nei social e nelle chat. La scopri tu, non l'algoritmo.",
   keywords: [
     "Bloop",
     "eventi",
-    "città",
-    "real-time",
-    "city pulse",
-    "vivere la città",
-    "AI",
+    "eventi Bologna",
+    "cosa fare in città",
+    "scoprire eventi",
+    "segnalare eventi",
+    "radar eventi",
   ],
   openGraph: {
-    title: "Bloop — La città pulsa. Vivila.",
+    title: "Bloop — La tua città è più viva di quanto pensi",
     description:
-      "Il sistema operativo per vivere la città. Go out, live the city.",
+      "Tutti gli eventi della tua città in un solo posto. La scopri tu, non l'algoritmo.",
     type: "website",
     locale: "it_IT",
   },

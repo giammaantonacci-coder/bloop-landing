@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Il flusso — Bloop",
     description:
-      "Dimmi cosa ti piace, guarda la città pulsare, esci e vivila. Un flusso solo, dall'idea alla porta.",
+      "Dimmi che serata cerchi, ti porto nel posto giusto, scegli e vai. Un flusso solo, dall'idea alla porta.",
     type: "article",
     locale: "it_IT",
   },

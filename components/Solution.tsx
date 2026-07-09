@@ -5,24 +5,24 @@ import Link from "next/link";
 
 const features = [
   {
-    n: "F/01",
-    tag: "Discovery",
-    title: "Scopri cosa pulsa",
-    body: "Aggreghiamo eventi e posti da più fonti, in un unico posto. Niente più ricerche infinite.",
+    n: "01",
+    tag: "Un solo posto",
+    title: "Tutto in un posto",
+    body: "Raccolgo ogni evento della città — anche le chicche che vivono nei social e nelle chat. Basta saltare da un'app all'altra.",
     accent: "coral" as const,
   },
   {
-    n: "F/02",
-    tag: "Personal",
-    title: "Eventi su misura",
-    body: "L'AI impara i tuoi gusti e ti suggerisce solo quello che ti interessa davvero.",
+    n: "02",
+    tag: "La scegli tu",
+    title: "Te lo dico io, non l'algoritmo",
+    body: "Dimmi che serata cerchi e ti porto nel posto giusto, vicino a te, al momento giusto. A scegliere sei tu.",
     accent: "lilac" as const,
   },
   {
-    n: "F/03",
-    tag: "Flow",
-    title: "Dall'idea all'ingresso",
-    body: "Ticket, indicazioni, trasporto: tutto dentro l'app, zero friction.",
+    n: "03",
+    tag: "Senza gatekeeping",
+    title: "Nessuno resta fuori",
+    body: "Chiunque può segnalare un evento. La visibilità non dipende da chi segui o da quanto paghi.",
     accent: "coral" as const,
   },
 ];
@@ -58,13 +58,14 @@ export function Solution() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
             >
-              Bloop è il <span className="highlight-lilac">battito</span>
+              Tutta la città,
               <br />
-              della tua città
+              <span className="highlight-lilac">in un solo posto.</span>
             </motion.h2>
             <p className="mt-6 max-w-xl text-lg text-white">
-              Un&apos;unica app per trasformare la voglia di uscire in
-              un&apos;esperienza reale — dalla scoperta alla porta d&apos;ingresso.
+              Sono il radar degli eventi della tua città: raccolgo tutto, ti
+              guido a trovare cosa fare e ti lascio scegliere. Cerchi qualcosa
+              di preciso o vuoi scoprire una chicca — ci penso io.
             </p>
             <motion.div
               initial={{ opacity: 0, y: 16 }}

@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const lines = [
-  ["Crediamo che la città non sia solo", "il posto in cui viviamo."],
-  ["È un'esperienza", "da vivere insieme."],
-  ["Bloop nasce per farci vivere la città", "in modo più umano —"],
-  ["dove la tecnologia non distrae,", "ma avvicina."],
+  ["Immagino una città", "visibile a 360 gradi."],
+  ["Dove nessun evento va perso,", "e nessuno resta fuori"],
+  ["solo perché non sapeva", "che stesse succedendo."],
+  ["La scopri tu,", "non l'algoritmo."],
 ];
 
 const container = {
@@ -68,7 +68,7 @@ export function Vision() {
               >
                 {pair[0]}
                 <br />
-                <span className={i === 1 ? "highlight-coral" : "text-white/95"}>
+                <span className={i === 3 ? "highlight-coral" : "text-white/95"}>
                   {pair[1]}
                 </span>
               </motion.p>

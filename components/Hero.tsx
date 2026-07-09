@@ -21,7 +21,7 @@ export function Hero() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="font-sans font-semibold text-[13px] uppercase tracking-[0.28em] text-smoke"
         >
-          Real-time city pulse platform
+          Il radar degli eventi della tua città
         </motion.p>
 
         <motion.h1
@@ -30,9 +30,9 @@ export function Hero() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.05 }}
           className="mt-12 font-display text-[clamp(2.75rem,8vw,7rem)] font-bold leading-[0.95] tracking-[-0.03em]"
         >
-          <span className="block sm:whitespace-nowrap">La tua città pulsa</span>
+          <span className="block">La tua città è più viva</span>
           <span className="mt-5 block">
-            <span className="highlight-coral">Vivila.</span>
+            <span className="highlight-coral">di quanto pensi.</span>
           </span>
         </motion.h1>
 
@@ -43,8 +43,9 @@ export function Hero() {
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
             className="max-w-xl text-balance text-lg text-white sm:text-xl md:col-span-6"
           >
-            Bloop ti mostra tutto quello che succede intorno a te, in tempo
-            reale. Eventi, zone vive, esperienze — tutto in un&apos;unica app.
+            Sono Bloop: l&apos;amico local che ti dice dove andare, stasera,
+            vicino a te. Tutti gli eventi in un solo posto — anche le chicche
+            che vivono nei social e nelle chat. Li scopri tu, non l&apos;algoritmo.
           </motion.p>
 
           <motion.div
@@ -57,7 +58,7 @@ export function Hero() {
               href="#soluzione"
               className="group inline-flex items-center gap-3 rounded-full bg-coral px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-deep transition hover:bg-white"
             >
-              Diventa un Blooper
+              Accendi il radar
               <svg
                 width="18"
                 height="18"
