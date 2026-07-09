@@ -105,7 +105,7 @@ export function Bloopers() {
                 </p>
               </div>
 
-              <div className="mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-coral/15 px-4 py-2 font-sans font-semibold text-[12px] uppercase tracking-[0.25em] text-coral">
+              <div className="mt-10 inline-flex w-fit items-center gap-2 rounded-full bg-lilac/15 px-4 py-2 font-sans font-semibold text-[12px] uppercase tracking-[0.25em] text-lilac">
                 {s.reward}
               </div>
             </motion.article>
