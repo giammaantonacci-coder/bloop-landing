@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Logo } from "./Logo";
 
 export function Nav() {
@@ -20,24 +21,24 @@ export function Nav() {
       }`}
     >
       <div className="relative mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-8">
-        <a href="#hero" aria-label="Bloop — home" className="flex items-center">
+        <Link href="/" aria-label="Bloop — home" className="flex items-center">
           <Logo size="sm" animated />
-        </a>
+        </Link>
 
         <nav className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 font-sans font-semibold text-[13px] uppercase tracking-[0.2em] text-smoke md:flex">
-          <a href="#problema" className="pointer-events-auto transition hover:text-white">
+          <Link href="/problema" className="pointer-events-auto transition hover:text-white">
             Problema
-          </a>
-          <a href="#soluzione" className="pointer-events-auto transition hover:text-white">
+          </Link>
+          <a href="/#soluzione" className="pointer-events-auto transition hover:text-white">
             Soluzione
           </a>
-          <a href="#come-funziona" className="pointer-events-auto transition hover:text-white">
+          <a href="/#come-funziona" className="pointer-events-auto transition hover:text-white">
             Flusso
           </a>
-          <a href="#visione" className="pointer-events-auto transition hover:text-white">
+          <a href="/#visione" className="pointer-events-auto transition hover:text-white">
             Visione
           </a>
-          <a href="#bloopers" className="pointer-events-auto transition hover:text-white">
+          <a href="/#bloopers" className="pointer-events-auto transition hover:text-white">
             Bloopers
           </a>
         </nav>

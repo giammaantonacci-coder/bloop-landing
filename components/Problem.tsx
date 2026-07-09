@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { AnimatedCounter } from "./ui/AnimatedCounter";
 import { BridgeConnector } from "./ui/BridgeConnector";
 
@@ -73,6 +74,23 @@ export function Problem() {
               <br />
               <span className="text-smoke">della tua città?</span>
             </motion.h2>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-15% 0px" }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+              className="mt-8"
+            >
+              <Link
+                href="/problema"
+                className="group inline-flex items-center gap-2 font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-coral transition hover:text-white"
+              >
+                Approfondisci il problema
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+              </Link>
+            </motion.div>
           </div>
         </div>
 
