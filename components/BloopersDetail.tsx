@@ -1,58 +1,69 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Marquee } from "./ui/Marquee";
+import { BlooperLevels } from "./ui/BlooperLevels";
 
-const beliefs = [
+const perks = [
+  "Accesso VIP",
+  "Eventi esclusivi",
+  "Ticket scontati",
+  "Badge esclusivi",
+  "Anteprime",
+  "Priorità in lista",
+];
+
+const steps = [
   {
     n: "01",
-    tag: "La città",
-    title: "Non è solo dove vivi",
-    body: "È un'esperienza da vivere insieme, ogni giorno. Non uno sfondo, ma il posto in cui succedono le cose.",
+    tag: "Segnala",
+    title: "Vedi un evento che manca?",
+    body: "Un link, un flyer, uno screen. Bastano pochi secondi per farcelo sapere in DM o via email.",
     accent: "coral" as const,
   },
   {
     n: "02",
-    tag: "Il modo",
-    title: "Più umano",
-    body: "Vogliamo farti vivere la città con più leggerezza e meno rumore. Meno tempo a cercare, più tempo a esserci.",
+    tag: "Verifichiamo",
+    title: "Il team controlla e pubblica",
+    body: "Ogni segnalazione passa dal team Bloop. Se è valida, entra in app entro poche ore.",
     accent: "lilac" as const,
   },
   {
     n: "03",
-    tag: "Il mezzo",
-    title: "Tecnologia che avvicina",
-    body: "Non uno schermo in più tra te e il mondo, ma un ponte verso di esso. Che poi sparisce, quando esci.",
+    tag: "Guadagna",
+    title: "Accumuli punti",
+    body: "Ogni evento approvato ti fa salire di livello. Più segnali, più sblocchi.",
     accent: "coral" as const,
   },
 ];
 
-const principles = [
+const rewards = [
   {
     n: "01",
-    tag: "Umano",
-    title: "La tecnologia sparisce",
-    body: "Il telefono è un mezzo, non il fine. Bloop esiste per farti alzare lo sguardo, non per tenertelo incollato.",
+    tag: "VIP",
+    title: "Accesso prioritario",
+    body: "Salta la fila ed entra prima agli eventi partner. Il tuo posto è già pronto.",
     accent: "coral" as const,
   },
   {
     n: "02",
-    tag: "Reale",
-    title: "Fatti, non feed",
-    body: "Non vogliamo il tuo tempo sullo schermo. Vogliamo le tue serate fuori, con le persone.",
+    tag: "Esclusive",
+    title: "Serate riservate",
+    body: "Inviti a eventi solo per Bloopers, che non trovi da nessun'altra parte.",
     accent: "lilac" as const,
   },
   {
     n: "03",
-    tag: "Insieme",
-    title: "La città è collettiva",
-    body: "Una città viva la fanno le persone che la vivono. Più siamo, più pulsa.",
+    tag: "Sconti",
+    title: "Ticket scontati",
+    body: "Prezzi ridotti e drop dedicati sui biglietti degli eventi in app.",
     accent: "coral" as const,
   },
   {
     n: "04",
-    tag: "Aperto",
-    title: "Per tutti",
-    body: "Che tu sia di qui da sempre o arrivato ieri: la città è tua. Bloop te la mette a portata.",
+    tag: "Status",
+    title: "Badge e livelli",
+    body: "Sali di livello, sblocca badge e fatti riconoscere nella community.",
     accent: "lilac" as const,
   },
 ];
@@ -67,12 +78,7 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
 };
 
-const manifestoLines = [
-  ["Crediamo che la città non sia solo", "il posto in cui viviamo."],
-  ["È un'esperienza", "da vivere insieme."],
-];
-
-export function VisionDetail() {
+export function BloopersDetail() {
   return (
     <>
       {/* Header */}
@@ -90,8 +96,8 @@ export function VisionDetail() {
 
           <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-12">
             <div className="md:col-span-3">
-              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-lilac">
-                La visione
+              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-coral">
+                Community
               </p>
             </div>
             <div className="md:col-span-9">
@@ -101,9 +107,8 @@ export function VisionDetail() {
                 transition={{ duration: 0.7, ease: "easeOut", delay: 0.05 }}
                 className="text-balance font-display text-5xl font-bold leading-[0.98] tracking-[-0.02em] sm:text-7xl md:text-8xl"
               >
-                La città è
-                <br />
-                <span className="text-smoke">da vivere.</span>
+                Diventa un{" "}
+                <span className="highlight-coral">Blooper</span>.
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -111,51 +116,40 @@ export function VisionDetail() {
                 transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
                 className="mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl"
               >
-                Bloop non nasce per farti stare più tempo sul telefono. Nasce
-                per farti vivere la città in modo più umano — dove la tecnologia
-                non distrae, ma avvicina.
+                La città la fanno le persone che la vivono. Segnala gli eventi
+                che mancano, falli scoprire a tutti — e guadagna mentre lo fai.
               </motion.p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Manifesto centerpiece */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative rounded-[2.5rem] bg-white/[0.04] p-8 sm:p-14 md:p-20">
-            <motion.div
-              variants={grid}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-15% 0px" }}
-              className="space-y-8 sm:space-y-10"
-            >
-              {manifestoLines.map((pair, i) => (
-                <motion.p
-                  key={i}
-                  variants={item}
-                  className="font-display text-3xl font-semibold leading-[1.1] tracking-[-0.02em] sm:text-4xl md:text-5xl"
-                >
-                  {pair[0]}
-                  <br />
-                  <span className={i === 1 ? "highlight-lilac" : "text-white/95"}>
-                    {pair[1]}
-                  </span>
-                </motion.p>
-              ))}
-            </motion.div>
-          </div>
+      {/* Perks marquee */}
+      <section className="relative py-12">
+        <div className="border-y border-white/10 py-5">
+          <Marquee
+            items={perks.map((p) => (
+              <span
+                key={p}
+                className="font-display text-2xl font-bold uppercase tracking-tight text-white sm:text-4xl"
+              >
+                {p}
+              </span>
+            ))}
+            separator={
+              <span aria-hidden className="mx-6 inline-block h-2.5 w-2.5 rotate-45 bg-coral sm:mx-8" />
+            }
+          />
         </div>
       </section>
 
-      {/* Three beliefs */}
+      {/* How it works */}
       <section className="relative px-6 py-24 sm:px-8 sm:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
             <div className="md:col-span-3">
-              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-coral">
-                Cosa crediamo
+              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-lilac">
+                Come funziona
               </p>
             </div>
             <div className="md:col-span-9">
@@ -166,9 +160,9 @@ export function VisionDetail() {
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
               >
-                Tre convinzioni,
+                Tre passi.
                 <br />
-                <span className="text-smoke">una direzione.</span>
+                <span className="text-smoke">Zero sbatti.</span>
               </motion.h2>
             </div>
           </div>
@@ -180,23 +174,23 @@ export function VisionDetail() {
             viewport={{ once: true, margin: "-10% 0px" }}
             className="grid grid-cols-1 gap-5 md:grid-cols-3"
           >
-            {beliefs.map((b) => (
+            {steps.map((s) => (
               <motion.article
-                key={b.n}
+                key={s.n}
                 variants={item}
                 className="glow-border group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
               >
                 <div className="flex items-center justify-between font-sans text-[12px] font-semibold uppercase tracking-[0.3em] text-smoke">
-                  <span className={b.accent === "coral" ? "text-coral" : "text-lilac"}>
-                    {b.n}
+                  <span className={s.accent === "coral" ? "text-coral" : "text-lilac"}>
+                    {s.n}
                   </span>
-                  <span>{b.tag}</span>
+                  <span>{s.tag}</span>
                 </div>
                 <h3 className="mt-14 font-display text-3xl font-semibold leading-[1.05] tracking-[-0.01em] sm:text-4xl">
-                  {b.title}
+                  {s.title}
                 </h3>
                 <p className="mt-5 max-w-md text-base leading-relaxed text-white sm:text-lg">
-                  {b.body}
+                  {s.body}
                 </p>
               </motion.article>
             ))}
@@ -204,13 +198,13 @@ export function VisionDetail() {
         </div>
       </section>
 
-      {/* Principles */}
+      {/* Levels — gamified */}
       <section className="relative px-6 py-24 sm:px-8 sm:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
+          <div className="grid grid-cols-1 gap-10 pb-16 md:grid-cols-12">
             <div className="md:col-span-3">
-              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-lilac">
-                I principi
+              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-coral">
+                I livelli
               </p>
             </div>
             <div className="md:col-span-9">
@@ -221,9 +215,37 @@ export function VisionDetail() {
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
               >
-                Le regole
+                Più segnali,
                 <br />
-                <span className="text-smoke">che non cambiano.</span>
+                <span className="text-smoke">più sali.</span>
+              </motion.h2>
+            </div>
+          </div>
+
+          <BlooperLevels />
+        </div>
+      </section>
+
+      {/* Rewards */}
+      <section className="relative px-6 py-24 sm:px-8 sm:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
+            <div className="md:col-span-3">
+              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-lilac">
+                I premi
+              </p>
+            </div>
+            <div className="md:col-span-9">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-15% 0px" }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
+              >
+                Cosa sblocchi
+                <br />
+                <span className="text-smoke">salendo.</span>
               </motion.h2>
             </div>
           </div>
@@ -235,66 +257,27 @@ export function VisionDetail() {
             viewport={{ once: true, margin: "-10% 0px" }}
             className="grid grid-cols-1 gap-5 sm:grid-cols-2"
           >
-            {principles.map((p) => (
+            {rewards.map((r) => (
               <motion.article
-                key={p.n}
+                key={r.n}
                 variants={item}
                 className="glow-border group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
               >
                 <div className="flex items-center justify-between font-sans text-[12px] font-semibold uppercase tracking-[0.3em] text-smoke">
-                  <span className={p.accent === "coral" ? "text-coral" : "text-lilac"}>
-                    {p.n}
+                  <span className={r.accent === "coral" ? "text-coral" : "text-lilac"}>
+                    {r.n}
                   </span>
-                  <span>{p.tag}</span>
+                  <span>{r.tag}</span>
                 </div>
                 <h3 className="mt-14 font-display text-3xl font-semibold leading-[1.05] tracking-[-0.01em] sm:text-4xl">
-                  {p.title}
+                  {r.title}
                 </h3>
                 <p className="mt-5 max-w-md text-base leading-relaxed text-white sm:text-lg">
-                  {p.body}
+                  {r.body}
                 </p>
               </motion.article>
             ))}
           </motion.div>
-        </div>
-      </section>
-
-      {/* Signature statement */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 items-end gap-8 md:grid-cols-12">
-            <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.3em] text-smoke md:col-span-3">
-              Sintesi
-            </p>
-            <div className="md:col-span-9">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="text-balance font-display text-3xl leading-tight sm:text-4xl md:text-5xl"
-              >
-                La città non ha bisogno di un&apos;altra app.{" "}
-                <span className="highlight-lilac">Ha bisogno di te, fuori.</span>
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-smoke"
-              >
-                <span className="text-white">— Il team Bloop</span>
-                <span>2026</span>
-                <a
-                  href="mailto:bloopappevents@gmail.com"
-                  className="transition hover:text-white"
-                >
-                  bloopappevents@gmail.com
-                </a>
-              </motion.div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -309,25 +292,31 @@ export function VisionDetail() {
             className="glow-border relative overflow-hidden rounded-[2.5rem] bg-white/[0.04] p-10 sm:p-16"
           >
             <h2 className="max-w-2xl text-balance font-display text-3xl font-bold leading-[1.05] tracking-[-0.02em] sm:text-5xl">
-              Vivi la città
+              Pronto a far pulsare
               <br />
-              <span className="highlight-coral">con noi.</span>
+              <span className="highlight-coral">la città?</span>
             </h2>
+            <p className="mt-6 max-w-xl text-lg text-white">
+              Mandaci la prima segnalazione in DM su Instagram o via email.
+              Rispondiamo a tutti.
+            </p>
             <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a
-                href="/bloopers"
+                href="mailto:bloopappevents@gmail.com?subject=Diventa%20Blooper"
                 className="group inline-flex items-center gap-3 rounded-full bg-coral px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-deep transition hover:bg-white"
               >
-                Unisciti ai Bloopers
+                Diventa Blooper
                 <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
                   →
                 </span>
               </a>
               <a
-                href="/"
+                href="https://www.instagram.com/thebloopapp?igsh=MThkdTlqMTZjbXZhOQ=="
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-smoke transition hover:text-white"
               >
-                Torna alla home
+                Seguici su Instagram
               </a>
             </div>
           </motion.div>

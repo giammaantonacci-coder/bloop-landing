@@ -90,27 +90,27 @@ export function Footer() {
             </p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
-                <a href="#problema" className="text-white transition hover:text-coral">
+                <a href="/problema" className="text-white transition hover:text-coral">
                   Problema
                 </a>
               </li>
               <li>
-                <a href="#soluzione" className="text-white transition hover:text-coral">
+                <a href="/soluzione" className="text-white transition hover:text-coral">
                   Soluzione
                 </a>
               </li>
               <li>
-                <a href="#come-funziona" className="text-white transition hover:text-coral">
+                <a href="/flusso" className="text-white transition hover:text-coral">
                   Flusso
                 </a>
               </li>
               <li>
-                <a href="#visione" className="text-white transition hover:text-coral">
+                <a href="/visione" className="text-white transition hover:text-coral">
                   Visione
                 </a>
               </li>
               <li>
-                <a href="#bloopers" className="text-white transition hover:text-coral">
+                <a href="/bloopers" className="text-white transition hover:text-coral">
                   Bloopers
                 </a>
               </li>

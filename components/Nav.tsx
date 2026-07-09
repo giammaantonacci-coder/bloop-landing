@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: "Soluzione", href: "/soluzione" },
   { label: "Flusso", href: "/flusso" },
   { label: "Visione", href: "/visione" },
-  { label: "Bloopers", href: "/#bloopers" },
+  { label: "Bloopers", href: "/bloopers" },
 ];
 
 function NavItem({
