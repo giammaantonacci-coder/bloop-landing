@@ -9,6 +9,7 @@ import {
   MotionValue,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 type StepData = {
   n: string;
@@ -263,6 +264,23 @@ export function HowItWorks() {
               <br />
               <span className="text-smoke">Una serata diversa.</span>
             </motion.h2>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-15% 0px" }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+              className="mt-8"
+            >
+              <Link
+                href="/flusso"
+                className="group inline-flex items-center gap-2 font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-coral transition hover:text-white"
+              >
+                Approfondisci il flusso
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+              </Link>
+            </motion.div>
           </div>
         </div>
 

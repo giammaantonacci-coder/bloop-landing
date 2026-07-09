@@ -9,7 +9,7 @@ import { useBubbles } from "./BubblesProvider";
 const NAV_LINKS = [
   { label: "Problema", href: "/problema" },
   { label: "Soluzione", href: "/soluzione" },
-  { label: "Flusso", href: "/#come-funziona" },
+  { label: "Flusso", href: "/flusso" },
   { label: "Visione", href: "/#visione" },
   { label: "Bloopers", href: "/#bloopers" },
 ];
