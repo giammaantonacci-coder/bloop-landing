@@ -43,7 +43,9 @@ export function Nav() {
         </nav>
 
         <a
-          href="mailto:bloopappevents@gmail.com?subject=Diventa%20Blooper"
+          href="https://www.instagram.com/thebloopapp?igsh=MThkdTlqMTZjbXZhOQ=="
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full bg-coral px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] text-white transition hover:bg-lilac"
         >
           Scopri Bloop

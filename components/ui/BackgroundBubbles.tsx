@@ -166,7 +166,10 @@ function BubbleVisual({
     : cfg.sphere;
 
   return (
-    <motion.div style={{ x: m.x, y: m.y }} className={`absolute ${cfg.pos} ${cfg.size}`}>
+    <motion.div
+      style={{ x: m.x, y: m.y, willChange: "transform" }}
+      className={`absolute ${cfg.pos} ${cfg.size}`}
+    >
       <AnimatePresence>
         {alive ? (
           <motion.div

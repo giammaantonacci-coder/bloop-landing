@@ -221,11 +221,14 @@ export function HowItWorks() {
   // on screen, so they don't burn CPU/GPU the rest of the scroll.
   const sectionInView = useInView(containerRef, { margin: "-10% 0px" });
 
-  // Glowing "comet" that rides the tip of the completion bar.
-  const cometTop = useTransform(
+  // Glowing "comet" that rides the tip of the completion bar. Driven by a
+  // `y` transform (not `top`) so it composites on the GPU — animating a
+  // layout property here caused a repaint smear on iOS during scroll.
+  // (7px = half the 14px dot, to keep it centred on the bar tip.)
+  const cometY = useTransform(
     scrollYProgress,
     [0, 1],
-    [rail.top, rail.top + rail.height]
+    [rail.top - 7, rail.top + rail.height - 7]
   );
   const cometOpacity = useTransform(
     scrollYProgress,
@@ -267,7 +270,7 @@ export function HowItWorks() {
         <div ref={containerRef} className="relative mt-6">
           {/* Rail track */}
           <div
-            className="absolute left-[1.75rem] w-[3px] -translate-x-1/2 rounded-full bg-white/10 sm:left-8"
+            className="absolute left-[1.75rem] -ml-[1.5px] w-[3px] rounded-full bg-white/10 sm:left-8"
             style={{ top: rail.top, height: rail.height }}
             aria-hidden
           />
@@ -278,18 +281,22 @@ export function HowItWorks() {
               height: rail.height,
               scaleY: scrollYProgress,
               transformOrigin: "top",
+              willChange: "transform",
             }}
-            className="absolute left-[1.75rem] w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-coral via-coral to-lilac sm:left-8"
+            className="absolute left-[1.75rem] -ml-[1.5px] w-[3px] rounded-full bg-gradient-to-b from-coral via-coral to-lilac sm:left-8"
             aria-hidden
           />
-          {/* Comet at the tip */}
+          {/* Comet at the tip — box-shadow glow (no filter blur) + y transform */}
           <motion.div
-            style={{ top: cometTop, opacity: cometOpacity }}
-            className="absolute left-[1.75rem] z-10 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white sm:left-8"
+            style={{
+              y: cometY,
+              opacity: cometOpacity,
+              willChange: "transform",
+              boxShadow: "0 0 14px 3px rgba(255,255,255,0.7)",
+            }}
+            className="absolute left-[1.75rem] top-0 z-10 -ml-[7px] h-3.5 w-3.5 rounded-full bg-white sm:left-8"
             aria-hidden
-          >
-            <span className="absolute inset-0 rounded-full bg-white blur-[6px]" />
-          </motion.div>
+          />
 
           <ol className="relative space-y-5 sm:space-y-8">
             {steps.map((s, i) => (
