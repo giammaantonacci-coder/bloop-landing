@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const lines = [
   ["Crediamo che la città non sia solo", "il posto in cui viviamo."],
@@ -38,6 +39,15 @@ export function Vision() {
             <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-smoke">
               Manifesto
             </p>
+            <Link
+              href="/visione"
+              className="group mt-6 inline-flex items-center gap-2 font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-lilac transition hover:text-white"
+            >
+              Approfondisci la visione
+              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                →
+              </span>
+            </Link>
           </div>
         </div>
 

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { AnimatedCounter } from "./ui/AnimatedCounter";
-import { BridgeConnector } from "./ui/BridgeConnector";
+import { MissedEvents } from "./ui/MissedEvents";
 
 type Stat = {
   value: number;
@@ -225,7 +225,7 @@ export function ProblemDetail() {
           </div>
 
           <div className="mt-16">
-            <BridgeConnector />
+            <MissedEvents />
           </div>
         </div>
       </section>
@@ -247,7 +247,7 @@ export function ProblemDetail() {
             </h2>
             <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a
-                href="/#soluzione"
+                href="/soluzione"
                 className="group inline-flex items-center gap-3 rounded-full bg-coral px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-deep transition hover:bg-white"
               >
                 Scopri come Bloop lo risolve

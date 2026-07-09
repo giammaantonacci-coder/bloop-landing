@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { label: "Problema", href: "/problema" },
   { label: "Soluzione", href: "/soluzione" },
   { label: "Flusso", href: "/flusso" },
-  { label: "Visione", href: "/#visione" },
+  { label: "Visione", href: "/visione" },
   { label: "Bloopers", href: "/#bloopers" },
 ];
 

@@ -268,7 +268,7 @@ export function SolutionDetail() {
             </h2>
             <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a
-                href="/#come-funziona"
+                href="/flusso"
                 className="group inline-flex items-center gap-3 rounded-full bg-coral px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-deep transition hover:bg-white"
               >
                 Guarda come funziona
