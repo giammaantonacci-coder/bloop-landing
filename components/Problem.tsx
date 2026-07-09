@@ -111,9 +111,7 @@ export function Problem() {
 
         {/* Closer */}
         <div className="mt-20">
-          <BridgeConnector />
-
-          <div className="mt-12 grid grid-cols-1 items-end gap-8 md:grid-cols-12">
+          <div className="grid grid-cols-1 items-end gap-8 md:grid-cols-12">
             <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.3em] text-smoke md:col-span-3">
               Sintesi
             </p>
@@ -122,11 +120,15 @@ export function Problem() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="text-balance font-display text-2xl leading-tight sm:text-3xl md:col-span-9 md:text-4xl"
+              className="text-balance font-display text-3xl leading-tight sm:text-4xl md:col-span-9 md:text-5xl"
             >
               Gli eventi ci sono. La voglia c&apos;è.{" "}
               <span className="highlight-coral">Manca il ponte.</span>
             </motion.p>
+          </div>
+
+          <div className="mt-16">
+            <BridgeConnector />
           </div>
         </div>
       </div>
