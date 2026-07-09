@@ -81,12 +81,13 @@ export function Solution() {
               variants={card}
               className="group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
             >
-              <div className="flex items-center justify-between font-sans font-semibold text-[12px] uppercase tracking-[0.3em] text-smoke">
-                <span className={f.accent === "coral" ? "text-coral" : "text-lilac"}>
-                  {f.n}
-                </span>
-                <span>{f.tag}</span>
-              </div>
+              <p
+                className={`font-sans text-[12px] font-semibold uppercase tracking-[0.3em] ${
+                  f.accent === "coral" ? "text-coral" : "text-lilac"
+                }`}
+              >
+                {f.tag}
+              </p>
 
               <div className="mt-16">
                 <h3 className="font-display text-3xl font-semibold leading-[1.05] tracking-[-0.01em] sm:text-4xl">

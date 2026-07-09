@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { AnimatedCounter } from "./ui/AnimatedCounter";
+import { BridgeConnector } from "./ui/BridgeConnector";
 
 type Stat = {
   value: number;
@@ -89,10 +90,9 @@ export function Problem() {
               variants={item}
               className="group relative flex flex-col justify-between rounded-[2rem] bg-white/[0.04] p-8 py-12 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
             >
-              <div className="flex items-center justify-between font-sans font-semibold text-[12px] uppercase tracking-[0.3em] text-smoke">
-                <span>{s.index}</span>
-                <span>{s.source}</span>
-              </div>
+              <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.3em] text-smoke">
+                {s.source}
+              </p>
 
               <p className="mt-12 font-display text-[clamp(4.5rem,10vw,8rem)] font-bold leading-[0.9] tracking-[-0.03em] text-coral">
                 {s.custom ? (
@@ -110,20 +110,24 @@ export function Problem() {
         </motion.ul>
 
         {/* Closer */}
-        <div className="mt-16 grid grid-cols-1 items-end gap-8 md:grid-cols-12">
-          <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.3em] text-smoke md:col-span-3">
-            Sintesi
-          </p>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="text-balance font-display text-2xl leading-tight sm:text-3xl md:col-span-9 md:text-4xl"
-          >
-            Gli eventi ci sono. La voglia c&apos;è.{" "}
-            <span className="highlight-coral">Manca il ponte.</span>
-          </motion.p>
+        <div className="mt-20">
+          <BridgeConnector />
+
+          <div className="mt-12 grid grid-cols-1 items-end gap-8 md:grid-cols-12">
+            <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.3em] text-smoke md:col-span-3">
+              Sintesi
+            </p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10% 0px" }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="text-balance font-display text-2xl leading-tight sm:text-3xl md:col-span-9 md:text-4xl"
+            >
+              Gli eventi ci sono. La voglia c&apos;è.{" "}
+              <span className="highlight-coral">Manca il ponte.</span>
+            </motion.p>
+          </div>
         </div>
       </div>
     </section>
