@@ -22,65 +22,42 @@ export function Nav() {
         scrolled ? "bg-deep/90 backdrop-blur-sm sm:bg-deep/85 sm:backdrop-blur-xl" : "bg-transparent"
       }`}
     >
-      <div className="relative mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-8">
-        <Link href="/" aria-label="Bloop — home" className="flex items-center">
+      <div className="mx-auto flex w-full max-w-7xl items-center gap-4 px-6 py-4 sm:px-8">
+        <Link href="/" aria-label="Bloop — home" className="flex shrink-0 items-center">
           <Logo size="sm" animated />
         </Link>
 
-        <nav className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 font-sans font-semibold text-[13px] uppercase tracking-[0.2em] text-smoke md:flex">
-          <Link href="/problema" className="pointer-events-auto transition hover:text-white">
+        <nav className="hidden flex-1 items-center justify-center gap-6 font-sans font-semibold text-[13px] uppercase tracking-[0.2em] text-smoke lg:flex">
+          <Link href="/problema" className="transition hover:text-white">
             Problema
           </Link>
-          <a href="/#soluzione" className="pointer-events-auto transition hover:text-white">
+          <a href="/#soluzione" className="transition hover:text-white">
             Soluzione
           </a>
-          <a href="/#come-funziona" className="pointer-events-auto transition hover:text-white">
+          <a href="/#come-funziona" className="transition hover:text-white">
             Flusso
           </a>
-          <a href="/#visione" className="pointer-events-auto transition hover:text-white">
+          <a href="/#visione" className="transition hover:text-white">
             Visione
           </a>
-          <a href="/#bloopers" className="pointer-events-auto transition hover:text-white">
+          <a href="/#bloopers" className="transition hover:text-white">
             Bloopers
           </a>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-3 lg:ml-0 ml-auto">
           <button
             type="button"
             onClick={toggle}
             aria-pressed={enabled}
-            aria-label={enabled ? "Disattiva le bolle" : "Attiva le bolle"}
-            title={enabled ? "Disattiva le bolle" : "Attiva le bolle"}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-smoke ring-1 ring-white/15 transition hover:text-white hover:ring-white/30"
+            className="hidden items-center gap-2 rounded-full px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] text-smoke ring-1 ring-white/15 transition hover:text-white hover:ring-white/30 lg:inline-flex"
           >
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden>
-              <circle
-                cx="9.5"
-                cy="12"
-                r="4"
-                fill="#F76B3A"
-                fillOpacity={enabled ? 1 : 0.35}
-              />
-              <circle
-                cx="15"
-                cy="12"
-                r="4"
-                fill="#A269FF"
-                fillOpacity={enabled ? 1 : 0.35}
-              />
-              {!enabled && (
-                <line
-                  x1="4"
-                  y1="20"
-                  x2="20"
-                  y2="4"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              )}
-            </svg>
+            <span
+              aria-hidden
+              className="inline-block h-2 w-2 rounded-full bg-coral transition-opacity"
+              style={{ opacity: enabled ? 1 : 0.35 }}
+            />
+            {enabled ? "Disattiva bolle" : "Attiva bolle"}
           </button>
 
           <a
