@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
+import { useBubbles } from "../BubblesProvider";
 
 type Spec = { color: "coral" | "lilac"; size: number };
 
@@ -41,9 +42,11 @@ type Ball = {
 
 export function PinballBubbles() {
   const reduce = useReducedMotion();
+  const { enabled } = useBubbles();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!enabled) return;
     const container = containerRef.current;
     if (!container) return;
     const els = Array.from(
@@ -180,7 +183,9 @@ export function PinballBubbles() {
       cleanups.forEach((fn) => fn());
       window.removeEventListener("resize", onResize);
     };
-  }, [reduce]);
+  }, [reduce, enabled]);
+
+  if (!enabled) return null;
 
   return (
     <div

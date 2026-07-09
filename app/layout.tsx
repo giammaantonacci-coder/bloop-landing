@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { BubblesProvider } from "@/components/BubblesProvider";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -61,7 +62,7 @@ export default function RootLayout({
       className={`${bricolage.variable} ${inter.variable} ${mono.variable}`}
     >
       <body className="bg-deep text-white font-sans antialiased selection:bg-coral selection:text-deep">
-        {children}
+        <BubblesProvider>{children}</BubblesProvider>
       </body>
     </html>
   );

@@ -11,6 +11,7 @@ import {
   useReducedMotion,
   MotionValue,
 } from "framer-motion";
+import { useBubbles } from "../BubblesProvider";
 
 type BubbleConfig = {
   pos: string;
@@ -249,6 +250,7 @@ function BubbleHit({
 export function BackgroundBubbles() {
   const reduce = useReducedMotion();
   const isMobile = useIsMobile();
+  const { enabled } = useBubbles();
   const vp = useRef({ w: 1440, h: 900 });
 
   const mouseX = useMotionValue(0);
@@ -286,6 +288,7 @@ export function BackgroundBubbles() {
   };
 
   useEffect(() => {
+    if (!enabled) return;
     const setVp = () => {
       vp.current = { w: window.innerWidth, h: window.innerHeight };
     };
@@ -310,7 +313,9 @@ export function BackgroundBubbles() {
       cleanup();
       window.removeEventListener("mousemove", onMove);
     };
-  }, [mouseX, mouseY, reduce]);
+  }, [mouseX, mouseY, reduce, enabled]);
+
+  if (!enabled) return null;
 
   return (
     <>
