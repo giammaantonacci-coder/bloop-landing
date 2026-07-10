@@ -21,20 +21,20 @@ type StepData = {
 const steps: StepData[] = [
   {
     n: "01",
-    title: "Dimmi che serata cerchi",
-    body: "Gente e casino, qualcosa di tranquillo, o «stupiscimi». Basta dirmelo come lo diresti a un amico.",
+    title: "Dici che serata cerchi",
+    body: "Gente e casino, qualcosa di tranquillo, o «stupiscimi». Basta scriverlo in poche parole.",
     accent: "coral",
   },
   {
     n: "02",
-    title: "Ti porto nel posto giusto",
-    body: "Ti dico dove andare, vicino a te e al momento giusto. Anche la chicca che non sapevi di volere.",
+    title: "Bloop ti porta nel posto giusto",
+    body: "Ti mostra dove andare, vicino a te e al momento giusto. Anche la chicca che non sapevi di volere.",
     accent: "lilac",
   },
   {
     n: "03",
     title: "Scegli e vai",
-    body: "Io accendo il radar, tu vivi la città. Nessun algoritmo che decide per te.",
+    body: "Bloop accende il radar, tu vivi la città. Nessun algoritmo che decide per te.",
     accent: "coral",
   },
 ];

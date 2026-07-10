@@ -15,14 +15,14 @@ const features = [
     n: "02",
     tag: "Personal",
     title: "Su misura per te",
-    body: "Mi dici che serata cerchi — gente, qualcosa di tranquillo, o «stupiscimi» — e ti mostro solo quello che fa per te.",
+    body: "Dici che serata cerchi — gente, qualcosa di tranquillo, o «stupiscimi» — e Bloop ti mostra solo quello che fa per te.",
     accent: "lilac" as const,
   },
   {
     n: "03",
     tag: "Flow",
     title: "Dall'idea all'ingresso",
-    body: "Dall'impulso di uscire al posto giusto, senza saltare da un'app all'altra. Ti guido fino a lì.",
+    body: "Dall'impulso di uscire al posto giusto, senza saltare da un'app all'altra. Bloop ti accompagna fino a lì.",
     accent: "coral" as const,
   },
 ];
@@ -107,9 +107,9 @@ export function SolutionDetail() {
                 transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
                 className="mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl"
               >
-                Raccolgo tutto quello che succede in città — anche le chicche
-                che vivono nei social e nelle chat — e ti guido a trovare cosa
-                fare. A scegliere resti tu, non l&apos;algoritmo.
+                Bloop raccoglie tutto quello che succede in città — anche le
+                chicche che vivono nei social e nelle chat — e ti aiuta a
+                trovare cosa fare. A scegliere resti tu, non l&apos;algoritmo.
               </motion.p>
             </div>
           </div>

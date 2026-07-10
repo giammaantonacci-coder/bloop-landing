@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const lines = [
-  ["Immagino una città", "visibile a 360 gradi."],
+  ["Immaginiamo una città", "visibile a 360 gradi."],
   ["Dove nessun evento va perso,", "e nessuno resta fuori"],
   ["solo perché non sapeva", "che stesse succedendo."],
   ["La scopri tu,", "non l'algoritmo."],

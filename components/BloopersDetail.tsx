@@ -5,7 +5,7 @@ import { Marquee } from "./ui/Marquee";
 import { BlooperLevels } from "./ui/BlooperLevels";
 
 const perks = [
-  "Ti ricondivido",
+  "Vieni ricondiviso",
   "Anteprima al lancio",
   "Le chicche prima",
   "Contest con i partner",
@@ -24,15 +24,15 @@ const steps = [
   {
     n: "02",
     tag: "Pubblico",
-    title: "La controllo e la metto in giro",
-    body: "Controllo che sia tutto giusto e la faccio scoprire a tutti. Niente gatekeeping.",
+    title: "Bloop la verifica e la pubblica",
+    body: "Il team controlla che sia tutto giusto e la fa scoprire a tutti. Niente gatekeeping.",
     accent: "lilac" as const,
   },
   {
     n: "03",
-    tag: "Ti riconosco",
-    title: "Ti ricondivido, col tuo nome",
-    body: "Chi me l'ha fatta scoprire lo dico. Più segnali, prima entri.",
+    tag: "Riconoscimento",
+    title: "Vieni ricondiviso, col tuo nome",
+    body: "Chi l'ha fatta scoprire viene citato. Più segnali, prima entri.",
     accent: "coral" as const,
   },
 ];
@@ -41,8 +41,8 @@ const rewards = [
   {
     n: "01",
     tag: "Riconoscimento",
-    title: "Ti ricondivido col tuo nome",
-    body: "Chi me l'ha fatta scoprire lo dico. Il tuo nome gira insieme all'evento — «me l'hai fatta scoprire tu».",
+    title: "Vieni ricondiviso col tuo nome",
+    body: "Chi l'ha fatta scoprire viene citato. Il tuo nome gira insieme all'evento — «me l'hai fatta scoprire tu».",
     accent: "coral" as const,
   },
   {
@@ -55,8 +55,8 @@ const rewards = [
   {
     n: "03",
     tag: "Contest",
-    title: "Ti porto agli eventi",
-    body: "Ogni tanto regalo ingressi e drink offerti dai partner. Segnali, partecipi, magari vinci.",
+    title: "Bloop ti porta agli eventi",
+    body: "Ogni tanto Bloop regala ingressi e drink offerti dai partner. Segnali, partecipi, magari vinci.",
     accent: "coral" as const,
   },
   {
@@ -117,8 +117,8 @@ export function BloopersDetail() {
                 className="mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl"
               >
                 La città la fanno le persone che la vivono. Segnala gli eventi
-                che mancano — quelli che vivono nei social e nelle chat — e li
-                faccio scoprire a tutti. Ti ricondivido, col tuo nome.
+                che mancano — quelli che vivono nei social e nelle chat — e Bloop
+                li fa scoprire a tutti. Vieni ricondiviso, col tuo nome.
               </motion.p>
             </div>
           </div>
@@ -298,8 +298,8 @@ export function BloopersDetail() {
               <span className="highlight-coral">la città?</span>
             </h2>
             <p className="mt-6 max-w-xl text-lg text-white">
-              Mandami la tua prima segnalazione in DM su Instagram o via email.
-              Rispondo a tutti.
+              Manda la tua prima segnalazione in DM su Instagram o via email.
+              Rispondiamo a tutti.
             </p>
             <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a

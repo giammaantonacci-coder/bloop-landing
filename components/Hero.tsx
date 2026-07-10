@@ -43,9 +43,10 @@ export function Hero() {
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
             className="max-w-xl text-balance text-lg text-white sm:text-xl md:col-span-6"
           >
-            Sono Bloop: l&apos;amico local che ti dice dove andare, stasera,
-            vicino a te. Tutti gli eventi in un solo posto — anche le chicche
-            che vivono nei social e nelle chat. Li scopri tu, non l&apos;algoritmo.
+            Bloop raccoglie tutti gli eventi della tua città in un solo posto —
+            anche le chicche che vivono nei social e nelle chat — e ti aiuta a
+            trovare cosa fare, stasera, vicino a te. A scegliere sei tu, non
+            l&apos;algoritmo.
           </motion.p>
 
           <motion.div

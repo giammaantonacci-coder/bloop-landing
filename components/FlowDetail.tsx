@@ -6,23 +6,23 @@ import { BridgeConnector } from "./ui/BridgeConnector";
 const steps = [
   {
     n: "01",
-    tag: "Dimmi",
-    title: "Dimmi che serata cerchi",
-    body: "Gente e casino, qualcosa di tranquillo, o «stupiscimi». Basta dirmelo come lo diresti a un amico.",
+    tag: "Cerca",
+    title: "Dici che serata cerchi",
+    body: "Gente e casino, qualcosa di tranquillo, o «stupiscimi». Basta scriverlo in poche parole.",
     accent: "coral" as const,
   },
   {
     n: "02",
-    tag: "Ti porto",
-    title: "Ti porto nel posto giusto",
-    body: "Ti dico dove andare, vicino a te e al momento giusto. Anche la chicca che non sapevi di volere.",
+    tag: "Trova",
+    title: "Bloop ti porta nel posto giusto",
+    body: "Ti mostra dove andare, vicino a te e al momento giusto. Anche la chicca che non sapevi di volere.",
     accent: "lilac" as const,
   },
   {
     n: "03",
     tag: "Vai",
     title: "Scegli e vai",
-    body: "Io accendo il radar, tu vivi la città. Nessun algoritmo che decide per te.",
+    body: "Bloop accende il radar, tu vivi la città. Nessun algoritmo che decide per te.",
     accent: "coral" as const,
   },
 ];
@@ -53,7 +53,7 @@ const details = [
     n: "04",
     tag: "Live",
     title: "Sempre sul pezzo",
-    body: "La città cambia di ora in ora. Io resto al passo, sempre aggiornato.",
+    body: "La città cambia di ora in ora. Bloop resta al passo, sempre aggiornato.",
     accent: "lilac" as const,
   },
 ];
@@ -107,9 +107,9 @@ export function FlowDetail() {
                 transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
                 className="mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl"
               >
-                Uscire dovrebbe essere semplice. Ti accompagno passo dopo passo:
-                mi dici che serata cerchi, ti porto nel posto giusto, tu scegli
-                e vai. Come te lo direbbe un amico.
+                Uscire dovrebbe essere semplice. Bloop ti accompagna passo dopo
+                passo: dici che serata cerchi, l&apos;app ti porta nel posto
+                giusto, tu scegli e vai. Dall&apos;idea alla porta, senza attriti.
               </motion.p>
             </div>
           </div>

@@ -123,7 +123,7 @@ export function NotFound404() {
           className="mt-4 max-w-2xl font-display text-4xl font-bold leading-[1.02] tracking-[-0.02em] sm:text-6xl"
         >
           Questa pagina non è{" "}
-          <span className="highlight-coral">nel mio radar.</span>
+          <span className="highlight-coral">sul radar.</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -131,8 +131,8 @@ export function NotFound404() {
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.12 }}
           className="mt-5 max-w-xl text-lg text-white"
         >
-          L&apos;hai presa un po&apos; larga. I palloncini però sì —
-          trascinali dove vuoi, poi torniamo in pista.
+          L&apos;hai presa un po&apos; larga. I palloncini però puoi spostarli
+          dove vuoi — poi torna alla home.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 16 }}

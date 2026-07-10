@@ -8,14 +8,14 @@ const features = [
     n: "01",
     tag: "Un solo posto",
     title: "Tutto in un posto",
-    body: "Raccolgo ogni evento della città — anche le chicche che vivono nei social e nelle chat. Basta saltare da un'app all'altra.",
+    body: "Bloop raccoglie ogni evento della città — anche le chicche che vivono nei social e nelle chat. Basta saltare da un'app all'altra.",
     accent: "coral" as const,
   },
   {
     n: "02",
     tag: "La scegli tu",
     title: "Te lo dico io, non l'algoritmo",
-    body: "Dimmi che serata cerchi e ti porto nel posto giusto, vicino a te, al momento giusto. A scegliere sei tu.",
+    body: "Dici che serata cerchi e Bloop ti porta nel posto giusto, vicino a te, al momento giusto. A scegliere sei tu.",
     accent: "lilac" as const,
   },
   {
@@ -63,9 +63,9 @@ export function Solution() {
               <span className="highlight-lilac">in un solo posto.</span>
             </motion.h2>
             <p className="mt-6 max-w-xl text-lg text-white">
-              Sono il radar degli eventi della tua città: raccolgo tutto, ti
-              guido a trovare cosa fare e ti lascio scegliere. Cerchi qualcosa
-              di preciso o vuoi scoprire una chicca — ci penso io.
+              Bloop è il radar degli eventi della tua città: raccoglie tutto, ti
+              aiuta a trovare cosa fare e ti lascia scegliere. Che tu cerchi
+              qualcosa di preciso o voglia scoprire una chicca, lo trovi qui.
             </p>
             <motion.div
               initial={{ opacity: 0, y: 16 }}

@@ -14,15 +14,15 @@ const steps = [
   {
     n: "02",
     tag: "Pubblico",
-    title: "La controllo e la metto in giro",
-    body: "Controllo che sia tutto giusto e la faccio scoprire a tutti. Niente gatekeeping: entra chiunque abbia qualcosa di buono.",
+    title: "Bloop la verifica e la pubblica",
+    body: "Il team controlla che sia tutto giusto e la fa scoprire a tutti. Niente gatekeeping: entra chiunque abbia qualcosa di buono.",
     reward: "+ Fiducia",
   },
   {
     n: "03",
-    tag: "Ti riconosco",
-    title: "Ti ricondivido, col tuo nome",
-    body: "Chi me l'ha fatta scoprire lo dico. Più segnali, prima entri: i primi provano la città in anteprima.",
+    tag: "Riconoscimento",
+    title: "Vieni ricondiviso, col tuo nome",
+    body: "Chi l'ha fatta scoprire viene citato. Più segnali, prima entri: i primi provano la città in anteprima.",
     reward: "+ Anteprima",
   },
 ];
@@ -61,7 +61,7 @@ export function Bloopers() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
             >
-              Aiutami a mappare
+              Aiutaci a mappare
               <br />
               la città. Diventa un{" "}
               <span className="highlight-coral">Blooper</span>.
@@ -74,7 +74,7 @@ export function Bloopers() {
               className="mt-6 max-w-xl text-lg text-white"
             >
               La città la fanno le persone che la vivono. Segnala gli eventi che
-              mancano — quelli che vivono nei social e nelle chat — e li faccio
+              mancano — quelli che vivono nei social e nelle chat — e Bloop li fa
               scoprire a tutti.
             </motion.p>
             <motion.div
@@ -138,8 +138,8 @@ export function Bloopers() {
               Come partecipare
             </p>
             <p className="mt-4 max-w-xl font-display text-2xl leading-tight sm:text-3xl">
-              Mandami la tua prima segnalazione in DM su Instagram o via email.
-              Rispondo a tutti.
+              Manda la tua prima segnalazione in DM su Instagram o via email.
+              Rispondiamo a tutti.
             </p>
           </div>
 

@@ -78,8 +78,8 @@ export function Footer() {
               La scopri tu, <span className="highlight-coral">non l&apos;algoritmo.</span>
             </p>
             <p className="mt-8 max-w-md text-base text-white">
-              Il radar degli eventi della tua città. L&apos;amico local che ti
-              dice dove andare, stasera, vicino a te.
+              Il radar degli eventi della tua città. Tutti gli eventi in un solo
+              posto, per trovare cosa fare stasera, vicino a te.
             </p>
           </div>
 
