@@ -20,9 +20,8 @@ type BubbleConfig = {
   fy: number;
   mouse: number;
   delay: number;
-  sphere: React.CSSProperties;
-  blob: string;
   glow: string;
+  flip: boolean;
   float: { x: number[]; y: number[] };
 };
 
@@ -33,15 +32,8 @@ const CORAL: BubbleConfig = {
   fy: 0.2,
   mouse: 42,
   delay: 0.1,
-  sphere: {
-    background:
-      "radial-gradient(circle at 34% 30%, #ffb890 0%, #f9814d 36%, #F76B3A 58%, #a83c17 100%)",
-    boxShadow:
-      "inset -12px -16px 44px rgba(0,0,0,0.42), inset 14px 16px 40px rgba(255,255,255,0.3), 0 44px 90px -22px rgba(247,107,58,0.55)",
-  },
-  blob:
-    "radial-gradient(circle, rgba(247,107,58,0.9) 0%, rgba(247,107,58,0) 70%)",
-  glow: "#F76B3A",
+  glow: "rgba(247,107,58,0.6)",
+  flip: false,
   float: { x: [0, 26, -18, 14, 0], y: [0, -22, 18, -10, 0] },
 };
 
@@ -52,15 +44,8 @@ const LILAC: BubbleConfig = {
   fy: -0.16,
   mouse: -36,
   delay: 0.26,
-  sphere: {
-    background:
-      "radial-gradient(circle at 34% 30%, #dcc2ff 0%, #b085ff 38%, #A269FF 60%, #5b2ea8 100%)",
-    boxShadow:
-      "inset -12px -16px 44px rgba(0,0,0,0.42), inset 14px 16px 40px rgba(255,255,255,0.3), 0 44px 90px -22px rgba(162,105,255,0.55)",
-  },
-  blob:
-    "radial-gradient(circle, rgba(162,105,255,0.85) 0%, rgba(162,105,255,0) 70%)",
-  glow: "#A269FF",
+  glow: "rgba(162,105,255,0.55)",
+  flip: true,
   float: { x: [0, -22, 16, -20, 0], y: [0, 20, -16, 22, 0] },
 };
 
@@ -99,11 +84,11 @@ function useBubbleMotion(
   const mY = useTransform(smoothY, [-0.5, 0.5], [-cfg.mouse * 0.7, cfg.mouse * 0.7]);
   const x = useTransform([driftX, mX], ([a, b]: number[]) => a + b);
   const y = useTransform([driftY, mY], ([a, b]: number[]) => a + b);
-  const sharpOpacity = useTransform(t, [0, 0.5], [1, 0]);
-  const sharpScale = useTransform(t, [0, 1], [1, 1.25]);
-  const blobOpacity = useTransform(t, [0.15, 0.7], [0, 0.6]);
-  const rotX = useTransform(smoothY, [-0.5, 0.5], [14, -14]);
-  const rotY = useTransform(smoothX, [-0.5, 0.5], [-14, 14]);
+  const sharpOpacity = useTransform(t, [0, 0.55], [1, 0]);
+  const sharpScale = useTransform(t, [0, 1], [1, 1.2]);
+  const blobOpacity = useTransform(t, [0.15, 0.7], [0.28, 0]);
+  const rotX = useTransform(smoothY, [-0.5, 0.5], [12, -12]);
+  const rotY = useTransform(smoothX, [-0.5, 0.5], [-12, 12]);
   return { x, y, sharpOpacity, sharpScale, blobOpacity, rotX, rotY };
 }
 
@@ -156,16 +141,6 @@ function BubbleVisual({
   reduce: boolean | null;
   isMobile: boolean;
 }) {
-  // Lighter sphere shadow on mobile: smaller blur radii are cheaper to
-  // paint/composite on low-power GPUs than the desktop version.
-  const sphereStyle = isMobile
-    ? {
-        ...cfg.sphere,
-        boxShadow:
-          "inset -8px -10px 26px rgba(0,0,0,0.4), inset 8px 10px 22px rgba(255,255,255,0.26), 0 22px 46px -18px rgba(0,0,0,0.5)",
-      }
-    : cfg.sphere;
-
   return (
     <motion.div
       style={{ x: m.x, y: m.y, willChange: "transform" }}
@@ -182,7 +157,7 @@ function BubbleVisual({
             transition={{ type: "spring", stiffness: 58, damping: 12, delay: cfg.delay }}
           >
             <motion.div
-              className="relative h-full w-full"
+              className={`relative h-full w-full ${cfg.flip ? "-scale-x-100" : ""}`}
               animate={
                 reduce
                   ? undefined
@@ -192,14 +167,20 @@ function BubbleVisual({
               }
               transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
             >
-              {/* Ambient blurred blob — lighter blur, no blend mode on mobile */}
+              {/* Ambient brand-tinted bloom behind the chrome ball */}
               <motion.div
                 aria-hidden
-                style={{ opacity: m.blobOpacity, background: cfg.blob }}
-                className={`absolute -inset-[18%] rounded-full blur-xl sm:blur-2xl sm:mix-blend-screen`}
+                style={{
+                  opacity: m.blobOpacity,
+                  background: `radial-gradient(circle, ${cfg.glow} 0%, rgba(0,0,0,0) 70%)`,
+                }}
+                className="absolute -inset-[16%] rounded-full blur-2xl sm:mix-blend-screen"
               />
-              {/* Glossy 3D sphere — tilt only where a cursor exists */}
-              <motion.div
+              {/* Real 3D chrome ball render — tilt only where a cursor exists */}
+              <motion.img
+                src="/balloons/ball1.webp"
+                alt=""
+                draggable={false}
                 aria-hidden
                 style={{
                   opacity: m.sharpOpacity,
@@ -207,12 +188,12 @@ function BubbleVisual({
                   rotateX: reduce || isMobile ? 0 : m.rotX,
                   rotateY: reduce || isMobile ? 0 : m.rotY,
                   transformPerspective: isMobile ? undefined : 900,
-                  ...sphereStyle,
+                  filter: isMobile
+                    ? "drop-shadow(0 16px 30px rgba(0,0,0,0.5))"
+                    : "drop-shadow(0 34px 60px rgba(150,180,205,0.4))",
                 }}
-                className="relative h-full w-full rounded-full"
-              >
-                <span className="absolute left-[20%] top-[16%] h-[26%] w-[26%] rounded-full bg-white/70 blur-lg sm:blur-xl" />
-              </motion.div>
+                className="absolute inset-0 h-full w-full object-contain"
+              />
             </motion.div>
           </motion.div>
         ) : (
@@ -267,8 +248,8 @@ export function BackgroundBubbles() {
   const coral = useBubbleMotion(CORAL, t, smoothX, smoothY, vp);
   const lilac = useBubbleMotion(LILAC, t, smoothX, smoothY, vp);
 
-  // Bubbles are only poppable while in the hero (sphere) state so their
-  // hit targets never block clicks on content further down the page.
+  // Bubbles are only poppable while in the hero state so their hit targets
+  // never block clicks on content further down the page.
   const [nearTop, setNearTop] = useState(true);
   const [bubbles, setBubbles] = useState({
     coral: { alive: true, cycle: 0 },

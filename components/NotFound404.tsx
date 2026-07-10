@@ -5,31 +5,21 @@ import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 
 type BalloonSpec = {
-  char: string;
-  color: "coral" | "lilac";
+  src: string;
+  alt: string;
+  aspect: string;
   left: string;
   top: string;
   rot: number;
   float: number;
+  flip?: boolean;
 };
 
 const BALLOONS: BalloonSpec[] = [
-  { char: "4", color: "coral", left: "10%", top: "12%", rot: -6, float: 3.4 },
-  { char: "0", color: "lilac", left: "39%", top: "20%", rot: 5, float: 4.1 },
-  { char: "4", color: "coral", left: "67%", top: "10%", rot: -3, float: 3.7 },
+  { src: "/balloons/four.webp", alt: "4", aspect: "417 / 559", left: "3%", top: "13%", rot: -6, float: 3.4 },
+  { src: "/balloons/zero.webp", alt: "0", aspect: "409 / 537", left: "38%", top: "20%", rot: 4, float: 4.1 },
+  { src: "/balloons/four.webp", alt: "4", aspect: "417 / 559", left: "70%", top: "11%", rot: -3, float: 3.7 },
 ];
-
-const GRAD = {
-  coral:
-    "radial-gradient(circle at 34% 28%, #ffc7a3 0%, #f9814d 42%, #F76B3A 62%, #a83c17 100%)",
-  lilac:
-    "radial-gradient(circle at 34% 28%, #e2ccff 0%, #b085ff 42%, #A269FF 62%, #5b2ea8 100%)",
-};
-
-const GLOW = {
-  coral: "drop-shadow(0 24px 50px rgba(247,107,58,0.5))",
-  lilac: "drop-shadow(0 24px 50px rgba(162,105,255,0.5))",
-};
 
 function Balloon({
   spec,
@@ -60,30 +50,20 @@ function Balloon({
         }
         transition={{ duration: spec.float, repeat: Infinity, ease: "easeInOut" }}
         className="relative select-none"
+        style={{ transform: spec.flip ? "scaleX(-1)" : undefined }}
       >
-        {/* String */}
-        <span
-          aria-hidden
-          className="absolute left-1/2 top-[80%] h-24 w-px -translate-x-1/2 bg-white/25"
-        />
-        {/* 3D balloon digit */}
-        <span
-          className="block font-display font-extrabold leading-none"
+        {/* Real 3D chrome balloon render */}
+        <img
+          src={spec.src}
+          alt={spec.alt}
+          draggable={false}
+          className="block select-none"
           style={{
-            fontSize: "clamp(6rem, 19vw, 13rem)",
-            backgroundImage: GRAD[spec.color],
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
-            filter: GLOW[spec.color],
+            height: "clamp(7rem, 24vw, 18rem)",
+            width: "auto",
+            aspectRatio: spec.aspect,
+            filter: "drop-shadow(0 30px 55px rgba(150,180,205,0.35))",
           }}
-        >
-          {spec.char}
-        </span>
-        {/* Specular highlight */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute left-[24%] top-[14%] h-5 w-5 rounded-full bg-white/70 blur-md"
         />
       </motion.div>
     </motion.div>

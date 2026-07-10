@@ -4,31 +4,17 @@ import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import { useBubbles } from "../BubblesProvider";
 
-type Spec = { color: "coral" | "lilac"; size: number };
+type Spec = { size: number; flip?: boolean };
 
-// Small glossy 3D balls that drift, bounce off the walls and each other,
+// Small chrome balls that drift, bounce off the walls and each other,
 // and shoot away when you tap them — pinball as page entertainment.
 const SPECS: Spec[] = [
-  { color: "coral", size: 84 },
-  { color: "lilac", size: 62 },
-  { color: "coral", size: 52 },
-  { color: "lilac", size: 74 },
-  { color: "coral", size: 46 },
+  { size: 88 },
+  { size: 64, flip: true },
+  { size: 54 },
+  { size: 78, flip: true },
+  { size: 48 },
 ];
-
-const BG = {
-  coral:
-    "radial-gradient(circle at 34% 30%, #ffb890 0%, #f9814d 36%, #F76B3A 58%, #a83c17 100%)",
-  lilac:
-    "radial-gradient(circle at 34% 30%, #dcc2ff 0%, #b085ff 38%, #A269FF 60%, #5b2ea8 100%)",
-};
-
-const SHADOW = {
-  coral:
-    "inset -6px -8px 20px rgba(0,0,0,0.4), inset 6px 8px 16px rgba(255,255,255,0.28), 0 14px 30px -8px rgba(247,107,58,0.55)",
-  lilac:
-    "inset -6px -8px 20px rgba(0,0,0,0.4), inset 6px 8px 16px rgba(255,255,255,0.28), 0 14px 30px -8px rgba(162,105,255,0.55)",
-};
 
 type Ball = {
   el: HTMLElement;
@@ -200,15 +186,19 @@ export function PinballBubbles() {
           type="button"
           tabIndex={-1}
           aria-label="Bolla"
-          className="pointer-events-auto absolute left-0 top-0 cursor-pointer rounded-full opacity-0 transition-[filter] duration-150 will-change-transform"
-          style={{
-            width: s.size,
-            height: s.size,
-            background: BG[s.color],
-            boxShadow: SHADOW[s.color],
-          }}
+          className="pointer-events-auto absolute left-0 top-0 cursor-pointer opacity-0 transition-[filter] duration-150 will-change-transform"
+          style={{ width: s.size, height: s.size }}
         >
-          <span className="pointer-events-none absolute left-[22%] top-[18%] h-[24%] w-[24%] rounded-full bg-white/70 blur-md" />
+          <img
+            src="/balloons/ball1.webp"
+            alt=""
+            draggable={false}
+            className="pointer-events-none h-full w-full object-contain"
+            style={{
+              transform: s.flip ? "scaleX(-1)" : undefined,
+              filter: "drop-shadow(0 8px 18px rgba(150,180,205,0.4))",
+            }}
+          />
         </button>
       ))}
     </div>
