@@ -58,7 +58,7 @@ export function Hero() {
               href="#soluzione"
               className="group inline-flex items-center gap-3 rounded-full bg-coral px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-deep transition hover:bg-white"
             >
-              Accendi il radar
+              Scopri Bloop
               <svg
                 width="18"
                 height="18"
