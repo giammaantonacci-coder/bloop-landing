@@ -166,11 +166,11 @@ export function Footer() {
         <div className="mt-20 flex flex-col items-start justify-between gap-4 pt-8 font-sans font-semibold text-[12px] uppercase tracking-[0.25em] text-smoke sm:flex-row sm:items-center">
           <p>© 2026 Bloop — Made in Italia</p>
           <div className="flex items-center gap-6">
-            <a href="#" className="transition hover:text-white">
+            <a href="/privacy-policy" className="transition hover:text-white">
               Privacy
             </a>
-            <a href="#" className="transition hover:text-white">
-              Termini
+            <a href="/cookie-policy" className="transition hover:text-white">
+              Cookie
             </a>
           </div>
         </div>
