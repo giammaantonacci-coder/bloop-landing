@@ -4,21 +4,18 @@ import { motion } from "framer-motion";
 
 const beliefs = [
   {
-    n: "01",
     tag: "La città",
     title: "Non è solo dove vivi",
     body: "È un'esperienza da vivere insieme, ogni giorno. Non uno sfondo, ma il posto in cui succedono le cose.",
     accent: "coral" as const,
   },
   {
-    n: "02",
     tag: "Il modo",
     title: "Più umano",
-    body: "Vogliamo farti vivere la città con più leggerezza e meno rumore. Meno tempo a cercare, più tempo a esserci.",
+    body: "Vivere la città con più leggerezza e meno rumore. Meno tempo a cercare, più tempo a esserci.",
     accent: "lilac" as const,
   },
   {
-    n: "03",
     tag: "Il mezzo",
     title: "Tecnologia che avvicina",
     body: "Non uno schermo in più tra te e il mondo, ma un ponte verso di esso. Che poi sparisce, quando esci.",
@@ -28,49 +25,48 @@ const beliefs = [
 
 const principles = [
   {
-    n: "01",
-    tag: "Umano",
     title: "La tecnologia sparisce",
     body: "Il telefono è un mezzo, non il fine. Bloop esiste per farti alzare lo sguardo, non per tenertelo incollato.",
     accent: "coral" as const,
   },
   {
-    n: "02",
-    tag: "Reale",
     title: "Fatti, non feed",
-    body: "Non vogliamo il tuo tempo sullo schermo. Vogliamo le tue serate fuori, con le persone.",
+    body: "Non conta il tuo tempo sullo schermo. Contano le tue serate fuori, con le persone.",
     accent: "lilac" as const,
   },
   {
-    n: "03",
-    tag: "Insieme",
     title: "La città è collettiva",
     body: "Una città viva la fanno le persone che la vivono. Più siamo, più pulsa.",
     accent: "coral" as const,
   },
   {
-    n: "04",
-    tag: "Aperto",
     title: "Per tutti",
     body: "Che tu sia di qui da sempre o arrivato ieri: la città è tua. Bloop te la mette a portata.",
     accent: "lilac" as const,
   },
 ];
 
-const grid = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
-};
-
-const manifestoLines = [
-  ["Crediamo che la città non sia solo", "il posto in cui viviamo."],
-  ["È un'esperienza", "da vivere insieme."],
+const manifesto = [
+  { text: "Crediamo che la città non sia", highlight: false },
+  { text: "solo il posto in cui viviamo.", highlight: false },
+  { text: "È un'esperienza", highlight: false },
+  { text: "da vivere insieme.", highlight: true },
 ];
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+
+const line = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
+};
+
+const block = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
+};
 
 export function VisionDetail() {
   return (
@@ -120,94 +116,79 @@ export function VisionDetail() {
         </div>
       </section>
 
-      {/* Manifesto centerpiece */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative rounded-[2.5rem] bg-white/[0.04] p-8 sm:p-14 md:p-20">
-            <motion.div
-              variants={grid}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-15% 0px" }}
-              className="space-y-8 sm:space-y-10"
+      {/* Manifesto — full-bleed editorial statement */}
+      <section className="relative px-6 py-28 sm:px-8 sm:py-36">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-15% 0px" }}
+          className="mx-auto max-w-5xl"
+        >
+          {manifesto.map((l, i) => (
+            <motion.p
+              key={i}
+              variants={line}
+              className="font-display text-4xl font-bold leading-[1.08] tracking-[-0.02em] sm:text-6xl md:text-7xl"
             >
-              {manifestoLines.map((pair, i) => (
-                <motion.p
-                  key={i}
-                  variants={item}
-                  className="font-display text-3xl font-semibold leading-[1.1] tracking-[-0.02em] sm:text-4xl md:text-5xl"
-                >
-                  {pair[0]}
-                  <br />
-                  <span className={i === 1 ? "highlight-lilac" : "text-white/95"}>
-                    {pair[1]}
-                  </span>
-                </motion.p>
-              ))}
-            </motion.div>
-          </div>
-        </div>
+              {l.highlight ? (
+                <span className="highlight-lilac">{l.text}</span>
+              ) : (
+                <span className="text-white/95">{l.text}</span>
+              )}
+            </motion.p>
+          ))}
+        </motion.div>
       </section>
 
-      {/* Three beliefs */}
+      {/* Beliefs — stacked editorial blocks */}
       <section className="relative px-6 py-24 sm:px-8 sm:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
+          <div className="grid grid-cols-1 gap-10 pb-8 md:grid-cols-12">
             <div className="md:col-span-3">
               <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-coral">
                 Cosa crediamo
               </p>
             </div>
-            <div className="md:col-span-9">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-15% 0px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
-              >
-                Tre convinzioni,
-                <br />
-                <span className="text-smoke">una direzione.</span>
-              </motion.h2>
-            </div>
           </div>
 
           <motion.div
-            variants={grid}
+            variants={container}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10% 0px" }}
-            className="grid grid-cols-1 gap-5 md:grid-cols-3"
+            className="border-t border-white/10"
           >
             {beliefs.map((b) => (
-              <motion.article
-                key={b.n}
-                variants={item}
-                className="glow-border group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
+              <motion.div
+                key={b.title}
+                variants={block}
+                className="grid grid-cols-1 gap-4 border-b border-white/10 py-12 md:grid-cols-12 md:gap-10 md:py-16"
               >
-                <div className="flex items-center justify-between font-sans text-[12px] font-semibold uppercase tracking-[0.3em] text-smoke">
-                  <span className={b.accent === "coral" ? "text-coral" : "text-lilac"}>
-                    {b.n}
-                  </span>
-                  <span>{b.tag}</span>
-                </div>
-                <h3 className="mt-14 font-display text-3xl font-semibold leading-[1.05] tracking-[-0.01em] sm:text-4xl">
-                  {b.title}
-                </h3>
-                <p className="mt-5 max-w-md text-base leading-relaxed text-white sm:text-lg">
-                  {b.body}
+                <p
+                  className="font-sans text-[12px] font-semibold uppercase tracking-[0.3em] md:col-span-3 md:pt-3"
+                  style={{ color: b.accent === "coral" ? "#F76B3A" : "#A269FF" }}
+                >
+                  {b.tag}
                 </p>
-              </motion.article>
+                <div className="md:col-span-9">
+                  <h3 className="text-balance font-display text-3xl font-semibold leading-[1.04] tracking-[-0.02em] sm:text-5xl md:text-6xl">
+                    {b.title}
+                  </h3>
+                  <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white">
+                    {b.body}
+                  </p>
+                </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Principles */}
+      {/* Principles — marked list */}
       <section className="relative px-6 py-24 sm:px-8 sm:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
+          <div className="grid grid-cols-1 gap-10 pb-8 md:grid-cols-12">
             <div className="md:col-span-3">
               <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-lilac">
                 I principi
@@ -229,31 +210,34 @@ export function VisionDetail() {
           </div>
 
           <motion.div
-            variants={grid}
+            variants={container}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10% 0px" }}
-            className="grid grid-cols-1 gap-5 sm:grid-cols-2"
+            className="mt-6 grid grid-cols-1 gap-x-12 sm:grid-cols-2"
           >
             {principles.map((p) => (
-              <motion.article
-                key={p.n}
-                variants={item}
-                className="glow-border group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
+              <motion.div
+                key={p.title}
+                variants={block}
+                className="flex gap-4 border-t border-white/10 py-8"
               >
-                <div className="flex items-center justify-between font-sans text-[12px] font-semibold uppercase tracking-[0.3em] text-smoke">
-                  <span className={p.accent === "coral" ? "text-coral" : "text-lilac"}>
-                    {p.n}
-                  </span>
-                  <span>{p.tag}</span>
+                <span
+                  aria-hidden
+                  className="mt-2.5 h-2.5 w-2.5 shrink-0 rounded-full"
+                  style={{
+                    backgroundColor: p.accent === "coral" ? "#F76B3A" : "#A269FF",
+                  }}
+                />
+                <div>
+                  <h3 className="font-display text-xl font-semibold leading-tight tracking-[-0.01em] sm:text-2xl">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 max-w-md text-base leading-relaxed text-white sm:text-lg">
+                    {p.body}
+                  </p>
                 </div>
-                <h3 className="mt-14 font-display text-3xl font-semibold leading-[1.05] tracking-[-0.01em] sm:text-4xl">
-                  {p.title}
-                </h3>
-                <p className="mt-5 max-w-md text-base leading-relaxed text-white sm:text-lg">
-                  {p.body}
-                </p>
-              </motion.article>
+              </motion.div>
             ))}
           </motion.div>
         </div>

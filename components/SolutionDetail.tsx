@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { BridgeConnector } from "./ui/BridgeConnector";
 
+const COL = { coral: "#F76B3A", lilac: "#A269FF" } as const;
+
 const features = [
   {
     n: "01",
@@ -58,14 +60,14 @@ const details = [
   },
 ];
 
-const grid = {
+const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
 };
 
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+const row = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
 };
 
 export function SolutionDetail() {
@@ -116,10 +118,10 @@ export function SolutionDetail() {
         </div>
       </section>
 
-      {/* Core features */}
+      {/* Core features — alternating editorial rows */}
       <section className="relative px-6 py-24 sm:px-8 sm:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
+          <div className="grid grid-cols-1 gap-10 pb-8 md:grid-cols-12">
             <div className="md:col-span-3">
               <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-coral">
                 Come funziona
@@ -141,40 +143,58 @@ export function SolutionDetail() {
           </div>
 
           <motion.div
-            variants={grid}
+            variants={stagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10% 0px" }}
-            className="grid grid-cols-1 gap-5 md:grid-cols-3"
+            className="mt-6 border-t border-white/10"
           >
-            {features.map((f) => (
-              <motion.article
+            {features.map((f, i) => (
+              <motion.div
                 key={f.n}
-                variants={item}
-                className="glow-border group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
+                variants={row}
+                className="grid grid-cols-1 items-center gap-6 border-b border-white/10 py-12 md:grid-cols-12 md:gap-10 md:py-16"
               >
-                <div className="flex items-center justify-between font-sans text-[12px] font-semibold uppercase tracking-[0.3em] text-smoke">
-                  <span className={f.accent === "coral" ? "text-coral" : "text-lilac"}>
+                <div
+                  className={`md:col-span-5 ${i % 2 === 1 ? "md:order-2" : ""}`}
+                >
+                  <span
+                    aria-hidden
+                    className="block font-display text-[clamp(4.5rem,12vw,10rem)] font-bold leading-[0.8] tracking-tighter"
+                    style={{
+                      WebkitTextStroke: `1.5px ${COL[f.accent]}`,
+                      color: "transparent",
+                    }}
+                  >
                     {f.n}
                   </span>
-                  <span>{f.tag}</span>
+                  <p
+                    className="mt-4 font-sans text-[12px] font-semibold uppercase tracking-[0.3em]"
+                    style={{ color: COL[f.accent] }}
+                  >
+                    {f.tag}
+                  </p>
                 </div>
-                <h3 className="mt-14 font-display text-3xl font-semibold leading-[1.05] tracking-[-0.01em] sm:text-4xl">
-                  {f.title}
-                </h3>
-                <p className="mt-5 max-w-md text-base leading-relaxed text-white sm:text-lg">
-                  {f.body}
-                </p>
-              </motion.article>
+                <div
+                  className={`md:col-span-7 ${i % 2 === 1 ? "md:order-1" : ""}`}
+                >
+                  <h3 className="font-display text-3xl font-semibold leading-[1.05] tracking-[-0.01em] sm:text-4xl md:text-5xl">
+                    {f.title}
+                  </h3>
+                  <p className="mt-5 max-w-xl text-base leading-relaxed text-white sm:text-lg">
+                    {f.body}
+                  </p>
+                </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* In practice */}
+      {/* In practice — numbered list */}
       <section className="relative px-6 py-24 sm:px-8 sm:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
+          <div className="grid grid-cols-1 gap-10 pb-8 md:grid-cols-12">
             <div className="md:col-span-3">
               <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-lilac">
                 In pratica
@@ -196,31 +216,33 @@ export function SolutionDetail() {
           </div>
 
           <motion.div
-            variants={grid}
+            variants={stagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10% 0px" }}
-            className="grid grid-cols-1 gap-5 sm:grid-cols-2"
+            className="mt-6 grid grid-cols-1 gap-x-12 sm:grid-cols-2"
           >
             {details.map((d) => (
-              <motion.article
+              <motion.div
                 key={d.n}
-                variants={item}
-                className="glow-border group relative flex flex-col rounded-[2rem] bg-white/[0.04] p-8 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
+                variants={row}
+                className="flex gap-6 border-t border-white/10 py-8"
               >
-                <div className="flex items-center justify-between font-sans text-[12px] font-semibold uppercase tracking-[0.3em] text-smoke">
-                  <span className={d.accent === "coral" ? "text-coral" : "text-lilac"}>
-                    {d.n}
-                  </span>
-                  <span>{d.tag}</span>
+                <span
+                  className="font-display text-3xl font-bold leading-none"
+                  style={{ color: COL[d.accent] }}
+                >
+                  {d.n}
+                </span>
+                <div>
+                  <h3 className="font-display text-2xl font-semibold leading-tight tracking-[-0.01em] sm:text-3xl">
+                    {d.title}
+                  </h3>
+                  <p className="mt-3 max-w-md text-base leading-relaxed text-white sm:text-lg">
+                    {d.body}
+                  </p>
                 </div>
-                <h3 className="mt-14 font-display text-3xl font-semibold leading-[1.05] tracking-[-0.01em] sm:text-4xl">
-                  {d.title}
-                </h3>
-                <p className="mt-5 max-w-md text-base leading-relaxed text-white sm:text-lg">
-                  {d.body}
-                </p>
-              </motion.article>
+              </motion.div>
             ))}
           </motion.div>
         </div>
