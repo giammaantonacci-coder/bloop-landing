@@ -17,6 +17,33 @@ html {
   scroll-padding-top: 5rem;
 }
 
+/* Visible keyboard focus on every interactive element (dark-bg-safe) */
+:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip-to-content link: off-screen until focused */
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  border-radius: 9999px;
+  background: #f76b3a;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0b0920;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
 /* Custom scrollbar (WebKit) */
 ::-webkit-scrollbar {
   width: 10px;

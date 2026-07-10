@@ -14,7 +14,7 @@ export function LegalDoc({
   children: ReactNode;
 }) {
   return (
-    <main className="relative z-10">
+    <main id="main-content" className="relative z-10">
       <section className="mx-auto max-w-3xl px-6 pt-36 pb-24 sm:px-8 sm:pt-44">
         <Link
           href="/"

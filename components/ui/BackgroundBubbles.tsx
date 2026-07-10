@@ -238,6 +238,8 @@ function BubbleHit({
     <motion.div style={{ x: m.x, y: m.y }} className={`absolute ${cfg.pos} ${cfg.size}`}>
       <button
         type="button"
+        tabIndex={-1}
+        aria-hidden
         aria-label="Fai scoppiare la bolla"
         onClick={onPop}
         style={{ pointerEvents: active ? "auto" : "none" }}

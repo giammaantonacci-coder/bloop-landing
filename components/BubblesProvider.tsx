@@ -8,6 +8,7 @@ import {
   useState,
   ReactNode,
 } from "react";
+import { MotionConfig } from "framer-motion";
 
 type BubblesCtx = { enabled: boolean; toggle: () => void };
 
@@ -45,5 +46,9 @@ export function BubblesProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  return <Ctx.Provider value={{ enabled, toggle }}>{children}</Ctx.Provider>;
+  return (
+    <Ctx.Provider value={{ enabled, toggle }}>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </Ctx.Provider>
+  );
 }

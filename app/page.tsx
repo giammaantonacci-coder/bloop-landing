@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <Nav />
       <BackgroundBubbles />
-      <main className="relative z-10 overflow-hidden">
+      <main id="main-content" className="relative z-10 overflow-hidden">
         <Hero />
         <Problem />
         <Solution />

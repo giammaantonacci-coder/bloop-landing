@@ -118,7 +118,7 @@ export function Nav() {
             href="https://www.instagram.com/thebloopapp?igsh=MThkdTlqMTZjbXZhOQ=="
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-2 rounded-full bg-coral px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] text-white transition hover:bg-lilac lg:inline-flex"
+            className="hidden items-center gap-2 rounded-full bg-coral px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] text-deep transition hover:bg-lilac hover:text-deep lg:inline-flex"
           >
             Scopri Bloop
             <span aria-hidden>→</span>
@@ -213,7 +213,7 @@ export function Nav() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-coral px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-white transition hover:bg-lilac"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-coral px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-deep transition hover:bg-lilac hover:text-deep"
               >
                 Scopri Bloop
                 <span aria-hidden>→</span>

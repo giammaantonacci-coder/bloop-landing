@@ -220,8 +220,8 @@ export function ProblemDetail() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="text-balance font-display text-3xl leading-tight sm:text-4xl md:col-span-9 md:text-5xl"
             >
-              Le cose belle ci sono.{" "}
-              <span className="highlight-coral">Basta sapere dove cercarle.</span>
+              Gli eventi sono tutti intorno a te.{" "}
+              <span className="highlight-coral">Ma fuori dal tuo radar.</span>
             </motion.p>
           </div>
 

@@ -62,6 +62,9 @@ export default function RootLayout({
       className={`${bricolage.variable} ${inter.variable} ${mono.variable}`}
     >
       <body className="bg-deep text-white font-sans antialiased selection:bg-coral selection:text-deep">
+        <a href="#main-content" className="skip-link">
+          Vai al contenuto
+        </a>
         <BubblesProvider>{children}</BubblesProvider>
       </body>
     </html>

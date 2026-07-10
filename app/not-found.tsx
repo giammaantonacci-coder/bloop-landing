@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <>
       <Nav />
-      <main className="relative z-10 overflow-hidden">
+      <main id="main-content" className="relative z-10 overflow-hidden">
         <NotFound404 />
       </main>
     </>

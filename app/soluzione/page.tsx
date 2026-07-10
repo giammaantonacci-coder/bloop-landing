@@ -22,7 +22,7 @@ export default function SoluzionePage() {
     <>
       <Nav />
       <PinballBubbles />
-      <main className="relative z-10 overflow-hidden">
+      <main id="main-content" className="relative z-10 overflow-hidden">
         <SolutionDetail />
         <Footer />
       </main>
