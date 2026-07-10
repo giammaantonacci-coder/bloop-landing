@@ -22,7 +22,7 @@ const steps = [
     n: "03",
     tag: "Vai",
     title: "Scegli e vai",
-    body: "Bloop accende il radar, tu vivi la città. Nessun algoritmo che decide per te.",
+    body: "Tu scegli dove andare, Bloop ti apre la strada. Zero scroll infiniti.",
     accent: "coral" as const,
   },
 ];

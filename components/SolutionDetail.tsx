@@ -109,7 +109,7 @@ export function SolutionDetail() {
               >
                 Bloop raccoglie tutto quello che succede in città — anche le
                 chicche che vivono nei social e nelle chat — e ti aiuta a
-                trovare cosa fare. A scegliere resti tu, non l&apos;algoritmo.
+                trovare cosa fare. Il resto lo decidi tu.
               </motion.p>
             </div>
           </div>

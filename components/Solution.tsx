@@ -14,8 +14,8 @@ const features = [
   {
     n: "02",
     tag: "La scegli tu",
-    title: "Te lo dico io, non l'algoritmo",
-    body: "Dici che serata cerchi e Bloop ti porta nel posto giusto, vicino a te, al momento giusto. A scegliere sei tu.",
+    title: "Comandi tu, non un feed",
+    body: "Dici che serata cerchi e Bloop ti porta nel posto giusto, vicino a te, al momento giusto.",
     accent: "lilac" as const,
   },
   {

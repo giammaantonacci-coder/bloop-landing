@@ -26,7 +26,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Bloop — La tua città è più viva di quanto pensi",
   description:
-    "Il radar degli eventi della tua città. Tutti gli eventi in un solo posto — anche le chicche che vivono nei social e nelle chat. La scopri tu, non l'algoritmo.",
+    "Il radar degli eventi della tua città. Tutti gli eventi in un solo posto — anche le chicche che vivono nei social e nelle chat. A scegliere sei tu.",
   keywords: [
     "Bloop",
     "eventi",

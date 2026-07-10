@@ -45,8 +45,7 @@ export function Hero() {
           >
             Bloop raccoglie tutti gli eventi della tua città in un solo posto —
             anche le chicche che vivono nei social e nelle chat — e ti aiuta a
-            trovare cosa fare, stasera, vicino a te. A scegliere sei tu, non
-            l&apos;algoritmo.
+            trovare cosa fare, stasera, vicino a te. A scegliere sei tu.
           </motion.p>
 
           <motion.div

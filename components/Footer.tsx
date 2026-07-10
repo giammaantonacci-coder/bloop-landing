@@ -75,7 +75,7 @@ export function Footer() {
           <div className="md:col-span-6">
             <Logo size="lg" animated />
             <p className="mt-8 max-w-md font-display text-2xl font-semibold leading-tight sm:text-3xl">
-              La scopri tu, <span className="highlight-coral">non l&apos;algoritmo.</span>
+              Go out. <span className="highlight-coral">Live the city.</span>
             </p>
             <p className="mt-8 max-w-md text-base text-white">
               Il radar degli eventi della tua città. Tutti gli eventi in un solo
