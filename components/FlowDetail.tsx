@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BridgeConnector } from "./ui/BridgeConnector";
+import { FlowLine } from "./ui/FlowLine";
 
 const steps = [
   {
@@ -246,7 +246,7 @@ export function FlowDetail() {
           </div>
 
           <div className="mt-16">
-            <BridgeConnector />
+            <FlowLine />
           </div>
         </div>
       </section>
