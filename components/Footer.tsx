@@ -43,26 +43,6 @@ const socials = [
       </svg>
     ),
   },
-  {
-    name: "TikTok",
-    href: "#",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
-        <path
-          d="M14 4v10.5a3.5 3.5 0 11-3.5-3.5"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-        />
-        <path
-          d="M14 4c.5 2.5 2.5 4.5 5 5"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
 ];
 
 export function Footer() {
