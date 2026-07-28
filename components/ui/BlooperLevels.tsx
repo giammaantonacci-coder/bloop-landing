@@ -10,78 +10,60 @@ import {
   MotionValue,
 } from "framer-motion";
 
-type TierData = { threshold: number; n: string; label: string; accent: "coral" | "lilac" };
+type TierData = { threshold: number; n: string; label: string; accent: 1 | 2 };
 
 const TIERS: TierData[] = [
-  { threshold: 0, n: "1", label: "Explorer", accent: "coral" },
-  { threshold: 0.5, n: "2", label: "Insider", accent: "lilac" },
-  { threshold: 1, n: "3", label: "Legend", accent: "coral" },
+  { threshold: 0, n: "1", label: "Explorer", accent: 1 },
+  { threshold: 0.5, n: "2", label: "Insider", accent: 2 },
+  { threshold: 1, n: "3", label: "Legend", accent: 1 },
 ];
 
-function Tier({
-  tier,
-  progress,
-}: {
-  tier: TierData;
-  progress: MotionValue<number>;
-}) {
-  const col = tier.accent === "coral" ? "#F76B3A" : "#A269FF";
+function Tier({ tier, progress }: { tier: TierData; progress: MotionValue<number> }) {
+  const col = tier.accent === 1 ? "var(--accent)" : "var(--accent-2)";
   const fill = useTransform(
     progress,
-    [Math.max(0, tier.threshold - 0.16), tier.threshold <= 0.001 ? 0.03 : tier.threshold],
+    [
+      Math.max(0, tier.threshold - 0.16),
+      tier.threshold <= 0.001 ? 0.03 : tier.threshold,
+    ],
     [0, 1]
-  );
-  const scale = useTransform(fill, [0, 0.6, 1], [0.82, 1.14, 1]);
-  const glow = useTransform(
-    fill,
-    [0, 1],
-    ["0 0 0px rgba(0,0,0,0)", `0 0 28px ${col}aa`]
   );
   const emptyOpacity = useTransform(fill, [0, 1], [1, 0]);
 
   return (
     <div className="relative z-10 flex flex-col items-center gap-4">
-      <motion.span
-        style={{ scale, boxShadow: glow }}
-        className="relative flex h-16 w-16 items-center justify-center rounded-full bg-deep"
-      >
+      <span className="relative flex h-14 w-14 items-center justify-center bg-bg">
         <span
-          className="absolute inset-0 rounded-full border-2"
-          style={{ borderColor: col, opacity: 0.35 }}
+          className="absolute inset-0 border"
+          style={{ borderColor: col }}
           aria-hidden
         />
         <motion.span
-          className="absolute inset-0 rounded-full"
+          className="absolute inset-0"
           style={{ backgroundColor: col, opacity: fill }}
           aria-hidden
         />
         <motion.span
-          style={{ opacity: emptyOpacity }}
-          className="absolute font-display text-xl font-bold"
-        >
-          <span style={{ color: col }}>{tier.n}</span>
-        </motion.span>
-        <motion.span
-          style={{ opacity: fill }}
-          className="absolute font-display text-xl font-bold text-deep"
+          style={{ opacity: emptyOpacity, color: col }}
+          className="absolute font-mono text-sm font-medium"
         >
           {tier.n}
         </motion.span>
-      </motion.span>
-      <span
-        className="font-sans text-[12px] font-semibold uppercase tracking-[0.2em]"
-        style={{ color: col }}
-      >
-        {tier.label}
+        <motion.span
+          style={{ opacity: fill }}
+          className="absolute font-mono text-sm font-medium text-bg"
+        >
+          {tier.n}
+        </motion.span>
       </span>
+      <span className="eyebrow-sm text-muted">{tier.label}</span>
     </div>
   );
 }
 
 /**
- * Gamified level track: an XP bar fills as you scroll, tier badges light
- * up as it reaches them, and the points counter climbs — the reward loop,
- * made tangible.
+ * Level track: a bar fills as you scroll, tier marks square off as it reaches
+ * them, and the points counter climbs — the reward loop, made tangible.
  */
 export function BlooperLevels() {
   const ref = useRef<HTMLDivElement>(null);
@@ -97,22 +79,28 @@ export function BlooperLevels() {
 
   return (
     <div ref={ref}>
-      <div className="text-center">
-        <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.3em] text-smoke">
-          I tuoi punti
-        </p>
-        <p className="mt-3 font-display text-[clamp(3.5rem,9vw,6rem)] font-bold leading-none tracking-[-0.03em] text-coral tabular-nums">
+      <div className="grid12 gap-y-6 items-end">
+        <p className="eyebrow text-muted md:col-span-3">I tuoi punti</p>
+        <p className="font-display text-[clamp(4rem,10vw,8rem)] font-extrabold leading-[0.82] tracking-[-0.05em] text-accent-ink md:col-span-9 tabular-nums">
           {reduce ? "1500" : pts}
         </p>
       </div>
 
-      <div className="relative mx-auto mt-14 max-w-3xl">
+      <div className="relative mx-auto mt-20 max-w-3xl">
         {/* Track */}
-        <div className="absolute left-8 right-8 top-8 h-1 -translate-y-1/2 rounded-full bg-white/10" aria-hidden />
+        <div
+          className="absolute left-7 right-7 top-7 h-px -translate-y-1/2"
+          style={{ backgroundColor: "var(--rule)" }}
+          aria-hidden
+        />
         {/* Fill */}
         <motion.div
-          style={{ scaleX: reduce ? 1 : scrollYProgress, transformOrigin: "left" }}
-          className="absolute left-8 right-8 top-8 h-1 -translate-y-1/2 rounded-full bg-gradient-to-r from-coral to-lilac"
+          style={{
+            scaleX: reduce ? 1 : scrollYProgress,
+            transformOrigin: "left",
+            backgroundColor: "var(--accent)",
+          }}
+          className="absolute left-7 right-7 top-7 h-px -translate-y-1/2"
           aria-hidden
         />
         {/* Tiers */}

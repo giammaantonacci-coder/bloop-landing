@@ -1,48 +1,50 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Section, SectionHead, PageHead } from "./ui/Section";
+import { ArrowLink } from "./ui/ArrowLink";
 
 const beliefs = [
   {
+    n: "01",
     tag: "La città",
     title: "Non è solo dove vivi",
     body: "È un'esperienza da vivere insieme, ogni giorno. Non uno sfondo, ma il posto in cui succedono le cose.",
-    accent: "coral" as const,
   },
   {
+    n: "02",
     tag: "Il modo",
     title: "Più umano",
     body: "Vivere la città con più leggerezza e meno rumore. Meno tempo a cercare, più tempo a esserci.",
-    accent: "lilac" as const,
   },
   {
+    n: "03",
     tag: "Il mezzo",
     title: "Tecnologia che avvicina",
     body: "Non uno schermo in più tra te e il mondo, ma un ponte verso di esso. Che poi sparisce, quando esci.",
-    accent: "coral" as const,
   },
 ];
 
 const principles = [
   {
+    n: "01",
     title: "La tecnologia sparisce",
     body: "Il telefono è un mezzo, non il fine. Bloop esiste per farti alzare lo sguardo, non per tenertelo incollato.",
-    accent: "coral" as const,
   },
   {
+    n: "02",
     title: "Fatti, non feed",
     body: "Non conta il tuo tempo sullo schermo. Contano le tue serate fuori, con le persone.",
-    accent: "lilac" as const,
   },
   {
+    n: "03",
     title: "La città è collettiva",
     body: "Una città viva la fanno le persone che la vivono. Più siamo, più pulsa.",
-    accent: "coral" as const,
   },
   {
+    n: "04",
     title: "Per tutti",
     body: "Che tu sia di qui da sempre o arrivato ieri: la città è tua. Bloop te la mette a portata.",
-    accent: "lilac" as const,
   },
 ];
 
@@ -55,268 +57,186 @@ const manifesto = [
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.11, delayChildren: 0.05 } },
 };
 
 const line = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" as const } },
 };
 
 const block = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
 };
 
 export function VisionDetail() {
   return (
     <>
-      {/* Header */}
-      <section className="relative px-6 pt-36 sm:px-8 sm:pt-44">
-        <div className="mx-auto max-w-7xl">
-          <motion.a
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            href="/"
-            className="inline-flex items-center gap-2 font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-smoke transition hover:text-white"
-          >
-            <span aria-hidden>←</span> Torna alla home
-          </motion.a>
+      <PageHead
+        index="05"
+        label="La visione"
+        accent="2"
+        title={
+          <>
+            La città è
+            <br />
+            <span className="text-muted">da vivere.</span>
+          </>
+        }
+        intro="Bloop non nasce per farti stare più tempo sul telefono. Nasce per farti vivere la città in modo più umano — dove la tecnologia non distrae, ma avvicina."
+      />
 
-          <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-12">
-            <div className="md:col-span-3">
-              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-lilac">
-                La visione
-              </p>
-            </div>
-            <div className="md:col-span-9">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.05 }}
-                className="text-balance font-display text-5xl font-bold leading-[0.98] tracking-[-0.02em] sm:text-7xl md:text-8xl"
-              >
-                La città è
-                <br />
-                <span className="text-smoke">da vivere.</span>
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
-                className="mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl"
-              >
-                Bloop non nasce per farti stare più tempo sul telefono. Nasce
-                per farti vivere la città in modo più umano — dove la tecnologia
-                non distrae, ma avvicina.
-              </motion.p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Manifesto — full-bleed editorial statement */}
-      <section className="relative px-6 py-28 sm:px-8 sm:py-36">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-15% 0px" }}
-          className="mx-auto max-w-5xl"
-        >
-          {manifesto.map((l, i) => (
-            <motion.p
-              key={i}
-              variants={line}
-              className="font-display text-4xl font-bold leading-[1.08] tracking-[-0.02em] sm:text-6xl md:text-7xl"
-            >
-              {l.highlight ? (
-                <span className="highlight-lilac">{l.text}</span>
-              ) : (
-                <span className="text-white/95">{l.text}</span>
-              )}
-            </motion.p>
-          ))}
-        </motion.div>
-      </section>
-
-      {/* Beliefs — stacked editorial blocks */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-10 pb-8 md:grid-cols-12">
-            <div className="md:col-span-3">
-              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-coral">
-                Cosa crediamo
-              </p>
-            </div>
+      {/* Manifesto — full coral campitura */}
+      <Section tone="accent" ruled>
+        <div className="shell py-28 sm:py-40">
+          <div className="rule-b flex items-baseline justify-between pb-4">
+            <span className="eyebrow">Manifesto</span>
+            <span className="eyebrow">Bloop — 2026</span>
           </div>
 
           <motion.div
             variants={container}
             initial="hidden"
             whileInView="show"
+            viewport={{ once: true, margin: "-15% 0px" }}
+            className="mt-16 sm:mt-24"
+          >
+            {manifesto.map((l, i) => (
+              <motion.p key={i} variants={line} className="display-lg">
+                {l.highlight ? (
+                  <span className="mark-line">
+                    <span className="mark">{l.text}</span>
+                  </span>
+                ) : (
+                  l.text
+                )}
+              </motion.p>
+            ))}
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* Beliefs — stacked editorial rows */}
+      <Section tone="light" ruled>
+        <div className="shell py-24 sm:py-32">
+          <SectionHead index="05.1" label="Cosa crediamo" title="Tre convinzioni." />
+
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, margin: "-10% 0px" }}
-            className="border-t border-white/10"
+            className="rule-t"
           >
             {beliefs.map((b) => (
               <motion.div
-                key={b.title}
+                key={b.n}
                 variants={block}
-                className="grid grid-cols-1 gap-4 border-b border-white/10 py-12 md:grid-cols-12 md:gap-10 md:py-16"
+                className="grid12 rule-b-soft gap-y-5 py-12 md:py-20"
               >
-                <p
-                  className="font-sans text-[12px] font-semibold uppercase tracking-[0.3em] md:col-span-3 md:pt-3"
-                  style={{ color: b.accent === "coral" ? "#F76B3A" : "#A269FF" }}
-                >
-                  {b.tag}
-                </p>
+                <div className="md:col-span-3">
+                  <div className="flex items-baseline gap-4 md:flex-col md:items-start md:gap-3">
+                    <span className="eyebrow text-accent-ink">{b.n}</span>
+                    <span className="eyebrow text-muted">{b.tag}</span>
+                  </div>
+                </div>
                 <div className="md:col-span-9">
-                  <h3 className="text-balance font-display text-3xl font-semibold leading-[1.04] tracking-[-0.02em] sm:text-5xl md:text-6xl">
-                    {b.title}
-                  </h3>
-                  <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white">
-                    {b.body}
-                  </p>
+                  <h3 className="display-md">{b.title}</h3>
+                  <p className="lede mt-8 max-w-2xl text-fg">{b.body}</p>
                 </div>
               </motion.div>
             ))}
           </motion.div>
         </div>
-      </section>
+      </Section>
 
-      {/* Principles — marked list */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-10 pb-8 md:grid-cols-12">
-            <div className="md:col-span-3">
-              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-lilac">
-                I principi
-              </p>
-            </div>
-            <div className="md:col-span-9">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-15% 0px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
-              >
+      {/* Principles */}
+      <Section tone="dark" ruled>
+        <div className="shell py-24 sm:py-32">
+          <SectionHead
+            index="05.2"
+            label="I principi"
+            accent="2"
+            title={
+              <>
                 Le regole
                 <br />
-                <span className="text-smoke">che non cambiano.</span>
-              </motion.h2>
-            </div>
-          </div>
+                <span className="text-muted">che non cambiano.</span>
+              </>
+            }
+          />
 
           <motion.div
             variants={container}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10% 0px" }}
-            className="mt-6 grid grid-cols-1 gap-x-12 sm:grid-cols-2"
+            className="rule-t grid grid-cols-1 sm:grid-cols-2"
           >
-            {principles.map((p) => (
+            {principles.map((p, i) => (
               <motion.div
-                key={p.title}
+                key={p.n}
                 variants={block}
-                className="flex gap-4 border-t border-white/10 py-8"
+                className={`rule-b-soft py-10 sm:py-14 sm:pr-10 ${
+                  i % 2 === 1 ? "sm:rule-l-soft sm:pl-10" : ""
+                }`}
               >
-                <span
-                  aria-hidden
-                  className="mt-2.5 h-2.5 w-2.5 shrink-0 rounded-full"
-                  style={{
-                    backgroundColor: p.accent === "coral" ? "#F76B3A" : "#A269FF",
-                  }}
-                />
-                <div>
-                  <h3 className="font-display text-xl font-semibold leading-tight tracking-[-0.01em] sm:text-2xl">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 max-w-md text-base leading-relaxed text-white sm:text-lg">
-                    {p.body}
-                  </p>
-                </div>
+                <span className="eyebrow text-accent-2-ink">{p.n}</span>
+                <h3 className="display-sm mt-10">{p.title}</h3>
+                <p className="copy mt-5 max-w-md text-fg">{p.body}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
-      </section>
+      </Section>
 
-      {/* Signature statement */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 items-end gap-8 md:grid-cols-12">
-            <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.3em] text-smoke md:col-span-3">
-              Sintesi
-            </p>
+      {/* Signature + close */}
+      <Section tone="light" ruled>
+        <div className="shell py-24 sm:py-32">
+          <div className="grid12 gap-y-6">
+            <p className="eyebrow text-muted md:col-span-3">Sintesi</p>
             <div className="md:col-span-9">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10% 0px" }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
-                className="text-balance font-display text-3xl leading-tight sm:text-4xl md:text-5xl"
+                className="statement"
               >
                 La città non ha bisogno di un&apos;altra app.{" "}
-                <span className="highlight-lilac">Ha bisogno di te, fuori.</span>
+                <span className="mark-2">Ha bisogno di te, fuori.</span>
               </motion.p>
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-smoke"
-              >
-                <span className="text-white">— Il team Bloop</span>
-                <span>2026</span>
+
+              <div className="rule-t mt-16 flex flex-wrap items-baseline gap-x-8 gap-y-3 pt-6">
+                <span className="eyebrow text-fg">— Il team Bloop</span>
+                <span className="eyebrow text-muted">2026</span>
                 <a
                   href="mailto:bloopappevents@gmail.com"
-                  className="transition hover:text-white"
+                  className="eyebrow text-muted underline underline-offset-4 transition hover:text-fg"
                 >
                   bloopappevents@gmail.com
                 </a>
-              </motion.div>
+              </div>
+
+              <div className="mt-16 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+                <a href="/bloopers" className="btn group">
+                  Unisciti ai Bloopers
+                  <span
+                    aria-hidden
+                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </a>
+                <ArrowLink href="/" accent="fg" direction="back">
+                  Torna alla home
+                </ArrowLink>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-32">
-        <div className="mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="glow-border relative overflow-hidden rounded-[2.5rem] bg-white/[0.04] p-10 sm:p-16"
-          >
-            <h2 className="max-w-2xl text-balance font-display text-3xl font-bold leading-[1.05] tracking-[-0.02em] sm:text-5xl">
-              Vivi la città
-              <br />
-              <span className="highlight-coral">con noi.</span>
-            </h2>
-            <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <a
-                href="/bloopers"
-                className="group inline-flex items-center gap-3 rounded-full bg-coral px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-deep transition hover:bg-white"
-              >
-                Unisciti ai Bloopers
-                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-                  →
-                </span>
-              </a>
-              <a
-                href="/"
-                className="font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-smoke transition hover:text-white"
-              >
-                Torna alla home
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      </Section>
     </>
   );
 }

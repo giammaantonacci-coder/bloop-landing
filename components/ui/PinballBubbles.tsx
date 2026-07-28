@@ -4,31 +4,17 @@ import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import { useBubbles } from "../BubblesProvider";
 
-type Spec = { color: "coral" | "lilac"; size: number };
+type Spec = { color: string; size: number };
 
-// Small glossy 3D balls that drift, bounce off the walls and each other,
-// and shoot away when you tap them — pinball as page entertainment.
+// Flat discs that drift, bounce off the walls and each other, and shoot away
+// when tapped. Solid colour only — the playfulness stays, the gloss doesn't.
 const SPECS: Spec[] = [
-  { color: "coral", size: 84 },
-  { color: "lilac", size: 62 },
-  { color: "coral", size: 52 },
-  { color: "lilac", size: 74 },
-  { color: "coral", size: 46 },
+  { color: "#F76B3A", size: 80 },
+  { color: "#A269FF", size: 58 },
+  { color: "#F76B3A", size: 48 },
+  { color: "#A269FF", size: 70 },
+  { color: "#F76B3A", size: 42 },
 ];
-
-const BG = {
-  coral:
-    "radial-gradient(circle at 34% 30%, #ffb890 0%, #f9814d 36%, #F76B3A 58%, #a83c17 100%)",
-  lilac:
-    "radial-gradient(circle at 34% 30%, #dcc2ff 0%, #b085ff 38%, #A269FF 60%, #5b2ea8 100%)",
-};
-
-const SHADOW = {
-  coral:
-    "inset -6px -8px 20px rgba(0,0,0,0.4), inset 6px 8px 16px rgba(255,255,255,0.28), 0 14px 30px -8px rgba(247,107,58,0.55)",
-  lilac:
-    "inset -6px -8px 20px rgba(0,0,0,0.4), inset 6px 8px 16px rgba(255,255,255,0.28), 0 14px 30px -8px rgba(162,105,255,0.55)",
-};
 
 type Ball = {
   el: HTMLElement;
@@ -49,9 +35,7 @@ export function PinballBubbles() {
     if (!enabled) return;
     const container = containerRef.current;
     if (!container) return;
-    const els = Array.from(
-      container.querySelectorAll<HTMLElement>("[data-ball]")
-    );
+    const els = Array.from(container.querySelectorAll<HTMLElement>("[data-ball]"));
 
     const W = () => window.innerWidth;
     const H = () => window.innerHeight;
@@ -74,9 +58,11 @@ export function PinballBubbles() {
     const place = (b: Ball) => {
       b.el.style.transform = `translate3d(${b.x - b.r}px, ${b.y - b.r}px, 0)`;
     };
+    // Held well back: they sit under the copy on the ink bands, so they read
+    // as a tint rather than a shape competing with the type.
     balls.forEach((b) => {
       place(b);
-      b.el.style.opacity = "1";
+      b.el.style.opacity = "0.22";
     });
 
     // Reduced motion: drop them in place and stop.
@@ -151,23 +137,6 @@ export function PinballBubbles() {
     };
     raf = requestAnimationFrame(tick);
 
-    // Tap a ball → it shoots away in a random direction with a glow flash.
-    const cleanups = balls.map((b) => {
-      const onHit = (e: Event) => {
-        e.stopPropagation();
-        const speed = 320 + Math.random() * 160;
-        const ang = Math.random() * Math.PI * 2;
-        b.vx = Math.cos(ang) * speed;
-        b.vy = Math.sin(ang) * speed;
-        b.el.style.filter = "brightness(1.5)";
-        window.setTimeout(() => {
-          b.el.style.filter = "";
-        }, 160);
-      };
-      b.el.addEventListener("pointerdown", onHit);
-      return () => b.el.removeEventListener("pointerdown", onHit);
-    });
-
     const onResize = () => {
       const w = W();
       const h = H();
@@ -180,36 +149,32 @@ export function PinballBubbles() {
 
     return () => {
       cancelAnimationFrame(raf);
-      cleanups.forEach((fn) => fn());
       window.removeEventListener("resize", onResize);
     };
   }, [reduce, enabled]);
 
   if (!enabled) return null;
 
+  // Behind the content, like the hero bubbles: they read through the
+  // transparent ink bands and are masked out by the paper and coral ones,
+  // so they can never sit on top of a paragraph.
   return (
     <div
       ref={containerRef}
-      className="pointer-events-none fixed inset-0 z-30 overflow-hidden"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
       aria-hidden
     >
       {SPECS.map((s, i) => (
-        <button
+        <div
           key={i}
           data-ball
-          type="button"
-          tabIndex={-1}
-          aria-label="Bolla"
-          className="pointer-events-auto absolute left-0 top-0 cursor-pointer rounded-full opacity-0 transition-[filter] duration-150 will-change-transform"
+          className="absolute left-0 top-0 rounded-full opacity-0 will-change-transform"
           style={{
             width: s.size,
             height: s.size,
-            background: BG[s.color],
-            boxShadow: SHADOW[s.color],
+            backgroundColor: s.color,
           }}
-        >
-          <span className="pointer-events-none absolute left-[22%] top-[18%] h-[24%] w-[24%] rounded-full bg-white/70 blur-md" />
-        </button>
+        />
       ))}
     </div>
   );

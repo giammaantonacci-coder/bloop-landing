@@ -8,42 +8,60 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Brand constants
         coral: "#F76B3A",
+        lilac: "#A269FF",
         indigo: "#282475",
         night: "#16132E",
         deep: "#0B0920",
-        lilac: "#A269FF",
         smoke: "#A7A5BE",
+        paper: "#F2EFE7",
+        ink: "#0B0920",
+
+        // Tone-aware semantics, resolved from the `.tone-*` band a component
+        // sits in, so the same markup works on ink, on paper and on coral.
+        bg: "var(--bg)",
+        fg: "var(--fg)",
+        muted: "var(--muted)",
+        rule: "var(--rule)",
+        "rule-soft": "var(--rule-soft)",
+        accent: "var(--accent)",
+        "accent-ink": "var(--accent-ink)",
+        "accent-2": "var(--accent-2)",
+        "accent-2-ink": "var(--accent-2-ink)",
       },
       fontFamily: {
         display: ["var(--font-bricolage)", "system-ui", "sans-serif"],
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
+      borderRadius: {
+        // Swiss discipline: everything is a rectangle. `rounded-full` stays
+        // for the few genuinely circular marks (bubbles, logo dots, nodes).
+        DEFAULT: "0",
+        none: "0",
+        sm: "0",
+        md: "0",
+        lg: "0",
+        xl: "0",
+        "2xl": "0",
+        "3xl": "0",
+        full: "9999px",
+      },
       animation: {
         "pulse-slow": "pulseSlow 2.6s ease-in-out infinite",
         "pulse-slower": "pulseSlow 2.6s ease-in-out infinite 1.3s",
-        "pulse-dot": "pulseDot 1.6s ease-in-out infinite",
         marquee: "marquee 40s linear infinite",
         "marquee-slow": "marquee 60s linear infinite",
-        bob: "bob 2.4s ease-in-out infinite",
       },
       keyframes: {
         pulseSlow: {
-          "0%, 100%": { transform: "scale(1)", opacity: "1" },
-          "50%": { transform: "scale(1.15)", opacity: "0.8" },
-        },
-        pulseDot: {
-          "0%, 100%": { opacity: "1", transform: "scale(1)" },
-          "50%": { opacity: "0.4", transform: "scale(0.85)" },
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.55" },
         },
         marquee: {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-50%)" },
-        },
-        bob: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(8px)" },
         },
       },
     },

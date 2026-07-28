@@ -1,21 +1,14 @@
 "use client";
 
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-  useInView,
-  MotionValue,
-} from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Section, SectionHead } from "./ui/Section";
+import { ArrowLink } from "./ui/ArrowLink";
 
 type StepData = {
   n: string;
   title: string;
   body: string;
-  accent: "coral" | "lilac";
 };
 
 const steps: StepData[] = [
@@ -23,19 +16,16 @@ const steps: StepData[] = [
     n: "01",
     title: "Dici che serata cerchi",
     body: "Gente e casino, qualcosa di tranquillo, o «stupiscimi». Basta scriverlo in poche parole.",
-    accent: "coral",
   },
   {
     n: "02",
     title: "Bloop ti porta nel posto giusto",
     body: "Ti mostra dove andare, vicino a te e al momento giusto. Anche la chicca che non sapevi di volere.",
-    accent: "lilac",
   },
   {
     n: "03",
     title: "Scegli e vai",
     body: "Tu scegli dove andare, Bloop ti apre la strada. Zero scroll infiniti.",
-    accent: "coral",
   },
 ];
 
@@ -44,20 +34,15 @@ function Step({
   index,
   threshold,
   progress,
-  dotRef,
-  sectionInView,
+  markerRef,
 }: {
   step: StepData;
   index: number;
   threshold: number;
   progress: MotionValue<number>;
-  dotRef: (el: HTMLSpanElement | null) => void;
-  sectionInView: boolean;
+  markerRef: (el: HTMLSpanElement | null) => void;
 }) {
-  const reduce = useReducedMotion();
-  const accent = step.accent === "coral" ? "#F76B3A" : "#A269FF";
-
-  // Fill the dot over a short window just before the bar reaches it.
+  // The marker fills over a short window just before the rail reaches it.
   const fill = useTransform(progress, (p) => {
     const start = Math.max(0, threshold - 0.14);
     const end = threshold <= 0.001 ? 0.03 : threshold;
@@ -66,110 +51,54 @@ function Step({
     return (p - start) / (end - start);
   });
 
-  const dotScale = useTransform(fill, [0, 0.7, 1], [0.8, 1.08, 1]);
   const emptyOpacity = useTransform(fill, [0, 1], [1, 0]);
-  const glow = useTransform(
-    fill,
-    [0, 1],
-    ["0 0 0px rgba(0,0,0,0)", `0 0 34px ${accent}80`]
-  );
-
-  // The card lights up as its dot is reached.
-  const cardBg = useTransform(
-    fill,
-    [0, 1],
-    ["rgba(255,255,255,0.035)", "rgba(255,255,255,0.08)"]
-  );
-  const cardShadow = useTransform(
-    fill,
-    [0, 1],
-    ["0 0 0 rgba(0,0,0,0)", `0 24px 70px -28px ${accent}66`]
-  );
-  const cardScale = useTransform(fill, [0, 1], [0.99, 1]);
 
   return (
-    <li className="relative grid grid-cols-[3.5rem_1fr] items-center gap-5 sm:grid-cols-[4rem_1fr] sm:gap-8">
-      {/* Dot on the rail */}
-      <div className="relative z-10 flex justify-center">
-        <motion.span
-          ref={dotRef}
-          style={{ scale: dotScale, boxShadow: glow }}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-deep sm:h-16 sm:w-16"
+    <li className="rule-t-soft grid grid-cols-[3rem_1fr] gap-5 py-10 sm:grid-cols-[4rem_1fr] sm:gap-10 sm:py-14">
+      {/* Square marker sitting on the rail */}
+      <div className="relative z-10">
+        <span
+          ref={markerRef}
+          className="relative flex h-12 w-12 items-center justify-center bg-bg sm:h-14 sm:w-14"
         >
-          {/* Pulsing halo — only visible once active */}
-          <motion.span
-            className="absolute inset-0 rounded-full"
-            style={{ opacity: fill }}
-            aria-hidden
-          >
-            <motion.span
-              className="absolute inset-0 rounded-full"
-              style={{ backgroundColor: accent }}
-              animate={
-                reduce || !sectionInView
-                  ? undefined
-                  : { scale: [1, 1.75], opacity: [0.45, 0] }
-              }
-              transition={{
-                duration: 1.9,
-                repeat: Infinity,
-                ease: "easeOut",
-                delay: index * 0.2,
-              }}
-            />
-          </motion.span>
-
-          {/* Empty ring */}
+          {/* Outline, then a solid coral fill wipes in over it */}
           <span
-            className="absolute inset-0 rounded-full border-2"
-            style={{ borderColor: accent, opacity: 0.35 }}
+            className="absolute inset-0 border"
+            style={{ borderColor: "var(--accent)" }}
             aria-hidden
           />
-          {/* Fill */}
           <motion.span
-            className="absolute inset-0 rounded-full"
-            style={{ backgroundColor: accent, opacity: fill }}
+            className="absolute inset-0"
+            style={{ backgroundColor: "var(--accent)", opacity: fill }}
             aria-hidden
           />
-          {/* Number crossfade */}
           <motion.span
             style={{ opacity: emptyOpacity }}
-            className="absolute font-display text-lg font-bold"
-          >
-            <span style={{ color: accent }}>{step.n}</span>
-          </motion.span>
-          <motion.span
-            style={{ opacity: fill }}
-            className="absolute font-display text-lg font-bold text-deep"
+            className="absolute font-mono text-xs font-medium tracking-[0.1em] text-accent-ink"
           >
             {step.n}
           </motion.span>
-        </motion.span>
+          <motion.span
+            style={{ opacity: fill }}
+            className="absolute font-mono text-xs font-medium tracking-[0.1em] text-bg"
+          >
+            {step.n}
+          </motion.span>
+        </span>
       </div>
 
-      {/* Card — enters on scroll, brightens when its dot is reached */}
       <motion.div
-        initial={{ opacity: 0, x: 40 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-12% 0px" }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.08 }}
-        style={{ backgroundColor: cardBg, boxShadow: cardShadow, scale: cardScale }}
-        className="group rounded-[2rem] p-7 sm:p-9"
+        transition={{ duration: 0.55, ease: "easeOut", delay: index * 0.08 }}
+        className="grid12 gap-y-4"
       >
-        <div className="flex items-center gap-3">
-          <span
-            className="font-sans font-semibold text-[12px] uppercase tracking-[0.3em]"
-            style={{ color: accent }}
-          >
-            Fermata {step.n}
-          </span>
+        <p className="eyebrow text-muted md:col-span-3">Fermata {step.n}</p>
+        <div className="md:col-span-9">
+          <h3 className="display-sm">{step.title}</h3>
+          <p className="copy mt-5 max-w-xl text-fg">{step.body}</p>
         </div>
-        <h3 className="mt-4 font-display text-2xl font-semibold leading-tight tracking-[-0.01em] sm:text-3xl">
-          {step.title}
-        </h3>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-white sm:text-lg">
-          {step.body}
-        </p>
       </motion.div>
     </li>
   );
@@ -177,7 +106,7 @@ function Step({
 
 export function HowItWorks() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const dotEls = useRef<(HTMLSpanElement | null)[]>([]);
+  const markerEls = useRef<(HTMLSpanElement | null)[]>([]);
 
   const [rail, setRail] = useState({ top: 0, height: 0 });
   const [thresholds, setThresholds] = useState<number[]>(
@@ -189,7 +118,7 @@ export function HowItWorks() {
       const c = containerRef.current;
       if (!c) return;
       const cTop = c.getBoundingClientRect().top;
-      const centers = dotEls.current.map((d) => {
+      const centers = markerEls.current.map((d) => {
         if (!d) return 0;
         const r = d.getBoundingClientRect();
         return r.top - cTop + r.height / 2;
@@ -218,105 +147,47 @@ export function HowItWorks() {
     offset: ["start 0.8", "end 0.55"],
   });
 
-  // Only run the infinite dot-halo loops while the path is actually
-  // on screen, so they don't burn CPU/GPU the rest of the scroll.
-  const sectionInView = useInView(containerRef, { margin: "-10% 0px" });
-
-  // Glowing "comet" that rides the tip of the completion bar. Driven by a
-  // `y` transform (not `top`) so it composites on the GPU — animating a
-  // layout property here caused a repaint smear on iOS during scroll.
-  // (7px = half the 14px dot, to keep it centred on the bar tip.)
-  const cometY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [rail.top - 7, rail.top + rail.height - 7]
-  );
-  const cometOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.03, 0.97, 1],
-    [0, 1, 1, 0]
-  );
-
   return (
-    <section id="come-funziona" className="relative py-28 sm:py-36">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8">
-        <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
-          <div className="md:col-span-3">
-            <motion.p
-              initial={{ opacity: 0, x: -12 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-coral"
-            >
-              Flusso
-            </motion.p>
-          </div>
-          <div className="md:col-span-9">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-15% 0px" }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
-            >
+    <Section id="come-funziona" tone="light" ruled>
+      <div className="shell py-24 sm:py-32">
+        <SectionHead
+          index="04"
+          label="Flusso"
+          title={
+            <>
               Tre fermate.
               <br />
-              <span className="text-smoke">Una serata diversa.</span>
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-15% 0px" }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-              className="mt-8"
-            >
-              <Link
-                href="/flusso"
-                className="group inline-flex items-center gap-2 font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-coral transition hover:text-white"
-              >
-                Approfondisci il flusso
-                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-                  →
-                </span>
-              </Link>
-            </motion.div>
-          </div>
-        </div>
+              <span className="text-muted">Una serata diversa.</span>
+            </>
+          }
+          action={<ArrowLink href="/flusso">Approfondisci il flusso</ArrowLink>}
+        />
 
-        {/* Vertical path */}
-        <div ref={containerRef} className="relative mt-6">
-          {/* Rail track */}
+        <div ref={containerRef} className="relative">
+          {/* Rail track — a 1px hairline, and a solid coral bar that fills it */}
           <div
-            className="absolute left-[1.75rem] -ml-[1.5px] w-[3px] rounded-full bg-white/10 sm:left-8"
-            style={{ top: rail.top, height: rail.height }}
+            className="absolute left-6 w-px sm:left-7"
+            style={{
+              top: rail.top,
+              height: rail.height,
+              backgroundColor: "var(--rule)",
+            }}
             aria-hidden
           />
-          {/* Completion bar */}
           <motion.div
             style={{
               top: rail.top,
               height: rail.height,
               scaleY: scrollYProgress,
               transformOrigin: "top",
+              backgroundColor: "var(--accent)",
               willChange: "transform",
             }}
-            className="absolute left-[1.75rem] -ml-[1.5px] w-[3px] rounded-full bg-gradient-to-b from-coral via-coral to-lilac sm:left-8"
-            aria-hidden
-          />
-          {/* Comet at the tip — box-shadow glow (no filter blur) + y transform */}
-          <motion.div
-            style={{
-              y: cometY,
-              opacity: cometOpacity,
-              willChange: "transform",
-              boxShadow: "0 0 14px 3px rgba(255,255,255,0.7)",
-            }}
-            className="absolute left-[1.75rem] top-0 z-10 -ml-[7px] h-3.5 w-3.5 rounded-full bg-white sm:left-8"
+            className="absolute left-6 w-px sm:left-7"
             aria-hidden
           />
 
-          <ol className="relative space-y-5 sm:space-y-8">
+          <ol className="relative">
             {steps.map((s, i) => (
               <Step
                 key={s.n}
@@ -324,15 +195,14 @@ export function HowItWorks() {
                 index={i}
                 progress={scrollYProgress}
                 threshold={thresholds[i] ?? 0}
-                dotRef={(el) => {
-                  dotEls.current[i] = el;
+                markerRef={(el) => {
+                  markerEls.current[i] = el;
                 }}
-                sectionInView={sectionInView}
               />
             ))}
           </ol>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

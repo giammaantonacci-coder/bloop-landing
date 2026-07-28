@@ -61,7 +61,7 @@ export default function RootLayout({
       lang="it"
       className={`${bricolage.variable} ${inter.variable} ${mono.variable}`}
     >
-      <body className="bg-deep text-white font-sans antialiased selection:bg-coral selection:text-deep">
+      <body className="tone-dark bg-deep font-sans antialiased selection:bg-coral selection:text-deep">
         <a href="#main-content" className="skip-link">
           Vai al contenuto
         </a>

@@ -20,71 +20,40 @@ type BubbleConfig = {
   fy: number;
   mouse: number;
   delay: number;
-  sphere: React.CSSProperties;
-  blob: string;
-  glow: string;
+  color: string;
   float: { x: number[]; y: number[] };
 };
 
+// Flat colour discs. No gradient, no gloss, no blur, no blend mode — the
+// bubbles stay as brand marks but read as printed shapes, not 3D objects.
 const CORAL: BubbleConfig = {
-  pos: "left-[2%] top-[6%]",
-  size: "h-[20rem] w-[20rem] sm:h-[27rem] sm:w-[27rem]",
+  pos: "left-[2%] top-[8%]",
+  size: "h-[19rem] w-[19rem] sm:h-[26rem] sm:w-[26rem]",
   fx: 0.48,
   fy: 0.2,
-  mouse: 42,
+  mouse: 34,
   delay: 0.1,
-  sphere: {
-    background:
-      "radial-gradient(circle at 34% 30%, #ffb890 0%, #f9814d 36%, #F76B3A 58%, #a83c17 100%)",
-    boxShadow:
-      "inset -12px -16px 44px rgba(0,0,0,0.42), inset 14px 16px 40px rgba(255,255,255,0.3), 0 44px 90px -22px rgba(247,107,58,0.55)",
-  },
-  blob:
-    "radial-gradient(circle, rgba(247,107,58,0.9) 0%, rgba(247,107,58,0) 70%)",
-  glow: "#F76B3A",
-  float: { x: [0, 26, -18, 14, 0], y: [0, -22, 18, -10, 0] },
+  color: "#F76B3A",
+  float: { x: [0, 22, -16, 12, 0], y: [0, -18, 16, -8, 0] },
 };
 
 const LILAC: BubbleConfig = {
-  pos: "left-[66%] top-[50%]",
-  size: "h-[18rem] w-[18rem] sm:h-[25rem] sm:w-[25rem]",
+  pos: "left-[66%] top-[52%]",
+  size: "h-[16rem] w-[16rem] sm:h-[23rem] sm:w-[23rem]",
   fx: 0.08,
   fy: -0.16,
-  mouse: -36,
+  mouse: -28,
   delay: 0.26,
-  sphere: {
-    background:
-      "radial-gradient(circle at 34% 30%, #dcc2ff 0%, #b085ff 38%, #A269FF 60%, #5b2ea8 100%)",
-    boxShadow:
-      "inset -12px -16px 44px rgba(0,0,0,0.42), inset 14px 16px 40px rgba(255,255,255,0.3), 0 44px 90px -22px rgba(162,105,255,0.55)",
-  },
-  blob:
-    "radial-gradient(circle, rgba(162,105,255,0.85) 0%, rgba(162,105,255,0) 70%)",
-  glow: "#A269FF",
-  float: { x: [0, -22, 16, -20, 0], y: [0, 20, -16, 22, 0] },
+  color: "#A269FF",
+  float: { x: [0, -18, 14, -16, 0], y: [0, 16, -14, 18, 0] },
 };
 
 type Motion = {
   x: MotionValue<number>;
   y: MotionValue<number>;
-  sharpOpacity: MotionValue<number>;
-  sharpScale: MotionValue<number>;
-  blobOpacity: MotionValue<number>;
-  rotX: MotionValue<number>;
-  rotY: MotionValue<number>;
+  opacity: MotionValue<number>;
+  scale: MotionValue<number>;
 };
-
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 639px)");
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-  return isMobile;
-}
 
 function useBubbleMotion(
   cfg: BubbleConfig,
@@ -99,12 +68,10 @@ function useBubbleMotion(
   const mY = useTransform(smoothY, [-0.5, 0.5], [-cfg.mouse * 0.7, cfg.mouse * 0.7]);
   const x = useTransform([driftX, mX], ([a, b]: number[]) => a + b);
   const y = useTransform([driftY, mY], ([a, b]: number[]) => a + b);
-  const sharpOpacity = useTransform(t, [0, 0.5], [1, 0]);
-  const sharpScale = useTransform(t, [0, 1], [1, 1.25]);
-  const blobOpacity = useTransform(t, [0.15, 0.7], [0, 0.6]);
-  const rotX = useTransform(smoothY, [-0.5, 0.5], [14, -14]);
-  const rotY = useTransform(smoothX, [-0.5, 0.5], [-14, 14]);
-  return { x, y, sharpOpacity, sharpScale, blobOpacity, rotX, rotY };
+  // They fade out as the hero scrolls away rather than melting into a blob.
+  const opacity = useTransform(t, [0, 0.75], [1, 0.14]);
+  const scale = useTransform(t, [0, 1], [1, 1.12]);
+  return { x, y, opacity, scale };
 }
 
 const SHARDS = Array.from({ length: 8 });
@@ -113,9 +80,9 @@ function Burst({ color }: { color: string }) {
   return (
     <div className="absolute inset-0 flex items-center justify-center">
       <motion.span
-        className="absolute rounded-full border-2"
+        className="absolute rounded-full border"
         style={{ borderColor: color }}
-        initial={{ width: "38%", height: "38%", opacity: 0.85 }}
+        initial={{ width: "38%", height: "38%", opacity: 0.9 }}
         animate={{ width: "125%", height: "125%", opacity: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       />
@@ -124,14 +91,13 @@ function Burst({ color }: { color: string }) {
         return (
           <motion.span
             key={i}
-            className="absolute h-3 w-3 rounded-full"
+            className="absolute h-2.5 w-2.5"
             style={{ background: color }}
-            initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+            initial={{ x: 0, y: 0, opacity: 1 }}
             animate={{
               x: Math.cos(ang) * 170,
               y: Math.sin(ang) * 170,
               opacity: 0,
-              scale: 0.2,
             }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           />
@@ -156,30 +122,23 @@ function BubbleVisual({
   reduce: boolean | null;
   isMobile: boolean;
 }) {
-  // Lighter sphere shadow on mobile: smaller blur radii are cheaper to
-  // paint/composite on low-power GPUs than the desktop version.
-  const sphereStyle = isMobile
-    ? {
-        ...cfg.sphere,
-        boxShadow:
-          "inset -8px -10px 26px rgba(0,0,0,0.4), inset 8px 10px 22px rgba(255,255,255,0.26), 0 22px 46px -18px rgba(0,0,0,0.5)",
-      }
-    : cfg.sphere;
-
   return (
+    // On narrow screens the discs land behind the hero paragraph, where a
+    // full-strength fill drops white body copy to ~3.5:1. Held back to 45%
+    // there, the copy clears 9:1 and the disc still reads as a disc.
     <motion.div
       style={{ x: m.x, y: m.y, willChange: "transform" }}
-      className={`absolute ${cfg.pos} ${cfg.size}`}
+      className={`absolute opacity-[0.45] md:opacity-100 ${cfg.pos} ${cfg.size}`}
     >
       <AnimatePresence>
         {alive ? (
           <motion.div
-            key={`sphere-${cycle}`}
+            key={`disc-${cycle}`}
             className="relative h-full w-full"
-            initial={reduce ? false : { y: -520, opacity: 0, scale: 0.5 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.12 } }}
-            transition={{ type: "spring", stiffness: 58, damping: 12, delay: cfg.delay }}
+            initial={reduce ? false : { y: -520, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.12 } }}
+            transition={{ type: "spring", stiffness: 58, damping: 14, delay: cfg.delay }}
           >
             <motion.div
               className="relative h-full w-full"
@@ -187,36 +146,27 @@ function BubbleVisual({
                 reduce
                   ? undefined
                   : isMobile
-                  ? { x: cfg.float.x.map((v) => v * 0.5), y: cfg.float.y.map((v) => v * 0.5) }
+                  ? {
+                      x: cfg.float.x.map((v) => v * 0.5),
+                      y: cfg.float.y.map((v) => v * 0.5),
+                    }
                   : { x: cfg.float.x, y: cfg.float.y }
               }
               transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
             >
-              {/* Ambient blurred blob — lighter blur, no blend mode on mobile */}
-              <motion.div
-                aria-hidden
-                style={{ opacity: m.blobOpacity, background: cfg.blob }}
-                className={`absolute -inset-[18%] rounded-full blur-xl sm:blur-2xl sm:mix-blend-screen`}
-              />
-              {/* Glossy 3D sphere — tilt only where a cursor exists */}
               <motion.div
                 aria-hidden
                 style={{
-                  opacity: m.sharpOpacity,
-                  scale: m.sharpScale,
-                  rotateX: reduce || isMobile ? 0 : m.rotX,
-                  rotateY: reduce || isMobile ? 0 : m.rotY,
-                  transformPerspective: isMobile ? undefined : 900,
-                  ...sphereStyle,
+                  opacity: m.opacity,
+                  scale: m.scale,
+                  backgroundColor: cfg.color,
                 }}
-                className="relative h-full w-full rounded-full"
-              >
-                <span className="absolute left-[20%] top-[16%] h-[26%] w-[26%] rounded-full bg-white/70 blur-lg sm:blur-xl" />
-              </motion.div>
+                className="h-full w-full rounded-full"
+              />
             </motion.div>
           </motion.div>
         ) : (
-          <Burst key={`burst-${cycle}`} color={cfg.glow} />
+          <Burst key={`burst-${cycle}`} color={cfg.color} />
         )}
       </AnimatePresence>
     </motion.div>
@@ -249,6 +199,18 @@ function BubbleHit({
   );
 }
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  return isMobile;
+}
+
 export function BackgroundBubbles() {
   const reduce = useReducedMotion();
   const isMobile = useIsMobile();
@@ -267,8 +229,8 @@ export function BackgroundBubbles() {
   const coral = useBubbleMotion(CORAL, t, smoothX, smoothY, vp);
   const lilac = useBubbleMotion(LILAC, t, smoothX, smoothY, vp);
 
-  // Bubbles are only poppable while in the hero (sphere) state so their
-  // hit targets never block clicks on content further down the page.
+  // Bubbles are only poppable near the top so their hit targets never block
+  // clicks on content further down the page.
   const [nearTop, setNearTop] = useState(true);
   const [bubbles, setBubbles] = useState({
     coral: { alive: true, cycle: 0 },
@@ -280,7 +242,6 @@ export function BackgroundBubbles() {
       if (!s[which].alive) return s;
       return { ...s, [which]: { ...s[which], alive: false } };
     });
-    // Respawn after the burst has cleared.
     window.setTimeout(() => {
       setBubbles((s) => ({
         ...s,
@@ -321,16 +282,41 @@ export function BackgroundBubbles() {
 
   return (
     <>
-      {/* Visuals — behind content */}
+      {/* Visuals — behind content, and masked out by the opaque paper and
+          coral bands further down the page. */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
-        <BubbleVisual cfg={CORAL} m={coral} alive={bubbles.coral.alive} cycle={bubbles.coral.cycle} reduce={reduce} isMobile={isMobile} />
-        <BubbleVisual cfg={LILAC} m={lilac} alive={bubbles.lilac.alive} cycle={bubbles.lilac.cycle} reduce={reduce} isMobile={isMobile} />
+        <BubbleVisual
+          cfg={CORAL}
+          m={coral}
+          alive={bubbles.coral.alive}
+          cycle={bubbles.coral.cycle}
+          reduce={reduce}
+          isMobile={isMobile}
+        />
+        <BubbleVisual
+          cfg={LILAC}
+          m={lilac}
+          alive={bubbles.lilac.alive}
+          cycle={bubbles.lilac.cycle}
+          reduce={reduce}
+          isMobile={isMobile}
+        />
       </div>
 
       {/* Hit targets — above content, but only active near the top */}
       <div className="pointer-events-none fixed inset-0 z-40 overflow-hidden">
-        <BubbleHit cfg={CORAL} m={coral} active={nearTop && bubbles.coral.alive} onPop={() => pop("coral")} />
-        <BubbleHit cfg={LILAC} m={lilac} active={nearTop && bubbles.lilac.alive} onPop={() => pop("lilac")} />
+        <BubbleHit
+          cfg={CORAL}
+          m={coral}
+          active={nearTop && bubbles.coral.alive}
+          onPop={() => pop("coral")}
+        />
+        <BubbleHit
+          cfg={LILAC}
+          m={lilac}
+          active={nearTop && bubbles.lilac.alive}
+          onPop={() => pop("lilac")}
+        />
       </div>
     </>
   );

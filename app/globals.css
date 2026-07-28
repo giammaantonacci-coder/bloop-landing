@@ -2,26 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------------------
+   Tone system
+   ---------------------------------------------------------------------------
+   The page is built as a stack of full-bleed bands that alternate between a
+   dark ground, a paper ground and a solid coral campitura. Every band sets its
+   own palette through custom properties, so the components inside it never
+   need to know which band they live in — they only ever reference `--fg`,
+   `--muted`, `--rule`, `--accent` and friends.
+
+   `--accent` is the graphic coral used for filled shapes and rules; when the
+   same coral has to carry *text* on a light ground it fails contrast, so text
+   uses `--accent-ink`, a deepened variant. Same story for lilac.
+--------------------------------------------------------------------------- */
+
 :root {
   color-scheme: dark;
+  --paper: #f2efe7;
+  --ink: #0b0920;
+}
+
+.tone-dark {
+  --bg: #0b0920;
+  --fg: #ffffff;
+  --muted: #a7a5be;
+  --rule: rgba(255, 255, 255, 0.22);
+  --rule-soft: rgba(255, 255, 255, 0.1);
+  --accent: #f76b3a;
+  --accent-ink: #f76b3a;
+  --accent-2: #a269ff;
+  --accent-2-ink: #a269ff;
+  --mark: #f76b3a;
+  --mark-2: #a269ff;
+  --mark-fg: #0b0920;
+  --btn-bg: #f76b3a;
+  --btn-fg: #0b0920;
+  --btn-bg-hover: #ffffff;
+  /* Transparent so the fixed bubble layer stays visible through dark bands. */
+  background-color: transparent;
+  color: var(--fg);
+}
+
+.tone-light {
+  --bg: #f2efe7;
+  --fg: #0b0920;
+  --muted: #5f5b6b;
+  --rule: rgba(11, 9, 32, 0.24);
+  --rule-soft: rgba(11, 9, 32, 0.12);
+  --accent: #f76b3a;
+  --accent-ink: #b23c13;
+  --accent-2: #a269ff;
+  --accent-2-ink: #6b2fd6;
+  --mark: #f76b3a;
+  --mark-2: #a269ff;
+  --mark-fg: #0b0920;
+  --btn-bg: #0b0920;
+  --btn-fg: #f2efe7;
+  --btn-bg-hover: #f76b3a;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+.tone-accent {
+  --bg: #f76b3a;
+  --fg: #0b0920;
+  --muted: #4a1b08;
+  --rule: rgba(11, 9, 32, 0.3);
+  --rule-soft: rgba(11, 9, 32, 0.16);
+  --accent: #0b0920;
+  --accent-ink: #0b0920;
+  --accent-2: #ffffff;
+  --accent-2-ink: #0b0920;
+  --mark: #0b0920;
+  --mark-2: #0b0920;
+  --mark-fg: #f76b3a;
+  --btn-bg: #0b0920;
+  --btn-fg: #f76b3a;
+  --btn-bg-hover: #ffffff;
+  background-color: var(--bg);
+  color: var(--fg);
 }
 
 html,
 body {
-  background-color: #0b0920;
+  background-color: var(--ink);
   min-height: 100%;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 4.5rem;
 }
 
-/* Visible keyboard focus on every interactive element (dark-bg-safe) */
+/* Visible keyboard focus. Doubled outline so it reads on paper and on ink. */
 :focus-visible {
-  outline: 2px solid #ffffff;
-  outline-offset: 3px;
-  border-radius: 4px;
+  outline: 2px solid var(--accent, #f76b3a);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(127, 127, 127, 0.35);
+  border-radius: 0;
 }
 
 /* Skip-to-content link: off-screen until focused */
@@ -30,12 +108,12 @@ html {
   left: 1rem;
   top: -4rem;
   z-index: 100;
-  border-radius: 9999px;
   background: #f76b3a;
   padding: 0.75rem 1.25rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #0b0920;
   transition: top 0.2s ease;
@@ -44,7 +122,7 @@ html {
   top: 1rem;
 }
 
-/* Custom scrollbar (WebKit) */
+/* Custom scrollbar (WebKit) — squared off, no radius anywhere */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -78,17 +156,205 @@ html {
   }
 }
 
-/* Animatable angle for the rotating hover border. Registered as a typed
-   custom property so it can be transitioned/animated. */
-@property --border-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
+@layer components {
+  /* -----------------------------------------------------------------------
+     Layout shell + grid
+     A single 12-column field, wide gutters, everything snapped to it.
+  ----------------------------------------------------------------------- */
+  .shell {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 96rem;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .shell {
+      padding-inline: 3rem;
+    }
+  }
 
-@keyframes border-spin {
-  to {
-    --border-angle: 360deg;
+  .grid12 {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    column-gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .grid12 {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+
+  /* -----------------------------------------------------------------------
+     Typographic scale — Bricolage Grotesque pushed to 800 with tight
+     tracking and sub-1 leading. Swiss display sizing: few steps, big jumps.
+  ----------------------------------------------------------------------- */
+  .display-xl,
+  .display-lg,
+  .display-md,
+  .display-sm {
+    font-family: var(--font-bricolage), system-ui, sans-serif;
+    font-weight: 800;
+    text-wrap: balance;
+  }
+
+  /* Leading stays under 1 for the Swiss look, but never so tight that
+     descenders collide with the line below or escape a `.mark` block. */
+  .display-xl {
+    font-size: clamp(3.25rem, 11.5vw, 10rem);
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+  }
+
+  .display-lg {
+    font-size: clamp(2.75rem, 9vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.042em;
+  }
+
+  .display-md {
+    font-size: clamp(2.25rem, 6.5vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.038em;
+  }
+
+  .display-sm {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  /* Statement setting: large, but 700 and looser, for running sentences. */
+  .statement {
+    font-family: var(--font-bricolage), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4vw, 3.25rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  /* Mono labels do the sign-posting: section numbers, tags, meta. */
+  .eyebrow {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow-sm {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .lede {
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+  @media (min-width: 640px) {
+    .lede {
+      font-size: 1.25rem;
+      line-height: 1.5;
+    }
+  }
+
+  .copy {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* -----------------------------------------------------------------------
+     Marks — flat colour blocks behind a phrase, always with ink text.
+  ----------------------------------------------------------------------- */
+  /* Bricolage declares a shallow descent, so the inline background box clips
+     the tails of g/p/q. The extra bottom padding puts them back inside. */
+  .mark,
+  .mark-2 {
+    color: var(--mark-fg);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0.04em 0.16em 0.15em;
+  }
+  .mark {
+    background-color: var(--mark);
+  }
+  .mark-2 {
+    background-color: var(--mark-2);
+  }
+
+  /* A line whose text is marked: the background box reaches ~0.13em above
+     the glyphs, so at sub-1 leading it eats into the descenders of the line
+     before it. Marked lines are set as their own block with this class, which
+     buys the clearance in em so it holds at every step of the clamp. */
+  .mark-line {
+    display: block;
+    margin-top: 0.2em;
+  }
+
+  /* -----------------------------------------------------------------------
+     Buttons — rectangular, no radius, no shadow. Colour swap on hover.
+  ----------------------------------------------------------------------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--btn-bg);
+    color: var(--btn-fg);
+    padding: 1rem 1.75rem;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .btn:hover {
+    background-color: var(--btn-bg-hover);
+    color: var(--bg);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--rule);
+    color: var(--fg);
+    padding: 1rem 1.75rem;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .btn-ghost:hover {
+    background-color: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
+  }
+
+  /* Inline text link with a mono label and an arrow. */
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid currentColor;
+    transition: color 0.2s ease;
   }
 }
 
@@ -102,110 +368,34 @@ html {
     will-change: transform;
   }
 
-  /* Blueprint grid overlay */
-  .grid-blueprint {
-    background-image:
-      linear-gradient(to right, rgba(167, 165, 190, 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(167, 165, 190, 0.06) 1px, transparent 1px);
-    background-size: 64px 64px;
-  }
-
-  .grid-blueprint-tight {
-    background-image:
-      linear-gradient(to right, rgba(167, 165, 190, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(167, 165, 190, 0.05) 1px, transparent 1px);
-    background-size: 32px 32px;
-  }
-
-  .noise {
-    background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-    background-size: 3px 3px;
+  /* Swiss grid overlay — hairlines on the 12-column field. */
+  .grid-rules {
+    background-image: linear-gradient(
+      to right,
+      var(--rule-soft) 1px,
+      transparent 1px
+    );
+    background-size: calc(100% / 6) 100%;
   }
 
   .text-balance {
     text-wrap: balance;
   }
 
-  /* Corner tick marks — cinematic crop feel */
-  .tick-corners {
-    position: relative;
+  /* Hairline dividers pinned to the tone palette. */
+  .rule-t {
+    border-top: 1px solid var(--rule);
   }
-  .tick-corners::before,
-  .tick-corners::after {
-    content: "";
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border: 1px solid currentColor;
-    opacity: 0.35;
-    pointer-events: none;
+  .rule-b {
+    border-bottom: 1px solid var(--rule);
   }
-  .tick-corners::before {
-    top: -1px;
-    left: -1px;
-    border-right: 0;
-    border-bottom: 0;
+  .rule-t-soft {
+    border-top: 1px solid var(--rule-soft);
   }
-  .tick-corners::after {
-    bottom: -1px;
-    right: -1px;
-    border-left: 0;
-    border-top: 0;
+  .rule-b-soft {
+    border-bottom: 1px solid var(--rule-soft);
   }
-
-  /* Highlighter block (used behind key words) */
-  .highlight-coral {
-    background-color: #f76b3a;
-    color: #0b0920;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    padding: 0.02em 0.14em;
-  }
-
-  .highlight-lilac {
-    background-color: #a269ff;
-    color: #0b0920;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    padding: 0.02em 0.14em;
-  }
-
-  /* Rotating luminous border, revealed on hover. A conic gradient with a
-     bright coral→lilac arc is masked down to a thin ring and spun around
-     the card via the --border-angle custom property. */
-  .glow-border::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    border-radius: inherit;
-    padding: 1.5px;
-    background: conic-gradient(
-      from var(--border-angle),
-      transparent 0%,
-      transparent 62%,
-      #f76b3a 78%,
-      #ffd9c7 86%,
-      #a269ff 94%,
-      transparent 100%
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    pointer-events: none;
-  }
-  .glow-border:hover::before {
-    opacity: 1;
-    animation: border-spin 2.8s linear infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .glow-border:hover::before {
-      animation: none;
-    }
+  .rule-l-soft {
+    border-left: 1px solid var(--rule-soft);
   }
 }

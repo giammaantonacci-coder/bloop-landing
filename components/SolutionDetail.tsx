@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { BridgeConnector } from "./ui/BridgeConnector";
-
-const COL = { coral: "#F76B3A", lilac: "#A269FF" } as const;
+import { Section, SectionHead, PageHead, CtaBand } from "./ui/Section";
 
 const features = [
   {
@@ -11,21 +10,18 @@ const features = [
     tag: "Discovery",
     title: "Scopri cosa pulsa",
     body: "Aggreghiamo eventi e posti da più fonti in un unico posto. Niente più dieci app aperte e mille gruppi da controllare.",
-    accent: "coral" as const,
   },
   {
     n: "02",
     tag: "Personal",
     title: "Su misura per te",
     body: "Dici che serata cerchi — gente, qualcosa di tranquillo, o «stupiscimi» — e Bloop ti mostra solo quello che fa per te.",
-    accent: "lilac" as const,
   },
   {
     n: "03",
     tag: "Flow",
     title: "Dall'idea all'ingresso",
     body: "Dall'impulso di uscire al posto giusto, senza saltare da un'app all'altra. Bloop ti accompagna fino a lì.",
-    accent: "coral" as const,
   },
 ];
 
@@ -35,279 +31,176 @@ const details = [
     tag: "Aggregazione",
     title: "Una sola mappa",
     body: "Tutti gli eventi e i posti della città, raccolti in un solo posto e sempre aggiornati.",
-    accent: "coral" as const,
   },
   {
     n: "02",
     tag: "Personalizzazione",
     title: "Ti conosce",
     body: "Più usi Bloop, più diventa preciso. I suggerimenti si adattano a te, non il contrario.",
-    accent: "lilac" as const,
   },
   {
     n: "03",
     tag: "Azione",
     title: "Dal vedere al fare",
     body: "Trovi qualcosa? In pochi tap hai biglietto, percorso e amici avvisati.",
-    accent: "coral" as const,
   },
   {
     n: "04",
     tag: "Community",
     title: "Cresce con te",
     body: "Ogni Blooper che segnala rende la mappa più viva. La città la costruiamo insieme.",
-    accent: "lilac" as const,
   },
 ];
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
 };
 
 const row = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
 };
 
 export function SolutionDetail() {
   return (
     <>
-      {/* Header */}
-      <section className="relative px-6 pt-36 sm:px-8 sm:pt-44">
-        <div className="mx-auto max-w-7xl">
-          <motion.a
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            href="/"
-            className="inline-flex items-center gap-2 font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-smoke transition hover:text-white"
-          >
-            <span aria-hidden>←</span> Torna alla home
-          </motion.a>
+      <PageHead
+        index="03"
+        label="La soluzione"
+        accent="2"
+        title={
+          <>
+            Il ponte tra te
+            <br />
+            <span className="text-muted">e la tua città.</span>
+          </>
+        }
+        intro="Bloop raccoglie tutto quello che succede in città — anche le chicche che vivono nei social e nelle chat — e ti aiuta a trovare cosa fare. Il resto lo decidi tu."
+      />
 
-          <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-12">
-            <div className="md:col-span-3">
-              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-lilac">
-                La soluzione
-              </p>
-            </div>
-            <div className="md:col-span-9">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.05 }}
-                className="text-balance font-display text-5xl font-bold leading-[0.98] tracking-[-0.02em] sm:text-7xl md:text-8xl"
-              >
-                Il ponte tra te
-                <br />
-                <span className="text-smoke">e la tua città.</span>
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
-                className="mt-8 max-w-2xl text-lg leading-relaxed text-white sm:text-xl"
-              >
-                Bloop raccoglie tutto quello che succede in città — anche le
-                chicche che vivono nei social e nelle chat — e ti aiuta a
-                trovare cosa fare. Il resto lo decidi tu.
-              </motion.p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Core features — alternating editorial rows */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-10 pb-8 md:grid-cols-12">
-            <div className="md:col-span-3">
-              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-coral">
-                Come funziona
-              </p>
-            </div>
-            <div className="md:col-span-9">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-15% 0px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
-              >
+      {/* Core features — full-width editorial rows, huge outlined numerals */}
+      <Section tone="light" ruled>
+        <div className="shell py-24 sm:py-32">
+          <SectionHead
+            index="03.1"
+            label="Come funziona"
+            title={
+              <>
                 Tre mosse.
                 <br />
-                <span className="text-smoke">Una serata.</span>
-              </motion.h2>
-            </div>
-          </div>
+                <span className="text-muted">Una serata.</span>
+              </>
+            }
+          />
 
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10% 0px" }}
-            className="mt-6 border-t border-white/10"
+            className="rule-t"
           >
             {features.map((f, i) => (
               <motion.div
                 key={f.n}
                 variants={row}
-                className="grid grid-cols-1 items-center gap-6 border-b border-white/10 py-12 md:grid-cols-12 md:gap-10 md:py-16"
+                className="grid12 rule-b-soft items-center gap-y-6 py-12 md:py-20"
               >
-                <div
-                  className={`md:col-span-5 ${i % 2 === 1 ? "md:order-2" : ""}`}
-                >
+                <div className={`md:col-span-5 ${i % 2 === 1 ? "md:order-2" : ""}`}>
                   <span
                     aria-hidden
-                    className="block font-display text-[clamp(4.5rem,12vw,10rem)] font-bold leading-[0.8] tracking-tighter"
+                    className="block font-display text-[clamp(5rem,13vw,11rem)] font-extrabold leading-[0.78] tracking-[-0.06em]"
                     style={{
-                      WebkitTextStroke: `1.5px ${COL[f.accent]}`,
+                      WebkitTextStroke: "1.5px var(--accent)",
                       color: "transparent",
                     }}
                   >
                     {f.n}
                   </span>
-                  <p
-                    className="mt-4 font-sans text-[12px] font-semibold uppercase tracking-[0.3em]"
-                    style={{ color: COL[f.accent] }}
-                  >
-                    {f.tag}
-                  </p>
+                  <p className="eyebrow mt-6 text-accent-ink">{f.tag}</p>
                 </div>
-                <div
-                  className={`md:col-span-7 ${i % 2 === 1 ? "md:order-1" : ""}`}
-                >
-                  <h3 className="font-display text-3xl font-semibold leading-[1.05] tracking-[-0.01em] sm:text-4xl md:text-5xl">
-                    {f.title}
-                  </h3>
-                  <p className="mt-5 max-w-xl text-base leading-relaxed text-white sm:text-lg">
-                    {f.body}
-                  </p>
+                <div className={`md:col-span-7 ${i % 2 === 1 ? "md:order-1" : ""}`}>
+                  <h3 className="display-sm">{f.title}</h3>
+                  <p className="copy mt-6 max-w-xl text-fg">{f.body}</p>
                 </div>
               </motion.div>
             ))}
           </motion.div>
         </div>
-      </section>
+      </Section>
 
-      {/* In practice — numbered list */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-10 pb-8 md:grid-cols-12">
-            <div className="md:col-span-3">
-              <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.25em] text-lilac">
-                In pratica
-              </p>
-            </div>
-            <div className="md:col-span-9">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-15% 0px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
-              >
+      {/* In practice */}
+      <Section tone="dark" ruled>
+        <div className="shell py-24 sm:py-32">
+          <SectionHead
+            index="03.2"
+            label="In pratica"
+            accent="2"
+            title={
+              <>
                 Cosa ottieni,
                 <br />
-                <span className="text-smoke">davvero.</span>
-              </motion.h2>
-            </div>
-          </div>
+                <span className="text-muted">davvero.</span>
+              </>
+            }
+          />
 
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10% 0px" }}
-            className="mt-6 grid grid-cols-1 gap-x-12 sm:grid-cols-2"
+            className="rule-t grid grid-cols-1 sm:grid-cols-2"
           >
-            {details.map((d) => (
+            {details.map((d, i) => (
               <motion.div
                 key={d.n}
                 variants={row}
-                className="flex gap-6 border-t border-white/10 py-8"
+                className={`rule-b-soft flex flex-col py-10 sm:py-14 sm:pr-10 ${
+                  i % 2 === 1 ? "sm:rule-l-soft sm:pl-10" : ""
+                }`}
               >
-                <span
-                  className="font-display text-3xl font-bold leading-none"
-                  style={{ color: COL[d.accent] }}
-                >
-                  {d.n}
-                </span>
-                <div>
-                  <h3 className="font-display text-2xl font-semibold leading-tight tracking-[-0.01em] sm:text-3xl">
-                    {d.title}
-                  </h3>
-                  <p className="mt-3 max-w-md text-base leading-relaxed text-white sm:text-lg">
-                    {d.body}
-                  </p>
+                <div className="flex items-baseline justify-between gap-4">
+                  <span className="eyebrow text-accent-2-ink">{d.n}</span>
+                  <span className="eyebrow-sm text-muted">{d.tag}</span>
                 </div>
+                <h3 className="display-sm mt-12">{d.title}</h3>
+                <p className="copy mt-5 max-w-md text-fg">{d.body}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
-      </section>
+      </Section>
 
-      {/* Bridge statement */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 items-end gap-8 md:grid-cols-12">
-            <p className="font-sans text-[13px] font-semibold uppercase tracking-[0.3em] text-smoke md:col-span-3">
-              Sintesi
-            </p>
+      {/* Synthesis */}
+      <Section tone="light" ruled>
+        <div className="shell py-24 sm:py-32">
+          <div className="grid12 gap-y-6">
+            <p className="eyebrow text-muted md:col-span-3">Sintesi</p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="text-balance font-display text-3xl leading-tight sm:text-4xl md:col-span-9 md:text-5xl"
+              className="statement md:col-span-9"
             >
               Gli eventi ci sono. La voglia c&apos;è.{" "}
-              <span className="highlight-lilac">Bloop è il ponte.</span>
+              <span className="mark-2">Bloop è il ponte.</span>
             </motion.p>
           </div>
 
-          <div className="mt-16">
+          <div className="mt-20">
             <BridgeConnector />
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* CTA */}
-      <section className="relative px-6 py-24 sm:px-8 sm:py-32">
-        <div className="mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="glow-border relative overflow-hidden rounded-[2.5rem] bg-white/[0.04] p-10 sm:p-16"
-          >
-            <h2 className="max-w-2xl text-balance font-display text-3xl font-bold leading-[1.05] tracking-[-0.02em] sm:text-5xl">
-              Pronto a vivere
-              <br />
-              <span className="highlight-coral">la città?</span>
-            </h2>
-            <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <a
-                href="/flusso"
-                className="group inline-flex items-center gap-3 rounded-full bg-coral px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-deep transition hover:bg-white"
-              >
-                Guarda come funziona
-                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-                  →
-                </span>
-              </a>
-              <a
-                href="/"
-                className="font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-smoke transition hover:text-white"
-              >
-                Torna alla home
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CtaBand
+        title="Pronto a vivere la città?"
+        primary={{ href: "/flusso", label: "Guarda come funziona" }}
+        secondary={{ href: "/", label: "Torna alla home" }}
+      />
     </>
   );
 }

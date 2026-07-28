@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { AnimatedCounter } from "./ui/AnimatedCounter";
 import { BridgeConnector } from "./ui/BridgeConnector";
+import { Section, SectionHead } from "./ui/Section";
+import { ArrowLink } from "./ui/ArrowLink";
 
 type Stat = {
   value: number;
@@ -44,75 +45,50 @@ const container = {
 };
 
 const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 export function Problem() {
   return (
-    <section
-      id="problema"
-      className="relative py-28 sm:py-36"
-    >
-      <div className="mx-auto max-w-7xl px-6 sm:px-8">
-        {/* Section header */}
-        <div className="grid grid-cols-1 gap-10 pb-14 md:grid-cols-12">
-          <div className="md:col-span-3">
-            <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-coral">
-              Problema
-            </p>
-          </div>
-          <div className="md:col-span-9">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-15% 0px" }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="text-balance font-display text-4xl font-bold leading-[1] tracking-[-0.02em] sm:text-6xl md:text-7xl"
-            >
+    <Section id="problema" tone="light">
+      <div className="shell py-24 sm:py-32">
+        <SectionHead
+          index="02"
+          label="Problema"
+          title={
+            <>
               Quanto ti perdi
               <br />
-              <span className="text-smoke">della tua città?</span>
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-15% 0px" }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-              className="mt-8"
-            >
-              <Link
-                href="/problema"
-                className="group inline-flex items-center gap-2 font-sans text-[13px] font-semibold uppercase tracking-[0.2em] text-coral transition hover:text-white"
-              >
-                Approfondisci il problema
-                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-                  →
-                </span>
-              </Link>
-            </motion.div>
-          </div>
-        </div>
+              <span className="text-muted">della tua città?</span>
+            </>
+          }
+          action={<ArrowLink href="/problema">Approfondisci il problema</ArrowLink>}
+        />
 
-        {/* Stats bubbles */}
+        {/* Stat table — three cells on one hairline field. The numerals are
+            set as large as the headline so the data reads as typography. */}
         <motion.ul
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-10% 0px" }}
-          className="grid grid-cols-1 gap-5 md:grid-cols-3"
+          className="rule-t grid grid-cols-1 md:grid-cols-3"
         >
-          {stats.map((s) => (
+          {stats.map((s, i) => (
             <motion.li
               key={s.index}
               variants={item}
-              className="glow-border group relative flex flex-col justify-between rounded-[2rem] bg-white/[0.04] p-8 py-12 transition-colors duration-300 hover:bg-white/[0.07] md:p-10"
+              className={`rule-b-soft flex flex-col justify-between py-10 md:py-14 md:pr-8 ${
+                i > 0 ? "md:rule-l-soft md:pl-8" : ""
+              }`}
             >
-              <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.3em] text-smoke">
-                {s.source}
-              </p>
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="eyebrow text-accent-ink">{s.index}</span>
+                <span className="eyebrow-sm text-muted">{s.source}</span>
+              </div>
 
-              <p className="mt-12 font-display text-[clamp(4.5rem,10vw,8rem)] font-bold leading-[0.9] tracking-[-0.03em] text-coral">
+              <p className="mt-14 font-display text-[clamp(4rem,9vw,7.5rem)] font-extrabold leading-[0.82] tracking-[-0.05em] text-accent-ink">
                 {s.custom ? (
                   s.custom
                 ) : (
@@ -120,36 +96,30 @@ export function Problem() {
                 )}
               </p>
 
-              <p className="mt-8 max-w-xs text-base leading-relaxed text-white sm:text-lg">
-                {s.label}
-              </p>
+              <p className="copy mt-8 max-w-xs text-fg">{s.label}</p>
             </motion.li>
           ))}
         </motion.ul>
 
-        {/* Closer */}
-        <div className="mt-20">
-          <div className="grid grid-cols-1 items-end gap-8 md:grid-cols-12">
-            <p className="font-sans font-semibold text-[13px] uppercase tracking-[0.3em] text-smoke md:col-span-3">
-              Sintesi
-            </p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10% 0px" }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="text-balance font-display text-3xl leading-tight sm:text-4xl md:col-span-9 md:text-5xl"
-            >
-              Le cose belle ci sono.{" "}
-              <span className="highlight-coral">Basta sapere dove cercarle.</span>
-            </motion.p>
-          </div>
+        {/* Synthesis */}
+        <div className="grid12 mt-24 gap-y-6">
+          <p className="eyebrow text-muted md:col-span-3">Sintesi</p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="statement md:col-span-9"
+          >
+            Le cose belle ci sono.{" "}
+            <span className="mark">Basta sapere dove cercarle.</span>
+          </motion.p>
+        </div>
 
-          <div className="mt-16">
-            <BridgeConnector />
-          </div>
+        <div className="mt-20">
+          <BridgeConnector />
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

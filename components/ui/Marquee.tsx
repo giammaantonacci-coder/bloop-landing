@@ -18,9 +18,10 @@ export function Marquee({
   separator,
 }: MarqueeProps) {
   const sep = separator ?? (
-    <span aria-hidden className="mx-6 text-coral">
-      ●
-    </span>
+    <span
+      aria-hidden
+      className="mx-6 inline-block h-2 w-2 bg-accent sm:mx-8"
+    />
   );
 
   const track = (

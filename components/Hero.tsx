@@ -1,97 +1,84 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { Section } from "./ui/Section";
+import { ArrowLink } from "./ui/ArrowLink";
+
+const rise = (delay: number) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.7, ease: "easeOut" as const, delay },
+});
 
 export function Hero() {
   const reduce = useReducedMotion();
 
   return (
-    <section
-      id="hero"
-      className="relative isolate flex min-h-screen flex-col overflow-hidden"
-    >
-      {/* Background: fine noise */}
-      <div className="pointer-events-none absolute inset-0 noise opacity-40" aria-hidden />
+    <Section id="hero" tone="dark" className="isolate flex min-h-screen flex-col">
+      <div className="shell flex flex-1 flex-col pt-28 sm:pt-32">
+        {/* Masthead strip — mono metadata pinned to a hairline, the way a
+            Swiss poster carries its imprint. */}
+        <div className="rule-b flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 pb-4">
+          <p className="eyebrow text-accent-ink">Il radar degli eventi della tua città</p>
+          <p className="eyebrow text-muted">Bologna · IT · MMXXVI</p>
+        </div>
 
-      {/* Main content */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 pt-40 sm:px-8 sm:pt-52">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="font-sans font-semibold text-[13px] uppercase tracking-[0.28em] text-smoke"
-        >
-          Il radar degli eventi della tua città
-        </motion.p>
+        {/* Headline — the whole point of the page. Flush left, tight
+            leading, one line dropped into a coral block. */}
+        <h1 className="display-xl mt-16 sm:mt-24">
+          <motion.span className="block" {...rise(0.05)}>
+            La tua città
+          </motion.span>
+          <motion.span className="block" {...rise(0.12)}>
+            è più viva
+          </motion.span>
+          {/* Clearance above the marked line. At 0.88 leading the previous
+              line's descenders overflow its box by ~0.055em and the mark's
+              background box reaches ~0.125em above its own; 0.2em covers both
+              at every step of the clamp, which a fixed margin cannot. */}
+          <motion.span className="mt-[0.2em] block" {...rise(0.19)}>
+            <span className="mark">di quanto pensi.</span>
+          </motion.span>
+        </h1>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.05 }}
-          className="mt-12 font-display text-[clamp(2.75rem,8vw,7rem)] font-bold leading-[0.95] tracking-[-0.03em]"
-        >
-          <span className="block">La tua città è più viva</span>
-          <span className="mt-5 block">
-            <span className="highlight-coral">di quanto pensi.</span>
-          </span>
-        </motion.h1>
+        {/* Base of the composition: statement left, action right. */}
+        <div className="grid12 mt-auto gap-y-10 pt-20 sm:pt-28">
+          <motion.div className="md:col-span-3" {...rise(0.3)}>
+            <p className="eyebrow text-muted">Cos&apos;è</p>
+          </motion.div>
 
-        <div className="mt-20 grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-6">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-            className="max-w-xl text-balance text-lg text-white sm:text-xl md:col-span-6"
-          >
-            Bloop raccoglie tutti gli eventi della tua città in un solo posto —
-            anche le chicche che vivono nei social e nelle chat — e ti aiuta a
-            trovare cosa fare, stasera, vicino a te. A scegliere sei tu.
-          </motion.p>
+          <motion.div className="md:col-span-5" {...rise(0.34)}>
+            <p className="copy text-fg">
+              Bloop raccoglie tutti gli eventi della tua città in un solo posto —
+              anche le chicche che vivono nei social e nelle chat — e ti aiuta a
+              trovare cosa fare, stasera, vicino a te. A scegliere sei tu.
+            </p>
+          </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.35 }}
-            className="flex flex-col items-start gap-4 sm:flex-row sm:items-center md:col-span-6 md:justify-end"
+            className="flex flex-col items-start gap-6 md:col-span-4 md:items-end"
+            {...rise(0.4)}
           >
-            <a
-              href="#soluzione"
-              className="group inline-flex items-center gap-3 rounded-full bg-coral px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-deep transition hover:bg-white"
-            >
+            <a href="#soluzione" className="btn group">
               Scopri Bloop
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="transition-transform group-hover:translate-x-1"
-              >
-                <path
-                  d="M5 12h14M13 6l6 6-6 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <span aria-hidden className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
             </a>
-            <a
-              href="#problema"
-              className="group inline-flex items-center gap-2 font-sans font-semibold text-[13px] uppercase tracking-[0.2em] text-smoke transition hover:text-white"
-            >
+            <ArrowLink href="#problema" accent="fg">
               Guarda perché
-              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">↓</span>
-            </a>
+            </ArrowLink>
           </motion.div>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      {!reduce && (
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center px-6 pb-10 pt-16 font-sans font-semibold text-[13px] uppercase tracking-[0.25em] text-smoke sm:px-8">
-          <span>Scroll ↓</span>
+        {/* Foot rule with the scroll cue */}
+        <div className="rule-t mt-16 flex items-center justify-between py-5">
+          <span className="eyebrow text-muted">
+            {reduce ? "Sezione 01 — 06" : "Scroll ↓"}
+          </span>
+          <span className="eyebrow text-muted">01 / 06</span>
         </div>
-      )}
-    </section>
+      </div>
+    </Section>
   );
 }
