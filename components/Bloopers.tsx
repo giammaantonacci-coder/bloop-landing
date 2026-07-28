@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { Section, SectionHead } from "./ui/Section";
 import { ArrowLink } from "./ui/ArrowLink";
+import { EditorialImage } from "./ui/EditorialImage";
+import { photos } from "./photos";
 
 const steps = [
   {
@@ -86,6 +88,26 @@ export function Bloopers() {
               </p>
             </motion.article>
           ))}
+        </motion.div>
+
+        {/* Plate */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mt-20"
+        >
+          <EditorialImage
+            src={photos.bloopers.src}
+            alt={photos.bloopers.alt}
+            ratio="wide"
+            index="06"
+            caption="La città la fanno le persone che la vivono"
+            scribble="burst"
+            scribblePlace="right-[12%] top-[14%] w-[14%]"
+            sizes="100vw"
+          />
         </motion.div>
 
         {/* CTA row */}

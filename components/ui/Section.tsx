@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
 import { ArrowLink } from "./ArrowLink";
+import { EditorialImage } from "./EditorialImage";
+import { ScribbleName } from "./Scribble";
+import { PhotoSlot } from "../photos";
 
 export type Tone = "dark" | "light" | "accent";
 
@@ -86,6 +89,11 @@ type PageHeadProps = {
   title: ReactNode;
   intro: ReactNode;
   accent?: "1" | "2";
+  /** Opening plate, printed full width under the masthead. */
+  photo?: PhotoSlot;
+  photoCaption?: string;
+  photoScribble?: ScribbleName;
+  photoScribblePlace?: string;
 };
 
 /**
@@ -99,6 +107,10 @@ export function PageHead({
   title,
   intro,
   accent = "1",
+  photo,
+  photoCaption,
+  photoScribble = "circle",
+  photoScribblePlace,
 }: PageHeadProps) {
   const accentClass = accent === "1" ? "text-accent-ink" : "text-accent-2-ink";
 
@@ -121,6 +133,23 @@ export function PageHead({
             <p className="lede mt-10 max-w-2xl text-fg">{intro}</p>
           </div>
         </div>
+
+        {photo && (
+          <div className="mt-20">
+            <EditorialImage
+              src={photo.src}
+              alt={photo.alt}
+              ratio="wide"
+              tone={accent === "1" ? "coral" : "lilac"}
+              index={index}
+              caption={photoCaption}
+              scribble={photoScribble}
+              scribblePlace={photoScribblePlace}
+              priority
+              sizes="100vw"
+            />
+          </div>
+        )}
       </div>
     </Section>
   );

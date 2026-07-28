@@ -3,6 +3,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Section } from "./ui/Section";
 import { ArrowLink } from "./ui/ArrowLink";
+import { EditorialImage } from "./ui/EditorialImage";
+import { photos } from "./photos";
 
 const rise = (delay: number) => ({
   initial: { opacity: 0, y: 24 },
@@ -15,7 +17,7 @@ export function Hero() {
 
   return (
     <Section id="hero" tone="dark" className="isolate flex min-h-screen flex-col">
-      <div className="shell flex flex-1 flex-col pt-28 sm:pt-32">
+      <div className="shell flex flex-1 flex-col pt-24 sm:pt-28">
         {/* Masthead strip — mono metadata pinned to a hairline, the way a
             Swiss poster carries its imprint. */}
         <div className="rule-b flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 pb-4">
@@ -25,7 +27,7 @@ export function Hero() {
 
         {/* Headline — the whole point of the page. Flush left, tight
             leading, one line dropped into a coral block. */}
-        <h1 className="display-xl mt-16 sm:mt-24">
+        <h1 className="display-xl mt-12 sm:mt-16">
           <motion.span className="block" {...rise(0.05)}>
             La tua città
           </motion.span>
@@ -41,8 +43,8 @@ export function Hero() {
           </motion.span>
         </h1>
 
-        {/* Base of the composition: statement left, action right. */}
-        <div className="grid12 mt-auto gap-y-10 pt-20 sm:pt-28">
+        {/* Base of the composition: statement and action left, plate right. */}
+        <div className="grid12 mt-auto gap-y-12 pt-14 sm:pt-20">
           <motion.div className="md:col-span-3" {...rise(0.3)}>
             <p className="eyebrow text-muted">Cos&apos;è</p>
           </motion.div>
@@ -53,26 +55,40 @@ export function Hero() {
               anche le chicche che vivono nei social e nelle chat — e ti aiuta a
               trovare cosa fare, stasera, vicino a te. A scegliere sei tu.
             </p>
+
+            <div className="mt-8 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+              <a href="#soluzione" className="btn group">
+                Scopri Bloop
+                <span
+                  aria-hidden
+                  className="transition-transform group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </a>
+              <ArrowLink href="#problema" accent="fg">
+                Guarda perché
+              </ArrowLink>
+            </div>
           </motion.div>
 
-          <motion.div
-            className="flex flex-col items-start gap-6 md:col-span-4 md:items-end"
-            {...rise(0.4)}
-          >
-            <a href="#soluzione" className="btn group">
-              Scopri Bloop
-              <span aria-hidden className="transition-transform group-hover:translate-x-1">
-                →
-              </span>
-            </a>
-            <ArrowLink href="#problema" accent="fg">
-              Guarda perché
-            </ArrowLink>
+          <motion.div className="md:col-span-4" {...rise(0.42)}>
+            <EditorialImage
+              src={photos.hero.src}
+              alt={photos.hero.alt}
+              ratio="landscape"
+              index="01"
+              caption="Stasera, vicino a te"
+              scribble="circle"
+              scribblePlace="left-[12%] top-[12%] w-[46%]"
+              priority
+              sizes="(min-width: 768px) 33vw, 100vw"
+            />
           </motion.div>
         </div>
 
         {/* Foot rule with the scroll cue */}
-        <div className="rule-t mt-16 flex items-center justify-between py-5">
+        <div className="rule-t mt-10 flex items-center justify-between py-5">
           <span className="eyebrow text-muted">
             {reduce ? "Sezione 01 — 06" : "Scroll ↓"}
           </span>

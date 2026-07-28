@@ -205,7 +205,7 @@ html {
   /* Leading stays under 1 for the Swiss look, but never so tight that
      descenders collide with the line below or escape a `.mark` block. */
   .display-xl {
-    font-size: clamp(3.25rem, 11.5vw, 10rem);
+    font-size: clamp(3.25rem, 10.5vw, 9rem);
     line-height: 0.88;
     letter-spacing: -0.045em;
   }
@@ -366,6 +366,15 @@ html {
   .marquee-track-slow {
     animation: marquee-x 70s linear infinite;
     will-change: transform;
+  }
+
+  /* Duotone photography. The contrast bump lands before the remap so the
+     midtones spread across the two brand colours instead of bunching. */
+  .duotone {
+    filter: contrast(1.08) url(#duotone-coral);
+  }
+  .duotone-2 {
+    filter: contrast(1.08) url(#duotone-lilac);
   }
 
   /* Swiss grid overlay — hairlines on the 12-column field. */

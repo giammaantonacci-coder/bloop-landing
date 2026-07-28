@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { FlowLine } from "./ui/FlowLine";
 import { Section, SectionHead, PageHead, CtaBand } from "./ui/Section";
+import { photos } from "./photos";
 
 const steps = [
   {
@@ -76,6 +77,10 @@ export function FlowDetail() {
           </>
         }
         intro="Uscire dovrebbe essere semplice. Bloop ti accompagna passo dopo passo: dici che serata cerchi, l'app ti porta nel posto giusto, tu scegli e vai. Dall'idea alla porta, senza attriti."
+        photo={photos.flussoDetail}
+        photoCaption="Dall'idea alla porta d'ingresso"
+        photoScribble="arrow"
+        photoScribblePlace="left-[10%] top-[16%] w-[26%]"
       />
 
       {/* Three stops */}

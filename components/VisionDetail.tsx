@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Section, SectionHead, PageHead } from "./ui/Section";
+import { photos } from "./photos";
 import { ArrowLink } from "./ui/ArrowLink";
 
 const beliefs = [
@@ -85,6 +86,10 @@ export function VisionDetail() {
           </>
         }
         intro="Bloop non nasce per farti stare più tempo sul telefono. Nasce per farti vivere la città in modo più umano — dove la tecnologia non distrae, ma avvicina."
+        photo={photos.visioneDetail}
+        photoCaption="Una città visibile a 360 gradi"
+        photoScribble="star"
+        photoScribblePlace="right-[14%] top-[14%] w-[12%]"
       />
 
       {/* Manifesto — full coral campitura */}

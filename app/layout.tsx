@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { BubblesProvider } from "@/components/BubblesProvider";
+import { DuotoneDefs } from "@/components/ui/EditorialImage";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -65,6 +66,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Vai al contenuto
         </a>
+        <DuotoneDefs />
         <BubblesProvider>{children}</BubblesProvider>
       </body>
     </html>

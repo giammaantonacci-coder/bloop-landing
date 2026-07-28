@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Marquee } from "./ui/Marquee";
 import { BlooperLevels } from "./ui/BlooperLevels";
 import { Section, SectionHead, PageHead, CtaBand } from "./ui/Section";
+import { photos } from "./photos";
 
 const perks = [
   "Vieni ricondiviso",
@@ -87,6 +88,10 @@ export function BloopersDetail() {
           </>
         }
         intro="La città la fanno le persone che la vivono. Segnala gli eventi che mancano — quelli che vivono nei social e nelle chat — e Bloop li fa scoprire a tutti. Vieni ricondiviso, col tuo nome."
+        photo={photos.bloopersDetail}
+        photoCaption="Chi la fa scoprire, viene citato"
+        photoScribble="burst"
+        photoScribblePlace="right-[12%] top-[12%] w-[13%]"
       />
 
       {/* Perks ticker — a rule-bound band, set in display weight */}

@@ -72,6 +72,28 @@ campitura `.mark` vanno impostate come blocco a sé con `.mark-line`, che
 recupera in `em` lo spazio che il riquadro di sfondo ruberebbe alle
 discendenti della riga precedente.
 
+### Fotografia
+
+Le immagini passano tutte da `<EditorialImage>`: virate in **duotone**
+(inchiostro → coral, o → lilla) da un filtro SVG, squadrate, con un **segno
+disegnato a mano** sopra e una didascalia su filetto, come una tavola in un
+articolo stampato.
+
+Il duotone è un `feColorMatrix` di luminanza seguito da un `feComponentTransfer`
+che rimappa il grigio sui due colori del brand. Il vantaggio pratico: le foto
+**non devono essere coordinate tra loro** come colore — qualsiasi scatto finisce
+dentro la palette. Conta solo la gamma tonale.
+
+I segni (`components/ui/Scribble.tsx`) sono tracciati volutamente imperfetti —
+i cerchi chiudono oltre il punto di partenza, le frecce hanno la punta storta —
+e si disegnano da soli allo scroll. Una geometria perfetta si leggerebbe come
+un altro pezzo della griglia invece che come un gesto umano.
+
+**Per aggiungere le foto**: mettile in `public/photos/` e compila `src` nello
+slot corrispondente in `components/photos.ts`. Gli slot sono già collegati alle
+sezioni; uno slot vuoto ripiega su una mezzatinta invece di lasciare un buco.
+Dettagli su formati e criteri di scelta in `public/photos/README.md`.
+
 ## Struttura
 
 ```
@@ -91,8 +113,11 @@ components/
   Bloopers.tsx      # community + CTA
   Footer.tsx        # wordmark, payoff, navigazione, social
   *Detail.tsx       # contenuto delle pagine di dettaglio
+  photos.ts         # slot fotografici: qui si mettono i path
   ui/
     Section.tsx         # fascia, header di sezione, masthead, fascia CTA
+    EditorialImage.tsx  # immagine in duotone + filtri SVG + placeholder
+    Scribble.tsx        # segni disegnati a mano, si tracciano allo scroll
     ArrowLink.tsx       # link mono sottolineato con freccia
     AnimatedCounter.tsx # counter con easing
     BackgroundBubbles.tsx / PinballBubbles.tsx  # dischi piatti di sfondo

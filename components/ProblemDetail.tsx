@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { AnimatedCounter } from "./ui/AnimatedCounter";
 import { MissedEvents } from "./ui/MissedEvents";
 import { Section, SectionHead, PageHead, CtaBand } from "./ui/Section";
+import { photos } from "./photos";
 
 type Stat = {
   n: string;
@@ -89,6 +90,10 @@ export function ProblemDetail() {
           </>
         }
         intro="Ogni giorno, intorno a te, succede molto più di quello che vedi. Il problema non è che manchino gli eventi — è che vivono sparsi ovunque e le chicche si perdono."
+        photo={photos.problemaDetail}
+        photoCaption="Volantini, chat, gruppi: l'informazione è sparsa"
+        photoScribble="arrow"
+        photoScribblePlace="right-[10%] top-[16%] w-[24%]"
       />
 
       {/* Numbers */}

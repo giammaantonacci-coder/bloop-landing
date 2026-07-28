@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { BridgeConnector } from "./ui/BridgeConnector";
 import { Section, SectionHead, PageHead, CtaBand } from "./ui/Section";
+import { photos } from "./photos";
 
 const features = [
   {
@@ -77,6 +78,10 @@ export function SolutionDetail() {
           </>
         }
         intro="Bloop raccoglie tutto quello che succede in città — anche le chicche che vivono nei social e nelle chat — e ti aiuta a trovare cosa fare. Il resto lo decidi tu."
+        photo={photos.soluzioneDetail}
+        photoCaption="Una sola mappa, sempre aggiornata"
+        photoScribble="circle"
+        photoScribblePlace="left-[8%] top-[12%] w-[34%]"
       />
 
       {/* Core features — full-width editorial rows, huge outlined numerals */}
