@@ -117,7 +117,7 @@ export function Problem() {
             alt={photos.problema.alt}
             ratio="wide"
             index="02"
-            caption="La città che non vedi"
+            caption="Sta succedendo. Senza di te."
             scribble="arrow"
             scribblePlace="right-[8%] top-[18%] w-[26%]"
             sizes="100vw"

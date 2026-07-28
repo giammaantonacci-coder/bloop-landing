@@ -91,7 +91,7 @@ export function ProblemDetail() {
         }
         intro="Ogni giorno, intorno a te, succede molto più di quello che vedi. Il problema non è che manchino gli eventi — è che vivono sparsi ovunque e le chicche si perdono."
         photo={photos.problemaDetail}
-        photoCaption="Volantini, chat, gruppi: l'informazione è sparsa"
+        photoCaption="Quelli che c'erano"
         photoScribble="arrow"
         photoScribblePlace="right-[10%] top-[16%] w-[24%]"
       />

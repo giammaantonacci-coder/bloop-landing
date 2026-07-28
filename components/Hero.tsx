@@ -80,7 +80,7 @@ export function Hero() {
               index="01"
               caption="Stasera, vicino a te"
               scribble="circle"
-              scribblePlace="left-[12%] top-[12%] w-[46%]"
+              scribblePlace="left-[24%] top-[8%] w-[46%]"
               priority
               sizes="(min-width: 768px) 33vw, 100vw"
             />

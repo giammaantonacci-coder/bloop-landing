@@ -51,7 +51,7 @@ export function Bloopers() {
             <>
               <span className="block">Aiutaci a mappare la città.</span>
               <span className="mark-line">
-                Diventa un <span className="mark">Blooper</span>.
+                Diventa un <span className="mark">Blooper.</span>
               </span>
             </>
           }

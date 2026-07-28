@@ -89,10 +89,15 @@ i cerchi chiudono oltre il punto di partenza, le frecce hanno la punta storta �
 e si disegnano da soli allo scroll. Una geometria perfetta si leggerebbe come
 un altro pezzo della griglia invece che come un gesto umano.
 
-**Per aggiungere le foto**: mettile in `public/photos/` e compila `src` nello
-slot corrispondente in `components/photos.ts`. Gli slot sono già collegati alle
-sezioni; uno slot vuoto ripiega su una mezzatinta invece di lasciare un buco.
-Dettagli su formati e criteri di scelta in `public/photos/README.md`.
+Le foto stanno in `public/photos/`, già ritagliate e messe in tono per lo slot
+che occupano; la corrispondenza file → slot è in `components/photos.ts`. Uno
+slot senza `src` ripiega su una mezzatinta invece di lasciare un buco.
+
+`scripts/prepare-photos.py` rifà ritaglio, messa in tono e compressione di
+tutti gli slot partendo dagli originali. Porta ogni immagine alla stessa
+luminanza media, perché il duotone è spietato con le esposizioni estreme: un
+high-key diventa una campitura coral piatta, un notturno quasi tutto
+inchiostro. Dettagli in `public/photos/README.md`.
 
 ## Struttura
 

@@ -96,9 +96,9 @@ export function Solution() {
               ratio="portrait"
               tone="lilac"
               index="03"
-              caption="Una serata, non un feed"
-              scribble="star"
-              scribblePlace="right-[12%] top-[12%] w-[16%]"
+              caption="Tutto, in un colpo d'occhio"
+              scribble="circle"
+              scribblePlace="left-[22%] top-[46%] w-[46%]"
               sizes="(min-width: 768px) 33vw, 100vw"
             />
           </motion.div>

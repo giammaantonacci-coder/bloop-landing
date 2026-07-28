@@ -83,7 +83,7 @@ export function BloopersDetail() {
           <>
             <span className="block">Diventa un</span>
             <span className="mark-line">
-              <span className="mark">Blooper</span>.
+              <span className="mark">Blooper.</span>
             </span>
           </>
         }

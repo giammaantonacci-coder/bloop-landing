@@ -130,7 +130,7 @@ export function PageHead({
           </div>
           <div className="md:col-span-9">
             <h1 className="display-lg">{title}</h1>
-            <p className="lede mt-10 max-w-2xl text-fg">{intro}</p>
+            <p className="lede mt-12 max-w-2xl text-fg">{intro}</p>
           </div>
         </div>
 
