@@ -110,7 +110,7 @@ html {
   z-index: 100;
   background: #f76b3a;
   padding: 0.75rem 1.25rem;
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-label), system-ui, sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -238,21 +238,26 @@ html {
     text-wrap: balance;
   }
 
-  /* Mono labels do the sign-posting: section numbers, tags, meta. */
+  /* Roboto Medium does the sign-posting: section numbers, tags, meta.
+     Tabular figures because the family is proportional — without them the
+     stacked indices (01 / 02 / 03) would sit on ragged left edges where the
+     monospace they replaced held them in column. */
   .eyebrow {
-    font-family: var(--font-mono), ui-monospace, monospace;
+    font-family: var(--font-label), system-ui, sans-serif;
     font-size: 0.6875rem;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
   }
 
   .eyebrow-sm {
-    font-family: var(--font-mono), ui-monospace, monospace;
+    font-family: var(--font-label), system-ui, sans-serif;
     font-size: 0.625rem;
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
   }
 
   .lede {
@@ -320,7 +325,7 @@ html {
     background-color: var(--btn-bg);
     color: var(--btn-fg);
     padding: 1rem 1.75rem;
-    font-family: var(--font-mono), ui-monospace, monospace;
+    font-family: var(--font-label), system-ui, sans-serif;
     font-size: 0.6875rem;
     font-weight: 500;
     letter-spacing: 0.18em;
@@ -339,7 +344,7 @@ html {
     border: 1px solid var(--rule);
     color: var(--fg);
     padding: 1rem 1.75rem;
-    font-family: var(--font-mono), ui-monospace, monospace;
+    font-family: var(--font-label), system-ui, sans-serif;
     font-size: 0.6875rem;
     font-weight: 500;
     letter-spacing: 0.18em;
@@ -358,7 +363,7 @@ html {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: var(--font-mono), ui-monospace, monospace;
+    font-family: var(--font-label), system-ui, sans-serif;
     font-size: 0.6875rem;
     font-weight: 500;
     letter-spacing: 0.18em;

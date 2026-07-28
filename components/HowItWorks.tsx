@@ -74,13 +74,13 @@ function Step({
           />
           <motion.span
             style={{ opacity: emptyOpacity }}
-            className="absolute font-mono text-xs font-medium tracking-[0.1em] text-accent-ink"
+            className="absolute font-label text-xs font-medium tracking-[0.1em] text-accent-ink"
           >
             {step.n}
           </motion.span>
           <motion.span
             style={{ opacity: fill }}
-            className="absolute font-mono text-xs font-medium tracking-[0.1em] text-bg"
+            className="absolute font-label text-xs font-medium tracking-[0.1em] text-bg"
           >
             {step.n}
           </motion.span>

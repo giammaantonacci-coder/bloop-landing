@@ -10,7 +10,7 @@ Real-time city pulse platform. Landing page ufficiale.
 - Next.js 14 (App Router) + TypeScript
 - Tailwind CSS
 - Framer Motion
-- Google Fonts: Bricolage Grotesque + Inter
+- Google Fonts: Bricolage Grotesque (display) + Inter (testo) + Roboto Medium (etichette)
 - Deploy-ready per Vercel
 
 ## Setup locale
@@ -65,12 +65,20 @@ attraverso l'inchiostro e vengono mascherate dalle fasce chiare e coral.
 | `display-md` | h2 di sezione, manifesto |
 | `display-sm` | titoli di cella |
 | `statement` | frasi lunghe in corpo grande |
-| `eyebrow`, `eyebrow-sm` | numeri di sezione, tag, meta (mono) |
+| `eyebrow`, `eyebrow-sm` | numeri di sezione, tag, meta (Roboto Medium) |
 
-L'interlinea sta sotto 1 su tutta la scala display. Le righe con una
-campitura `.mark` vanno impostate come blocco a sé con `.mark-line`, che
-recupera in `em` lo spazio che il riquadro di sfondo ruberebbe alle
-discendenti della riga precedente.
+L'interlinea sta sotto 1 su tutta la scala display, ma il riquadro di una
+campitura `.mark` è alto ~1,39em — la scatola del font più il padding che
+tiene dentro le discendenti. L'interlinea necessaria sta quindi sulla
+marcatura stessa: una riga si allarga solo dove c'è davvero una campitura,
+così una frase che va a capo non si sovrappone mentre le righe intorno
+restano strette. `.mark-line` porta solo i margini che annullano il
+mezzo-interlinea che ne risulta.
+
+Le etichette — indici di sezione, tag, meta, bottoni — sono **Roboto
+Medium** maiuscolo spaziato, con cifre tabulari perché il carattere è
+proporzionale e senza di quelle gli indici incolonnati (01 / 02 / 03)
+starebbero su margini frastagliati.
 
 ### Fotografia
 
@@ -123,7 +131,7 @@ components/
     Section.tsx         # fascia, header di sezione, masthead, fascia CTA
     EditorialImage.tsx  # immagine in duotone + filtri SVG + placeholder
     Scribble.tsx        # segni disegnati a mano, si tracciano allo scroll
-    ArrowLink.tsx       # link mono sottolineato con freccia
+    ArrowLink.tsx       # link sottolineato con freccia
     AnimatedCounter.tsx # counter con easing
     BackgroundBubbles.tsx / PinballBubbles.tsx  # dischi piatti di sfondo
     BridgeConnector.tsx / FlowLine.tsx / MissedEvents.tsx / BlooperLevels.tsx

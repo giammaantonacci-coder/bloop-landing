@@ -45,13 +45,13 @@ function Tier({ tier, progress }: { tier: TierData; progress: MotionValue<number
         />
         <motion.span
           style={{ opacity: emptyOpacity, color: col }}
-          className="absolute font-mono text-sm font-medium"
+          className="absolute font-label text-sm font-medium"
         >
           {tier.n}
         </motion.span>
         <motion.span
           style={{ opacity: fill }}
-          className="absolute font-mono text-sm font-medium text-bg"
+          className="absolute font-label text-sm font-medium text-bg"
         >
           {tier.n}
         </motion.span>

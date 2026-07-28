@@ -133,7 +133,7 @@ export function MissedEvents() {
           fontWeight="600"
           letterSpacing="1.5"
           fill="var(--bg)"
-          style={{ fontFamily: "var(--font-mono), ui-monospace, monospace" }}
+          style={{ fontFamily: "var(--font-label), system-ui, sans-serif" }}
         >
           TU
         </text>

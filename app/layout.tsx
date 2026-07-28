@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import { BubblesProvider } from "@/components/BubblesProvider";
 import { DuotoneDefs } from "@/components/ui/EditorialImage";
@@ -17,11 +17,13 @@ const inter = Inter({
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
+// Carries every label, section index and tag on the site — the sign-posting
+// layer. Medium only: it is the one weight these are set in.
+const label = Roboto({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-label",
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["500"],
 });
 
 export const metadata: Metadata = {
@@ -60,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="it"
-      className={`${bricolage.variable} ${inter.variable} ${mono.variable}`}
+      className={`${bricolage.variable} ${inter.variable} ${label.variable}`}
     >
       <body className="tone-dark bg-deep font-sans antialiased selection:bg-coral selection:text-deep">
         <a href="#main-content" className="skip-link">
