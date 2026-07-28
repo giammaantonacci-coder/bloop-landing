@@ -34,11 +34,10 @@ export function Hero() {
           <motion.span className="block" {...rise(0.12)}>
             è più viva
           </motion.span>
-          {/* Clearance above the marked line. At 0.88 leading the previous
-              line's descenders overflow its box by ~0.055em and the mark's
-              background box reaches ~0.125em above its own; 0.2em covers both
-              at every step of the clamp, which a fixed margin cannot. */}
-          <motion.span className="mt-[0.2em] block" {...rise(0.19)}>
+          {/* `.mark-line` rather than an ad-hoc margin: it carries the leading
+              the coral box needs, so the phrase can wrap on a narrow screen
+              without the second line landing on the first. */}
+          <motion.span className="mark-line" {...rise(0.19)}>
             <span className="mark">di quanto pensi.</span>
           </motion.span>
         </h1>

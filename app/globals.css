@@ -282,6 +282,12 @@ html {
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
     padding: 0.04em 0.16em 0.15em;
+    /* The background box stands ~1.39em tall — the font's content box plus
+       the padding above. Carrying that as leading on the mark itself means a
+       line box only grows where a mark actually sits: a phrase that wraps
+       keeps its fragments clear of each other, while the unmarked lines
+       around it keep the tight display leading. */
+    line-height: 1.4;
   }
   .mark {
     background-color: var(--mark);
@@ -290,13 +296,18 @@ html {
     background-color: var(--mark-2);
   }
 
-  /* A line whose text is marked: the background box reaches ~0.13em above
-     the glyphs, so at sub-1 leading it eats into the descenders of the line
-     before it. Marked lines are set as their own block with this class, which
-     buys the clearance in em so it holds at every step of the clamp. */
+  /* A marked line set as its own block, so it can be spaced against the
+     display line above it.
+
+     The leading the mark carries also pads the outside of the block, which
+     would push the line down and away. These margins take exactly that
+     padding back off, so the mark sits where the display rhythm puts it
+     whether it wraps or not. Both values are in em and hold across the
+     clamp, which a fixed pixel margin could not. */
   .mark-line {
     display: block;
-    margin-top: 0.2em;
+    margin-top: -0.06em;
+    margin-bottom: -0.26em;
   }
 
   /* -----------------------------------------------------------------------
