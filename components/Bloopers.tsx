@@ -83,7 +83,7 @@ export function Bloopers() {
                 <p className="copy mt-5 max-w-sm text-fg">{s.body}</p>
               </div>
 
-              <p className="eyebrow-sm mt-10 inline-flex w-fit border border-rule px-3 py-2 text-accent-2-ink">
+              <p className="eyebrow-sm mt-10 inline-flex w-fit rounded-full border border-rule px-4 py-2 text-accent-2-ink">
                 + {s.reward}
               </p>
             </motion.article>

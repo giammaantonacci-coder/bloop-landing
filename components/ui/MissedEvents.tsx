@@ -22,12 +22,13 @@ const reachEnd = (e: { x: number; y: number }, f = 0.6) => ({
   y: TU.y + f * (e.y - TU.y),
 });
 
-const SIZE = 18;
+const EVENT_R = 9;
+const TU_R = 22;
 
 /**
  * The "problem" visual: a searcher (TU) surrounded by scattered events that
  * flicker in and out, while dashed reach-lines stretch toward them and never
- * connect. Squares, hairlines and flat colour — deliberately unresolved.
+ * connect. Discs, hairlines and flat colour — deliberately unresolved.
  *
  * Colours are inherited from the surrounding `.tone-*` band.
  */
@@ -74,12 +75,11 @@ export function MissedEvents() {
 
         {/* Scattered events — flickering squares, hard to catch */}
         {EVENTS.map((e, i) => (
-          <motion.rect
+          <motion.circle
             key={`ev-${i}`}
-            x={e.x - SIZE / 2}
-            y={e.y - SIZE / 2}
-            width={SIZE}
-            height={SIZE}
+            cx={e.x}
+            cy={e.y}
+            r={EVENT_R}
             fill={e.a === 1 ? "var(--accent)" : "var(--accent-2)"}
             animate={animate ? { opacity: [1, 0.15, 1] } : undefined}
             transition={{
@@ -92,22 +92,18 @@ export function MissedEvents() {
           />
         ))}
 
-        {/* Searching rings from TU — squared off */}
+        {/* Searching rings pushing out from TU */}
         {animate &&
           [0, 1, 2].map((i) => (
-            <motion.rect
+            <motion.circle
               key={`ring-${i}`}
+              cx={TU.x}
+              cy={TU.y}
               fill="none"
               stroke="var(--accent)"
               strokeWidth="1"
-              initial={{ x: TU.x - 20, y: TU.y - 20, width: 40, height: 40, opacity: 0.6 }}
-              animate={{
-                x: TU.x - 100,
-                y: TU.y - 100,
-                width: 200,
-                height: 200,
-                opacity: 0,
-              }}
+              initial={{ r: TU_R, opacity: 0.6 }}
+              animate={{ r: 100, opacity: 0 }}
               transition={{
                 duration: 2.7,
                 repeat: Infinity,
@@ -118,13 +114,7 @@ export function MissedEvents() {
           ))}
 
         {/* TU node */}
-        <rect
-          x={TU.x - 22}
-          y={TU.y - 22}
-          width={44}
-          height={44}
-          fill="var(--accent)"
-        />
+        <circle cx={TU.x} cy={TU.y} r={TU_R} fill="var(--accent)" />
         <text
           x={TU.x}
           y={TU.y + 5}

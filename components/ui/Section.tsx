@@ -164,7 +164,7 @@ type CtaBandProps = {
 
 /**
  * Closing band on the detail pages: a solid coral campitura with ink type
- * and a squared-off button. The loudest note comes last.
+ * and a pill button. The loudest note comes last.
  */
 export function CtaBand({ title, body, primary, secondary }: CtaBandProps) {
   return (

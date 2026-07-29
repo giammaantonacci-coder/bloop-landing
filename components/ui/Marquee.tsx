@@ -20,7 +20,7 @@ export function Marquee({
   const sep = separator ?? (
     <span
       aria-hidden
-      className="mx-6 inline-block h-2 w-2 bg-accent sm:mx-8"
+      className="mx-6 inline-block h-2 w-2 rounded-full bg-accent sm:mx-8"
     />
   );
 

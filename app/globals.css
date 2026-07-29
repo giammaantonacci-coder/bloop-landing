@@ -94,12 +94,13 @@ html {
   scroll-padding-top: 4.5rem;
 }
 
-/* Visible keyboard focus. Doubled outline so it reads on paper and on ink. */
+/* Visible keyboard focus. Doubled outline so it reads on paper and on ink.
+   No radius is set here on purpose: the outline follows the shape of whatever
+   it lands on, so it wraps a pill as a pill and a disc as a disc. */
 :focus-visible {
   outline: 2px solid var(--accent, #f76b3a);
   outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(127, 127, 127, 0.35);
-  border-radius: 0;
 }
 
 /* Skip-to-content link: off-screen until focused */
@@ -109,7 +110,8 @@ html {
   top: -4rem;
   z-index: 100;
   background: #f76b3a;
-  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
   font-family: var(--font-label), system-ui, sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
@@ -122,7 +124,7 @@ html {
   top: 1rem;
 }
 
-/* Custom scrollbar (WebKit) — squared off, no radius anywhere */
+/* Custom scrollbar (WebKit) */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -132,7 +134,7 @@ html {
 }
 ::-webkit-scrollbar-thumb {
   background: #f76b3a;
-  border-radius: 0;
+  border-radius: 9999px;
 }
 
 /* Motion safety */
@@ -286,7 +288,8 @@ html {
     color: var(--mark-fg);
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
-    padding: 0.04em 0.16em 0.15em;
+    padding: 0.04em 0.18em 0.15em;
+    border-radius: 0.26em;
     /* The background box stands ~1.39em tall — the font's content box plus
        the padding above. Carrying that as leading on the mark itself means a
        line box only grows where a mark actually sits: a phrase that wraps
@@ -324,7 +327,8 @@ html {
     gap: 0.75rem;
     background-color: var(--btn-bg);
     color: var(--btn-fg);
-    padding: 1rem 1.75rem;
+    border-radius: 9999px;
+    padding: 1rem 2rem;
     font-family: var(--font-label), system-ui, sans-serif;
     font-size: 0.6875rem;
     font-weight: 500;
@@ -343,7 +347,8 @@ html {
     gap: 0.5rem;
     border: 1px solid var(--rule);
     color: var(--fg);
-    padding: 1rem 1.75rem;
+    border-radius: 9999px;
+    padding: 1rem 2rem;
     font-family: var(--font-label), system-ui, sans-serif;
     font-size: 0.6875rem;
     font-weight: 500;

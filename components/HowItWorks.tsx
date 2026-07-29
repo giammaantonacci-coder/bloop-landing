@@ -55,20 +55,20 @@ function Step({
 
   return (
     <li className="rule-t-soft grid grid-cols-[3rem_1fr] gap-5 py-10 sm:grid-cols-[4rem_1fr] sm:gap-10 sm:py-14">
-      {/* Square marker sitting on the rail */}
+      {/* Bubble marker sitting on the rail */}
       <div className="relative z-10">
         <span
           ref={markerRef}
-          className="relative flex h-12 w-12 items-center justify-center bg-bg sm:h-14 sm:w-14"
+          className="relative flex h-12 w-12 items-center justify-center rounded-full bg-bg sm:h-14 sm:w-14"
         >
           {/* Outline, then a solid coral fill wipes in over it */}
           <span
-            className="absolute inset-0 border"
+            className="absolute inset-0 rounded-full border"
             style={{ borderColor: "var(--accent)" }}
             aria-hidden
           />
           <motion.span
-            className="absolute inset-0"
+            className="absolute inset-0 rounded-full"
             style={{ backgroundColor: "var(--accent)", opacity: fill }}
             aria-hidden
           />

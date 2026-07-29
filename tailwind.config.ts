@@ -37,16 +37,19 @@ const config: Config = {
         label: ["var(--font-label)", "system-ui", "sans-serif"],
       },
       borderRadius: {
-        // Swiss discipline: everything is a rectangle. `rounded-full` stays
-        // for the few genuinely circular marks (bubbles, logo dots, nodes).
-        DEFAULT: "0",
+        // The name is a bubble, so the geometry is too. Anything that can
+        // close into a circle does — nodes, markers, icon wells. Anything
+        // that cannot takes a radius generous enough to read as soft rather
+        // than merely de-burred, and every control ends as a pill: two
+        // half-circles with a bar between them, which is the wordmark.
         none: "0",
-        sm: "0",
-        md: "0",
-        lg: "0",
-        xl: "0",
-        "2xl": "0",
-        "3xl": "0",
+        sm: "0.5rem",
+        DEFAULT: "0.875rem",
+        md: "0.875rem",
+        lg: "1.25rem",
+        xl: "1.75rem",
+        "2xl": "2.25rem",
+        "3xl": "3rem",
         full: "9999px",
       },
       animation: {

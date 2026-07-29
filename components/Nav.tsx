@@ -106,7 +106,7 @@ export function Nav() {
               type="button"
               onClick={toggle}
               aria-pressed={enabled}
-              className="eyebrow-sm hidden items-center gap-2 border border-white/20 px-4 py-3 text-smoke transition hover:border-white/50 hover:text-white lg:inline-flex"
+              className="eyebrow-sm hidden items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-smoke transition hover:border-white/50 hover:text-white lg:inline-flex"
             >
               <span
                 aria-hidden
@@ -120,7 +120,7 @@ export function Nav() {
               href="https://www.instagram.com/thebloopapp?igsh=MThkdTlqMTZjbXZhOQ=="
               target="_blank"
               rel="noopener noreferrer"
-              className="eyebrow-sm hidden items-center gap-2 bg-coral px-5 py-3 text-deep transition hover:bg-white lg:inline-flex"
+              className="eyebrow-sm hidden items-center gap-2 rounded-full bg-coral px-6 py-3 text-deep transition hover:bg-white lg:inline-flex"
             >
               Scopri Bloop
               <span aria-hidden>→</span>
@@ -132,7 +132,7 @@ export function Nav() {
               onClick={() => setOpen((o) => !o)}
               aria-label={open ? "Chiudi menu" : "Apri menu"}
               aria-expanded={open}
-              className="relative inline-flex h-11 w-11 items-center justify-center border border-white/20 text-white transition hover:border-white/50 lg:hidden"
+              className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition hover:border-white/50 lg:hidden"
             >
               <span className="relative block h-4 w-5" aria-hidden>
                 <span
@@ -204,7 +204,7 @@ export function Nav() {
                 type="button"
                 onClick={toggle}
                 aria-pressed={enabled}
-                className="eyebrow-sm inline-flex items-center justify-center gap-2 border border-white/20 px-5 py-4 text-smoke transition hover:border-white/50 hover:text-white"
+                className="eyebrow-sm inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-5 py-4 text-smoke transition hover:border-white/50 hover:text-white"
               >
                 <span
                   aria-hidden
@@ -219,7 +219,7 @@ export function Nav() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="eyebrow-sm inline-flex items-center justify-center gap-2 bg-coral px-5 py-4 text-deep transition hover:bg-white"
+                className="eyebrow-sm inline-flex items-center justify-center gap-2 rounded-full bg-coral px-5 py-4 text-deep transition hover:bg-white"
               >
                 Scopri Bloop
                 <span aria-hidden>→</span>

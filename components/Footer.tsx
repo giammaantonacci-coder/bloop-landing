@@ -7,7 +7,7 @@ const socials = [
     href: "https://www.instagram.com/thebloopapp?igsh=MThkdTlqMTZjbXZhOQ==",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
-        <rect x="3" y="3" width="18" height="18" stroke="currentColor" strokeWidth="1.6" />
+        <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
         <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
         <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
       </svg>
@@ -18,7 +18,7 @@ const socials = [
     href: "https://www.linkedin.com/company/thebloopapp/",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
-        <rect x="3" y="3" width="18" height="18" stroke="currentColor" strokeWidth="1.6" />
+        <rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" strokeWidth="1.6" />
         <path
           d="M8 10v7M8 7.5v.01M12 17v-4a2.5 2.5 0 015 0v4M12 10v7"
           stroke="currentColor"
@@ -101,7 +101,7 @@ export function Footer() {
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-3 text-fg transition hover:text-accent-ink"
                   >
-                    <span className="inline-flex h-9 w-9 items-center justify-center border border-rule transition group-hover:border-accent">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-rule transition group-hover:border-accent">
                       {s.icon}
                     </span>
                     <span className="eyebrow">{s.name}</span>

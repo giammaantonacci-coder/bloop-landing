@@ -52,24 +52,24 @@ export function BridgeConnector() {
               opacity: markerOpacity,
               backgroundColor: "var(--fg)",
             }}
-            className="absolute top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2"
+            className="absolute top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full"
             aria-hidden
           />
         </div>
 
         {/* Terminals */}
         <span
-          className="absolute left-0 top-1/2 h-14 w-14 -translate-y-1/2"
+          className="absolute left-0 top-1/2 h-14 w-14 -translate-y-1/2 rounded-full"
           style={{ backgroundColor: "var(--accent)" }}
           aria-hidden
         />
         <span
-          className="absolute right-0 top-1/2 h-14 w-14 -translate-y-1/2 border"
+          className="absolute right-0 top-1/2 h-14 w-14 -translate-y-1/2 rounded-full border"
           style={{ borderColor: "var(--accent-2)" }}
           aria-hidden
         >
           <motion.span
-            className="absolute inset-0"
+            className="absolute inset-0 rounded-full"
             style={{ backgroundColor: "var(--accent-2)", opacity: endFill }}
           />
         </span>

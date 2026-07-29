@@ -72,7 +72,7 @@ export type Ratio = keyof typeof RATIOS;
 function Placeholder({ tone }: { tone: "coral" | "lilac" }) {
   const fg = tone === "coral" ? "#F76B3A" : "#A269FF";
   return (
-    <div aria-hidden className="absolute inset-0 overflow-hidden bg-ink">
+    <div aria-hidden className="absolute inset-0 overflow-hidden rounded-[inherit] bg-ink">
       {/* Dot screen at a fixed pitch rather than a scaled viewBox, so the
           halftone reads at the same size in a small portrait slot and in a
           full-width strip. */}
@@ -124,7 +124,7 @@ type EditorialImageProps = {
 
 /**
  * A photograph as this design system treats one: duotoned into the palette,
- * squared off, annotated by hand, and captioned on a hairline like a plate in
+ * rounded off, annotated by hand, and captioned on a hairline like a plate in
  * a printed article.
  */
 export function EditorialImage({
@@ -146,7 +146,7 @@ export function EditorialImage({
   return (
     <figure className={className}>
       <div
-        className="relative overflow-hidden bg-ink"
+        className="relative overflow-hidden rounded-2xl bg-ink sm:rounded-3xl"
         style={{ aspectRatio: RATIOS[ratio] }}
       >
         {src ? (

@@ -32,14 +32,14 @@ function Tier({ tier, progress }: { tier: TierData; progress: MotionValue<number
 
   return (
     <div className="relative z-10 flex flex-col items-center gap-4">
-      <span className="relative flex h-14 w-14 items-center justify-center bg-bg">
+      <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-bg">
         <span
-          className="absolute inset-0 border"
+          className="absolute inset-0 rounded-full border"
           style={{ borderColor: col }}
           aria-hidden
         />
         <motion.span
-          className="absolute inset-0"
+          className="absolute inset-0 rounded-full"
           style={{ backgroundColor: col, opacity: fill }}
           aria-hidden
         />

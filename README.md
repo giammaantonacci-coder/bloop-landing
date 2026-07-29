@@ -36,10 +36,23 @@ Push il repo su GitHub e importa il progetto su [Vercel](https://vercel.com/new)
 ## Design
 
 Modern editorial / Swiss style: griglia a 12 colonne, filetti da 1px al posto
-delle card, tipografia display molto grande e stretta, nessun raggio di bordo,
-nessun gradiente o glow. Le pagine sono impilate come **fasce a tonalità
-alternata** — inchiostro, carta, coral pieno — e il ritmo dell'alternanza è la
-struttura della pagina.
+delle card, tipografia display molto grande e stretta, nessun gradiente o
+glow. Le pagine sono impilate come **fasce a tonalità alternata** —
+inchiostro, carta, coral pieno — e il ritmo dell'alternanza è la struttura
+della pagina.
+
+### Geometria
+
+Il nome è una bolla, quindi lo è anche la forma. Tutto ciò che può chiudersi
+in un cerchio lo fa — nodi del flusso, marcatori dei livelli, terminali del
+ponte, pozzetti delle icone. Tutto il resto prende un raggio abbastanza
+generoso da leggersi come morbido e non semplicemente smussato, e **ogni
+controllo finisce a pillola**: due semicerchi con una barra in mezzo, che è
+poi il wordmark.
+
+La scala sta in `borderRadius` nel config di Tailwind. Le campiture `.mark`
+hanno il raggio in `em`, così l'angolo resta proporzionato dai 52px del
+mobile ai 144px del titolo desktop.
 
 ### Sistema di tonalità
 
