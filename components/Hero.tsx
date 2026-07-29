@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 import { Section } from "./ui/Section";
 import { ArrowLink } from "./ui/ArrowLink";
 import { EditorialImage } from "./ui/EditorialImage";
@@ -55,16 +56,32 @@ export function Hero() {
               trovare cosa fare, stasera, vicino a te. A scegliere sei tu.
             </p>
 
-            <div className="mt-8 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-              <a href="#soluzione" className="btn group">
-                Scopri Bloop
-                <span
-                  aria-hidden
-                  className="transition-transform group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </a>
+            {/* Two audiences, two actions: come and look, or come and take
+                part. The ghost pill keeps the second from competing with the
+                first. "Diventa Blooper" points at the page rather than
+                straight at the mail client — from a cold hero that is a jump,
+                and the page closes with the same call anyway. */}
+            <div className="mt-8 flex flex-col items-start gap-5">
+              <div className="flex flex-wrap items-center gap-3">
+                <a href="#soluzione" className="btn group">
+                  Scopri Bloop
+                  <span
+                    aria-hidden
+                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </a>
+                <Link href="/bloopers" className="btn-ghost group">
+                  Diventa Blooper
+                  <span
+                    aria-hidden
+                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </Link>
+              </div>
               <ArrowLink href="#problema" accent="fg">
                 Guarda perché
               </ArrowLink>
