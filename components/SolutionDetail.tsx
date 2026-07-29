@@ -117,7 +117,7 @@ export function SolutionDetail() {
                     aria-hidden
                     className="block font-display text-[clamp(5rem,13vw,11rem)] font-extrabold leading-[0.78] tracking-[-0.06em]"
                     style={{
-                      WebkitTextStroke: "1.5px var(--accent)",
+                      WebkitTextStroke: "1.5px var(--accent-ink)",
                       color: "transparent",
                     }}
                   >
@@ -136,7 +136,7 @@ export function SolutionDetail() {
       </Section>
 
       {/* In practice */}
-      <Section tone="dark" ruled>
+      <Section tone="light" ruled>
         <div className="shell py-24 sm:py-32">
           <SectionHead
             index="03.2"

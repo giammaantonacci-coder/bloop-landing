@@ -5,8 +5,9 @@
 /* ---------------------------------------------------------------------------
    Tone system
    ---------------------------------------------------------------------------
-   The page is built as a stack of full-bleed bands that alternate between a
-   dark ground, a paper ground and a solid coral campitura. Every band sets its
+   The page is a paper field. Bands sit on it as either paper (transparent,
+   so the ground and the bubble layer read through), a solid coral campitura,
+   or — for the footer and the top bar alone — solid ink. Every band sets its
    own palette through custom properties, so the components inside it never
    need to know which band they live in — they only ever reference `--fg`,
    `--muted`, `--rule`, `--accent` and friends.
@@ -17,7 +18,7 @@
 --------------------------------------------------------------------------- */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   --paper: #f2efe7;
   --ink: #0b0920;
 }
@@ -38,8 +39,7 @@
   --btn-bg: #f76b3a;
   --btn-fg: #0b0920;
   --btn-bg-hover: #ffffff;
-  /* Transparent so the fixed bubble layer stays visible through dark bands. */
-  background-color: transparent;
+  background-color: var(--bg);
   color: var(--fg);
 }
 
@@ -56,10 +56,14 @@
   --mark: #f76b3a;
   --mark-2: #a269ff;
   --mark-fg: #0b0920;
-  --btn-bg: #0b0920;
-  --btn-fg: #f2efe7;
-  --btn-bg-hover: #f76b3a;
-  background-color: var(--bg);
+  /* The primary control stays coral on paper: it is the brand's loudest
+     note and the page has no dark band left to carry it. */
+  --btn-bg: #f76b3a;
+  --btn-fg: #0b0920;
+  --btn-bg-hover: #0b0920;
+  /* Transparent so the paper ground — and the bubble layer over it — reads
+     through every band on the page. */
+  background-color: transparent;
   color: var(--fg);
 }
 
@@ -85,7 +89,7 @@
 
 html,
 body {
-  background-color: var(--ink);
+  background-color: var(--paper);
   min-height: 100%;
 }
 
@@ -130,7 +134,7 @@ html {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0920;
+  background: #e8e4da;
 }
 ::-webkit-scrollbar-thumb {
   background: #f76b3a;

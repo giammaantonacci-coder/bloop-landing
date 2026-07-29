@@ -37,9 +37,9 @@ Push il repo su GitHub e importa il progetto su [Vercel](https://vercel.com/new)
 
 Modern editorial / Swiss style: griglia a 12 colonne, filetti da 1px al posto
 delle card, tipografia display molto grande e stretta, nessun gradiente o
-glow. Le pagine sono impilate come **fasce a tonalità alternata** —
-inchiostro, carta, coral pieno — e il ritmo dell'alternanza è la struttura
-della pagina.
+glow. La pagina è **un campo di carta**: le fasce ci stanno sopra come carta,
+come campitura coral piena, o — solo per footer e barra in alto — come
+inchiostro. La struttura la danno i filetti e le campiture, non il fondo.
 
 ### Geometria
 
@@ -56,18 +56,19 @@ mobile ai 144px del titolo desktop.
 
 ### Sistema di tonalità
 
-Ogni fascia è un `<Section tone="dark | light | accent">` che pubblica la
+Ogni fascia è un `<Section tone="light | accent | dark">` che pubblica la
 propria palette come custom property (`.tone-*` in `globals.css`). I componenti
 non sanno mai su quale fondo si trovano: usano solo i colori semantici
 `bg / fg / muted / rule / accent`, mappati su quelle variabili in
-`tailwind.config.ts`.
+`tailwind.config.ts`. `dark` è riservato a footer e barra in alto.
 
 Il coral pieno non regge il testo piccolo su carta, quindi il colore
 *grafico* (`--accent`, per campiture e filetti) è separato da quello
 *tipografico* (`--accent-ink`, scurito quanto basta per l'AA).
 
-Le fasce scure sono trasparenti: è così che le bolle di sfondo si vedono
-attraverso l'inchiostro e vengono mascherate dalle fasce chiare e coral.
+**Le fasce chiare sono trasparenti**: è così che il fondo di carta — e con
+lui il livello delle bolle — si vede attraverso tutto il corpo del sito. Le
+campiture coral e l'inchiostro del footer sono invece opache e lo mascherano.
 
 ### Tipografia
 
@@ -171,4 +172,7 @@ components/
   pieno si fermerebbe a 2,6:1.
 - I dischi di sfondo scendono al 45% sotto `md`, dove finiscono dietro al
   paragrafo dell'hero.
+- Su carta il coral pieno regge solo 2,6:1: numerali, cifre del 404 e
+  marcatori dei livelli usano le varianti `-ink`. Il contrasto è verificato
+  con uno script che percorre ogni nodo di testo di tutte le pagine.
 - Struttura semantica con `header`, `section`, `footer`, `nav`, landmark ARIA per il wordmark.

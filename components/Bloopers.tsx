@@ -42,7 +42,7 @@ const card = {
 
 export function Bloopers() {
   return (
-    <Section id="bloopers" tone="dark">
+    <Section id="bloopers" tone="light">
       <div className="shell py-24 sm:py-32">
         <SectionHead
           index="06"

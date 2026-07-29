@@ -39,7 +39,7 @@ const card = {
 
 export function Solution() {
   return (
-    <Section id="soluzione" tone="dark" ruled>
+    <Section id="soluzione" tone="light" ruled>
       <div className="shell py-24 sm:py-32">
         {/* Header set inline rather than through SectionHead: the title keeps
             the full nine columns, and the plate sits beside the standfirst on

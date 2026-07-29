@@ -115,7 +115,7 @@ export function PageHead({
   const accentClass = accent === "1" ? "text-accent-ink" : "text-accent-2-ink";
 
   return (
-    <Section tone="dark">
+    <Section tone="light">
       <div className="shell pb-20 pt-32 sm:pb-28 sm:pt-40">
         <ArrowLink href="/" accent="fg" direction="back">
           Torna alla home

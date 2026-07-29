@@ -15,11 +15,12 @@ type DigitSpec = {
 };
 
 // Three flat digits, draggable. No gradients, no glow — solid colour blocks
-// the way a Swiss poster would set an oversized numeral.
+// the way a Swiss poster would set an oversized numeral. They take the tone's
+// readable accents: flat coral on paper only reaches 2.6:1.
 const DIGITS: DigitSpec[] = [
-  { char: "4", color: "#F76B3A", left: "6%", top: "14%", rot: -4, float: 3.4 },
-  { char: "0", color: "#A269FF", left: "36%", top: "22%", rot: 3, float: 4.1 },
-  { char: "4", color: "#F76B3A", left: "64%", top: "12%", rot: -2, float: 3.7 },
+  { char: "4", color: "var(--accent-ink)", left: "6%", top: "14%", rot: -4, float: 3.4 },
+  { char: "0", color: "var(--accent-2-ink)", left: "36%", top: "22%", rot: 3, float: 4.1 },
+  { char: "4", color: "var(--accent-ink)", left: "64%", top: "12%", rot: -2, float: 3.7 },
 ];
 
 function Digit({
@@ -65,7 +66,7 @@ export function NotFound404() {
   const bounds = useRef<HTMLDivElement>(null);
 
   return (
-    <Section tone="dark" className="flex min-h-screen flex-col overflow-hidden">
+    <Section tone="light" className="flex min-h-screen flex-col overflow-hidden">
       <div ref={bounds} className="absolute inset-0" aria-hidden={false}>
         {DIGITS.map((spec, i) => (
           <Digit key={i} spec={spec} reduce={reduce} bounds={bounds} />

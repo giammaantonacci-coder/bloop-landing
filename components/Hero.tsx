@@ -17,7 +17,7 @@ export function Hero() {
   const reduce = useReducedMotion();
 
   return (
-    <Section id="hero" tone="dark" className="isolate flex min-h-screen flex-col">
+    <Section id="hero" tone="light" className="isolate flex min-h-screen flex-col">
       <div className="shell flex flex-1 flex-col pt-24 sm:pt-28">
         {/* Masthead strip — mono metadata pinned to a hairline, the way a
             Swiss poster carries its imprint. */}

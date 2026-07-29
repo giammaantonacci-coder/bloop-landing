@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#16132E",
+  themeColor: "#F2EFE7",
   width: "device-width",
   initialScale: 1,
 };
@@ -64,7 +64,7 @@ export default function RootLayout({
       lang="it"
       className={`${bricolage.variable} ${inter.variable} ${label.variable}`}
     >
-      <body className="tone-dark bg-deep font-sans antialiased selection:bg-coral selection:text-deep">
+      <body className="tone-light bg-paper font-sans antialiased selection:bg-coral selection:text-deep">
         <a href="#main-content" className="skip-link">
           Vai al contenuto
         </a>

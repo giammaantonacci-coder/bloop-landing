@@ -18,7 +18,7 @@ export function LegalDoc({
   return (
     <main id="main-content" className="relative z-10">
       {/* Masthead on ink */}
-      <Section tone="dark">
+      <Section tone="light">
         <div className="shell pb-16 pt-32 sm:pt-40">
           <ArrowLink href="/" accent="fg" direction="back">
             Torna alla home

@@ -69,15 +69,15 @@ export function Nav() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  // The bar rides over bands of every tone, so once it leaves the dark hero
-  // it goes solid ink rather than translucent — legibility over paper.
+  // The bar rides over a paper page, so once it leaves the top it goes
+  // solid paper with a hairline under it rather than translucent.
   const solid = scrolled || open;
 
   return (
     <>
       <header
-        className={`tone-dark fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-          solid ? "!bg-deep border-b border-white/15" : "!bg-transparent"
+        className={`tone-light fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+          solid ? "!bg-paper rule-b" : "!bg-transparent"
         }`}
       >
         <div className="shell flex items-center gap-6 py-4">
@@ -85,7 +85,7 @@ export function Nav() {
             href="/"
             aria-label="Bloop — home"
             onClick={() => setOpen(false)}
-            className="flex shrink-0 items-center text-white"
+            className="flex shrink-0 items-center text-fg"
           >
             <Logo size="sm" animated />
           </Link>
@@ -96,7 +96,7 @@ export function Nav() {
                 key={l.href}
                 href={l.href}
                 label={l.label}
-                className="eyebrow text-smoke transition hover:text-white"
+                className="eyebrow text-muted transition hover:text-fg"
               />
             ))}
           </nav>
@@ -106,7 +106,7 @@ export function Nav() {
               type="button"
               onClick={toggle}
               aria-pressed={enabled}
-              className="eyebrow-sm hidden items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-smoke transition hover:border-white/50 hover:text-white lg:inline-flex"
+              className="eyebrow-sm hidden items-center gap-2 rounded-full border border-rule px-5 py-3 text-muted transition hover:border-accent hover:text-fg lg:inline-flex"
             >
               <span
                 aria-hidden
@@ -120,7 +120,7 @@ export function Nav() {
               href="https://www.instagram.com/thebloopapp?igsh=MThkdTlqMTZjbXZhOQ=="
               target="_blank"
               rel="noopener noreferrer"
-              className="eyebrow-sm hidden items-center gap-2 rounded-full bg-coral px-6 py-3 text-deep transition hover:bg-white lg:inline-flex"
+              className="eyebrow-sm hidden items-center gap-2 rounded-full bg-coral px-6 py-3 text-deep transition hover:bg-deep hover:text-paper lg:inline-flex"
             >
               Scopri Bloop
               <span aria-hidden>→</span>
@@ -132,7 +132,7 @@ export function Nav() {
               onClick={() => setOpen((o) => !o)}
               aria-label={open ? "Chiudi menu" : "Apri menu"}
               aria-expanded={open}
-              className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition hover:border-white/50 lg:hidden"
+              className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-rule text-fg transition hover:border-accent lg:hidden"
             >
               <span className="relative block h-4 w-5" aria-hidden>
                 <span
@@ -166,7 +166,7 @@ export function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="tone-dark fixed inset-0 z-40 flex flex-col !bg-deep px-5 pb-10 pt-24 sm:px-8 lg:hidden"
+            className="tone-light fixed inset-0 z-40 flex flex-col !bg-paper px-5 pb-10 pt-24 sm:px-8 lg:hidden"
           >
             <motion.nav
               initial="hidden"
@@ -187,12 +187,12 @@ export function Nav() {
                   className="rule-t-soft"
                 >
                   <div className="flex items-baseline gap-5 py-4">
-                    <span className="eyebrow-sm text-coral">{l.n}</span>
+                    <span className="eyebrow-sm text-accent-ink">{l.n}</span>
                     <NavItem
                       href={l.href}
                       label={l.label}
                       onClick={() => setOpen(false)}
-                      className="display-sm text-white transition hover:text-coral"
+                      className="display-sm text-fg transition hover:text-accent-ink"
                     />
                   </div>
                 </motion.div>
@@ -204,7 +204,7 @@ export function Nav() {
                 type="button"
                 onClick={toggle}
                 aria-pressed={enabled}
-                className="eyebrow-sm inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-5 py-4 text-smoke transition hover:border-white/50 hover:text-white"
+                className="eyebrow-sm inline-flex items-center justify-center gap-2 rounded-full border border-rule px-5 py-4 text-muted transition hover:border-accent hover:text-fg"
               >
                 <span
                   aria-hidden
@@ -219,7 +219,7 @@ export function Nav() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="eyebrow-sm inline-flex items-center justify-center gap-2 rounded-full bg-coral px-5 py-4 text-deep transition hover:bg-white"
+                className="eyebrow-sm inline-flex items-center justify-center gap-2 rounded-full bg-coral px-5 py-4 text-deep transition hover:bg-deep hover:text-paper"
               >
                 Scopri Bloop
                 <span aria-hidden>→</span>

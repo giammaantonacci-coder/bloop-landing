@@ -157,7 +157,7 @@ export function VisionDetail() {
       </Section>
 
       {/* Principles */}
-      <Section tone="dark" ruled>
+      <Section tone="light" ruled>
         <div className="shell py-24 sm:py-32">
           <SectionHead
             index="05.2"

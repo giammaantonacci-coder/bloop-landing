@@ -19,7 +19,11 @@ const TIERS: TierData[] = [
 ];
 
 function Tier({ tier, progress }: { tier: TierData; progress: MotionValue<number> }) {
+  // The disc keeps the graphic colour; the numeral drawn on the paper
+  // behind it takes the deepened one, which the flat coral cannot carry
+  // at 14px.
   const col = tier.accent === 1 ? "var(--accent)" : "var(--accent-2)";
+  const ink = tier.accent === 1 ? "var(--accent-ink)" : "var(--accent-2-ink)";
   const fill = useTransform(
     progress,
     [
@@ -44,7 +48,7 @@ function Tier({ tier, progress }: { tier: TierData; progress: MotionValue<number
           aria-hidden
         />
         <motion.span
-          style={{ opacity: emptyOpacity, color: col }}
+          style={{ opacity: emptyOpacity, color: ink }}
           className="absolute font-label text-sm font-medium"
         >
           {tier.n}

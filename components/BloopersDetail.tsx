@@ -95,7 +95,7 @@ export function BloopersDetail() {
       />
 
       {/* Perks ticker — a rule-bound band, set in display weight */}
-      <Section tone="dark">
+      <Section tone="light">
         <div className="rule-t rule-b py-6">
           <Marquee
             items={perks.map((p) => (
@@ -153,7 +153,7 @@ export function BloopersDetail() {
       </Section>
 
       {/* Levels */}
-      <Section tone="dark" ruled>
+      <Section tone="light" ruled>
         <div className="shell py-24 sm:py-32">
           <SectionHead
             index="06.2"

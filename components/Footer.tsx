@@ -40,7 +40,7 @@ const nav = [
 
 export function Footer() {
   return (
-    <footer className="tone-dark relative !bg-deep">
+    <footer className="tone-dark relative">
       <div className="shell py-20 sm:py-24">
         <div className="grid12 gap-y-14">
           {/* Brand block */}
