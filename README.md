@@ -132,7 +132,7 @@ app/
 components/
   Nav.tsx           # barra fissa, opaca appena esce dall'hero
   Logo.tsx          # wordmark bloop con le due "oo" che pulsano
-  Hero.tsx          # fascia scura full-viewport
+  Hero.tsx          # fascia full-viewport su carta
   Problem.tsx       # tabella di dati su carta
   Solution.tsx      # tre celle divise da filetti
   HowItWorks.tsx    # percorso verticale che si riempie con lo scroll
